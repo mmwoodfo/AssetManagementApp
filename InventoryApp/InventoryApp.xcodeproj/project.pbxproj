@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2F1205236C94E90020F9CD /* Consumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2F1204236C94E90020F9CD /* Consumable.swift */; };
+		0D2F1207236C95990020F9CD /* AssignedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2F1206236C95990020F9CD /* AssignedItem.swift */; };
+		0D2F1209236C9EBA0020F9CD /* CheckedoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2F1208236C9EBA0020F9CD /* CheckedoutItem.swift */; };
 		0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */; };
 		0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */; };
 		0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15332360F3C200F64EE0 /* ViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D2F1204236C94E90020F9CD /* Consumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumable.swift; sourceTree = "<group>"; };
+		0D2F1206236C95990020F9CD /* AssignedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedItem.swift; sourceTree = "<group>"; };
+		0D2F1208236C9EBA0020F9CD /* CheckedoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedoutItem.swift; sourceTree = "<group>"; };
 		0DFB152C2360F3C200F64EE0 /* InventoryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InventoryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +51,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D2F1203236C94CD0020F9CD /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				0D2F1204236C94E90020F9CD /* Consumable.swift */,
+				0D2F1206236C95990020F9CD /* AssignedItem.swift */,
+				0D2F1208236C9EBA0020F9CD /* CheckedoutItem.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		0DFB15232360F3C200F64EE0 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +80,7 @@
 		0DFB152E2360F3C200F64EE0 /* InventoryApp */ = {
 			isa = PBXGroup;
 			children = (
+				0D2F1203236C94CD0020F9CD /* Objects */,
 				0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */,
 				0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */,
 				0DFB154E2361029C00F64EE0 /* ViewControllers */,
@@ -158,12 +175,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2F1205236C94E90020F9CD /* Consumable.swift in Sources */,
+				0D2F1209236C9EBA0020F9CD /* CheckedoutItem.swift in Sources */,
 				0DFB153A2360F3C200F64EE0 /* InventoryApp.xcdatamodeld in Sources */,
 				0DFB154B2361010000F64EE0 /* ConsumablesViewController.swift in Sources */,
 				0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */,
 				0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */,
 				0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */,
 				0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */,
+				0D2F1207236C95990020F9CD /* AssignedItem.swift in Sources */,
 				0DFB154D2361011700F64EE0 /* AssignedCheckedOutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
