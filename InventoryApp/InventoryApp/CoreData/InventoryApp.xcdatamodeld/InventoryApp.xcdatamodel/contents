@@ -4,7 +4,7 @@
         <attribute name="adaptorName" optional="YES" attributeType="String"/>
         <attribute name="asuriteId" optional="YES" attributeType="String"/>
         <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="loanedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="loanedDate" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
@@ -13,8 +13,8 @@
         <attribute name="adaptorName" optional="YES" attributeType="String"/>
         <attribute name="asuriteId" optional="YES" attributeType="String"/>
         <attribute name="email" optional="YES" attributeType="String"/>
-        <attribute name="expectedReturnDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="loanedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expectedReturnDate" optional="YES" attributeType="String"/>
+        <attribute name="loanedDate" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
@@ -24,8 +24,8 @@
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ConsumableEntity" positionX="-63" positionY="-18" width="128" height="73"/>
-        <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="163"/>
         <element name="AssignedEntity" positionX="-36" positionY="18" width="128" height="148"/>
+        <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="163"/>
+        <element name="ConsumableEntity" positionX="-63" positionY="-18" width="128" height="73"/>
     </elements>
 </model>

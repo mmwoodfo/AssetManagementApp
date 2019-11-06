@@ -22,7 +22,7 @@ extension AssignedEntity {
     @NSManaged public var email: String?
     @NSManaged public var phoneNumber: String?
     @NSManaged public var reason: String?
-    @NSManaged public var loanedDate: Date?
+    @NSManaged public var loanedDate: String?
     @NSManaged public var adaptorName: String?
 
 }

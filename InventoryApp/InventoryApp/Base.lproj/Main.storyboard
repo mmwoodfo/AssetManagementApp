@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -251,7 +251,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="eiu-TK-d9K"/>
                     <connections>
-                        <outlet property="InputTextField" destination="Nq6-g7-hgv" id="rjg-Ze-LlY"/>
                         <outlet property="SuccessLabel" destination="Dp1-OR-v3C" id="qRC-AC-W5n"/>
                         <outlet property="adapterSelector" destination="SNc-BJ-SHi" id="6Uh-g6-epu"/>
                         <outlet property="asuField" destination="msd-RD-u7a" id="rFG-pF-QVg"/>
@@ -260,6 +259,7 @@
                         <outlet property="nameField" destination="X2v-f6-SEZ" id="7Nz-74-7Lk"/>
                         <outlet property="phoneField" destination="Szm-mG-uKe" id="A5p-5K-oDb"/>
                         <outlet property="reasonField" destination="TkU-Q3-Ge2" id="Va0-O3-QAx"/>
+                        <outlet property="todayDateField" destination="Nq6-g7-hgv" id="rjg-Ze-LlY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDU-Q4-m3u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 weak var field: UITextField!
 
 
@@ -14,7 +15,16 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
     
     private let tempAdapterArray = ["meg","you","need","to","finish","this"]
-    var activeTextField = 0
+    private let picker1 = UIPickerView()
+    private var activeTextField = 0
+    private var datePicker: UIDatePicker?
+    private var selectedAdapter: String = ""
+    
+    private var methods:MethodsForController = MethodsForController()
+    
+    //Core data variables
+    let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var checkedout = [CheckoutEntity]()
 
     //Outlets to handle passing data to the model
     @IBOutlet weak var nameField: UITextField!
@@ -23,23 +33,11 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var reasonField: UITextField!
     @IBOutlet weak var adapterSelector: UITextField!
-    
-    
     @IBOutlet weak var SuccessLabel: UILabel!
-    
     @IBOutlet weak var dateHolder: UILabel!
+    @IBOutlet weak var todayDateField: UITextField!
     
-    
-    @IBOutlet weak var InputTextField: UITextField!
-    
-    private var datePicker: UIDatePicker?
-    
-    let picker1 = UIPickerView()
-
-    
-    var selectedAdapter: String = ""
-    
-    
+//------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad() {
         
          super.viewDidLoad()
@@ -55,7 +53,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(CheckoutViewController.dateChanged(datePicker:)), for: .valueChanged)
-        InputTextField.inputView = datePicker
+        todayDateField.inputView = datePicker
         
 
         
@@ -68,14 +66,44 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         createToolBar()
         
         SuccessLabel.isHidden = true
-        
-       
-
-        // Do any additional setup after loading the view.
-        
     }
     
-    //Adapter picker set up
+//------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//
+    //Function that allows UI elements to close when tapped outside
+    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+//------------------------ DATE CHANGED FUNCTION ----------------------------------//
+    @objc func dateChanged(datePicker: UIDatePicker){
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-YYY"
+        todayDateField.text = dateFormatter.string(from: datePicker.date)
+    }
+
+//------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
+    @IBAction func CheckOutItem(_ sender: Any) {
+        /*Validate that important information is not empty**/
+        if(nameField.text == "" || asuField.text == "" || emailField.text == "" || reasonField.text == ""){
+            self.present(methods.displayAlert(givenTitle: "Missing information", givenMessage: "Please fill out all required fields"), animated: true)
+        }else{
+            /*If important information is not empty add to core data & check if method added succussfully*/
+            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: todayDateField.text ?? "", expectedReturnDate: dateHolder.text ?? "", adaptorName: adapterSelector.text ?? "")){
+                methods.clearUI(viewController: self)
+                SuccessLabel.isHidden = false
+            }else{
+                self.present(methods.displayAlert(givenTitle: "Something went wrong", givenMessage: "The item could not be added to the list of checkedout consumables"), animated: true)
+            }
+        }
+    }
+    
+//------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//
+    @IBAction func ClearFields(_ sender: Any) {
+        methods.clearUI(viewController: self)
+    }
+    
+//------------------------------- ADAPTER PICKER SET UP --------------------------------------//
     func createPickerView(){
         picker1.delegate = self
         picker1.delegate?.pickerView?(picker1, didSelectRow: 0, inComponent: 0)
@@ -158,83 +186,6 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
 
            }
-    
-    
-    //Function that allows UI elements to close when tapped outside
-    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
-        view.endEditing(true)
-        
-    }
-    
-    @objc func dateChanged(datePicker: UIDatePicker){
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-YYY"
-        InputTextField.text = dateFormatter.string(from: datePicker.date)
-        //view.endEditing(true)
-        
-    }
-    
-
-
-    @IBAction func CheckOutItem(_ sender: Any) {
-        
-        let name: String = nameField.text!
-        let asuID: String = asuField.text!
-        let email: String = emailField.text!
-        let phone: String = phoneField.text!
-        let reason: String = reasonField.text!
-        let expectedReturnDate:String = dateHolder.text!
-        
-        
-        /*Validate that important information is not empty**/
-        if(name == "" || asuID == "" || email == "" || reason == ""){
-            displayAlert(givenTitle:"Missing information", givenMessage:"Please fill out all required fields")
-        }else{
-            let checkedoutItem:CheckedoutItem = CheckedoutItem(name: name, asuriteId: asuID, email: email, phoneNumber: phone, reason: reason, expectedReturnDate: expectedReturnDate, adaptorName: selectedAdapter)
-            
-            /*If important information is not empty add to core data & check if method added succussfully*/
-            if(addCheckoutObjectToCoreData(checkedoutItem: checkedoutItem)){
-                clearUI()
-                SuccessLabel.isHidden = false
-            }else{
-                displayAlert(givenTitle:"Something went wrong", givenMessage:"The item could not be added to the list of checkedout consumables")
-            }
-        }
-    
-        
-    }
-    
-    
-    @IBAction func ClearFields(_ sender: Any) {
-        clearUI()
-    }
-    
-    /*
-     addCheckedoutObjectToCoreData adds a passed item to core data and either returns true or false depending on if the item was successfully added or not
-     */
-    func addCheckoutObjectToCoreData(checkedoutItem:CheckedoutItem) -> Bool{
-        return false
-    }
-    
-    /*displayAlert displays an alert to the UI with a given title and given message. This alert is only used as a popup to notify the user of something important, usually an error*/
-    func displayAlert(givenTitle:String, givenMessage:String){
-        let alert = UIAlertController(title: givenTitle, message: givenMessage, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
-    
-    /*clearUI is used to clear all of the text fields in the view controller**/
-    func clearUI(){
-        for view in self.view.subviews{
-            if let textField = view as? UITextField{
-                textField.text = ""
-            }
-        }
-    }
-
 }
 
 
