@@ -31,7 +31,7 @@ public class MethodsForController{
     
     //========================================= CORE DATA ==========================================================//
     //Core data variables
-    let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext //moc = managed object context
     var checkedout = [CheckoutEntity]()
     var assigned = [AssignedEntity]()
     var consumable = [ConsumableEntity]()
@@ -90,5 +90,47 @@ public class MethodsForController{
         }catch _{
             return false
         }
+    }
+    
+    //------------------ RETURN LIST OF CHECKED OUT ENTITIES IN CORE DATA ----------------------//
+    func fetchCheckedoutEntity() -> [CheckoutEntity]{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CheckoutEntity")
+
+        checkedout = ((try? moc.fetch(fetchRequest)) as? [CheckoutEntity])!
+        
+        return checkedout
+    }
+    
+    //------------------ RETURN LIST OF ASSIGNED ENTITIES IN CORE DATA ----------------------//
+    func fetchConsumableEntity() -> [AssignedEntity]{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AssignedEntity")
+
+        assigned = ((try? moc.fetch(fetchRequest)) as? [AssignedEntity])!
+        
+        return assigned
+    }
+    
+    //----------------------- RETURN LIST OF CONSUMABLE TYPES IN CORE DATA -----------------------//
+    func fetchConsumableTypes() -> [String] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ConsumableEntity")
+
+        consumable = ((try? moc.fetch(fetchRequest)) as? [ConsumableEntity])!
+        
+        var types = [String]()
+        
+        for item in consumable{
+            types.append(item.type ?? "")
+        }
+        
+        return types
+    }
+    
+    //------------------ RETURN LIST OF CONSUMABLE ENTITIES IN CORE DATA ----------------------//
+    func fetchConsumableEntity() -> [ConsumableEntity]{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ConsumableEntity")
+
+        consumable = ((try? moc.fetch(fetchRequest)) as? [ConsumableEntity])!
+        
+        return consumable
     }
 }

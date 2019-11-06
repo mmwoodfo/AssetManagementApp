@@ -14,13 +14,13 @@ weak var field: UITextField!
 class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
     
-    private let tempAdapterArray = ["meg","you","need","to","finish","this"]
+    private var methods:MethodsForController = MethodsForController()
+    
+    private var tempAdapterArray = [String]()
     private let picker1 = UIPickerView()
     private var activeTextField = 0
     private var datePicker: UIDatePicker?
     private var selectedAdapter: String = ""
-    
-    private var methods:MethodsForController = MethodsForController()
     
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -41,6 +41,12 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     override func viewDidLoad() {
         
          super.viewDidLoad()
+        
+        //Set adaptors
+        tempAdapterArray = methods.fetchConsumableTypes()
+        if(tempAdapterArray.isEmpty){
+            tempAdapterArray.append("")
+        }
         
         //To get current date
         let date = Date()
