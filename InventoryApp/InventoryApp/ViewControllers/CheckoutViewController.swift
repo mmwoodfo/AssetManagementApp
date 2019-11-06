@@ -10,9 +10,11 @@ import UIKit
 weak var field: UITextField!
 
 
-class CheckoutViewController: UIViewController {
+class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+
     
     private let tempAdapterArray = ["meg","you","need","to","finish","this"]
+    var activeTextField = 0
 
     //Outlets to handle passing data to the model
     @IBOutlet weak var nameField: UITextField!
@@ -20,6 +22,7 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var reasonField: UITextField!
+    @IBOutlet weak var adapterSelector: UITextField!
     
     
     @IBOutlet weak var SuccessLabel: UILabel!
@@ -31,7 +34,8 @@ class CheckoutViewController: UIViewController {
     
     private var datePicker: UIDatePicker?
     
-    let adapterPicker = UIPickerView()
+    let picker1 = UIPickerView()
+
     
     var selectedAdapter: String = ""
     
@@ -58,6 +62,11 @@ class CheckoutViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CheckoutViewController.viewTapped(gestureRecognixer:)))
         view.addGestureRecognizer(tapGesture)
         
+        // Stuff for Adapter selector
+        adapterSelector.delegate = self
+        createPickerView()
+        createToolBar()
+        
         SuccessLabel.isHidden = true
         
        
@@ -65,6 +74,91 @@ class CheckoutViewController: UIViewController {
         // Do any additional setup after loading the view.
         
     }
+    
+    //Adapter picker set up
+    func createPickerView(){
+        picker1.delegate = self
+        picker1.delegate?.pickerView?(picker1, didSelectRow: 0, inComponent: 0)
+        adapterSelector.inputView = picker1
+    }
+    
+    func createToolBar(){
+        let toolcar = UIToolbar()
+        toolcar.sizeToFit()
+        toolcar.tintColor = UIColor.red
+        toolcar.backgroundColor = UIColor.blue
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(CheckoutViewController.viewTapped(gestureRecognixer:)))
+        toolcar.setItems([doneButton], animated: false)
+        toolcar.isUserInteractionEnabled = true
+        adapterSelector.inputAccessoryView = toolcar
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return tempAdapterArray.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+       {
+
+               return tempAdapterArray[row]
+
+       }
+       
+       func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+               adapterSelector.text =  tempAdapterArray[row]
+    
+       }
+       
+       func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+           return 100.0
+       }
+       
+       func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+           return 60.0
+       }
+
+       func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+           
+           
+           switch activeTextField{
+           case 1:
+           var label:UILabel
+           
+           if let v = view as? UILabel{
+               label = v
+           }
+           else{
+               label = UILabel()
+           }
+           
+           label.textColor = UIColor.black
+           label.textAlignment = .left
+           label.font = UIFont(name: "Helvetica", size: 16)
+           
+           label.text = tempAdapterArray[row]
+           
+           return label
+    
+               
+           default:
+               return UILabel()
+               
+           }
+       }
+       
+       func textFieldDidBeginEditing(_ textField: UITextField) {
+           
+               activeTextField = 1
+               picker1.reloadAllComponents()
+
+
+           }
+    
     
     //Function that allows UI elements to close when tapped outside
     @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){

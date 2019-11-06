@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TbE-zj-JZi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="915"/>
+            <point key="canvasLocation" x="791" y="974"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="9gP-Iq-4ZM">
@@ -239,6 +239,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SNc-BJ-SHi">
+                                <rect key="frame" x="307" y="467" width="156" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="lER-Fp-sY7"/>
@@ -247,6 +253,7 @@
                     <connections>
                         <outlet property="InputTextField" destination="Nq6-g7-hgv" id="rjg-Ze-LlY"/>
                         <outlet property="SuccessLabel" destination="Dp1-OR-v3C" id="qRC-AC-W5n"/>
+                        <outlet property="adapterSelector" destination="SNc-BJ-SHi" id="6Uh-g6-epu"/>
                         <outlet property="asuField" destination="msd-RD-u7a" id="rFG-pF-QVg"/>
                         <outlet property="dateHolder" destination="Gk4-X8-APu" id="Bn8-4R-ivO"/>
                         <outlet property="emailField" destination="DZj-S6-N5c" id="WUf-qe-B0q"/>
