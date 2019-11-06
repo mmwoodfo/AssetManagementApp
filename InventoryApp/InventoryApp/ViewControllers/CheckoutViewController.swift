@@ -11,25 +11,77 @@ weak var field: UITextField!
 
 
 class CheckoutViewController: UIViewController {
+    
+    private let tempAdapterArray = ["meg","you","need","to","finish","this"]
 
+    //Outlets to handle passing data to the model
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var asuField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var reasonField: UITextField!
-    @IBOutlet weak var adapterType: UITextField!
+    
     
     @IBOutlet weak var SuccessLabel: UILabel!
     
+    @IBOutlet weak var dateHolder: UILabel!
+    
+    
+    @IBOutlet weak var InputTextField: UITextField!
+    
+    private var datePicker: UIDatePicker?
+    
+    let adapterPicker = UIPickerView()
+    
+    var selectedAdapter: String = ""
+    
+    
     override func viewDidLoad() {
         
+         super.viewDidLoad()
+        
+        //To get current date
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "MM-dd-yyyy"
+        let formattedDate = format.string(from: date)
+        dateHolder.text = formattedDate
+        
+        //Date Picker setup
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(CheckoutViewController.dateChanged(datePicker:)), for: .valueChanged)
+        InputTextField.inputView = datePicker
+        
+
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CheckoutViewController.viewTapped(gestureRecognixer:)))
+        view.addGestureRecognizer(tapGesture)
+        
         SuccessLabel.isHidden = true
-        super.viewDidLoad()
+        
+       
 
         // Do any additional setup after loading the view.
         
     }
     
+    //Function that allows UI elements to close when tapped outside
+    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
+        view.endEditing(true)
+        
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker){
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-YYY"
+        InputTextField.text = dateFormatter.string(from: datePicker.date)
+        //view.endEditing(true)
+        
+    }
+    
+
 
     @IBAction func CheckOutItem(_ sender: Any) {
         
@@ -38,14 +90,14 @@ class CheckoutViewController: UIViewController {
         let email: String = emailField.text!
         let phone: String = phoneField.text!
         let reason: String = reasonField.text!
-        let expectedReturnDate:String = ""
-        let adaptorName:String = adapterType.text!
+        let expectedReturnDate:String = dateHolder.text!
+        
         
         /*Validate that important information is not empty**/
         if(name == "" || asuID == "" || email == "" || reason == ""){
             displayAlert(givenTitle:"Missing information", givenMessage:"Please fill out all required fields")
         }else{
-            let checkedoutItem:CheckedoutItem = CheckedoutItem(name: name, asuriteId: asuID, email: email, phoneNumber: phone, reason: reason, expectedReturnDate: expectedReturnDate, adaptorName: adaptorName)
+            let checkedoutItem:CheckedoutItem = CheckedoutItem(name: name, asuriteId: asuID, email: email, phoneNumber: phone, reason: reason, expectedReturnDate: expectedReturnDate, adaptorName: selectedAdapter)
             
             /*If important information is not empty add to core data & check if method added succussfully*/
             if(addCheckoutObjectToCoreData(checkedoutItem: checkedoutItem)){
@@ -90,3 +142,5 @@ class CheckoutViewController: UIViewController {
     }
 
 }
+
+
