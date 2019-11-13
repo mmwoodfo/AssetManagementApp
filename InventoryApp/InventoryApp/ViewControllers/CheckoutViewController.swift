@@ -36,11 +36,15 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var SuccessLabel: UILabel!
     @IBOutlet weak var dateHolder: UILabel!
     @IBOutlet weak var todayDateField: UITextField!
+    @IBOutlet weak var btnCheckout: UIButton!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad() {
         
          super.viewDidLoad()
+        
+        //set button designs
+        btnCheckout.layer.cornerRadius = 10
         
         //Set adaptors
         tempAdapterArray = methods.fetchConsumableTypes()
@@ -69,7 +73,6 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         // Stuff for Adapter selector
         adapterSelector.delegate = self
         createPickerView()
-        createToolBar()
         
         SuccessLabel.isHidden = true
     }
@@ -114,17 +117,6 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         picker1.delegate = self
         picker1.delegate?.pickerView?(picker1, didSelectRow: 0, inComponent: 0)
         adapterSelector.inputView = picker1
-    }
-    
-    func createToolBar(){
-        let toolcar = UIToolbar()
-        toolcar.sizeToFit()
-        toolcar.tintColor = UIColor.red
-        toolcar.backgroundColor = UIColor.blue
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(CheckoutViewController.viewTapped(gestureRecognixer:)))
-        toolcar.setItems([doneButton], animated: false)
-        toolcar.isUserInteractionEnabled = true
-        adapterSelector.inputAccessoryView = toolcar
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -192,6 +184,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
 
            }
+    
 }
 
 
