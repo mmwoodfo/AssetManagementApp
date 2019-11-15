@@ -23,12 +23,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Checkout a Consumable">
+                                <state key="normal" title="View Assigned Consumables">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <segue destination="7eJ-hD-Aud" kind="show" identifier="MainToCheckout" id="uik-PT-mul"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-cG-qQD">
                                 <rect key="frame" x="34" y="560" width="743" height="123"/>
@@ -100,28 +97,6 @@
                     <view key="view" contentMode="scaleToFill" id="aqK-YK-4Vc">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oF-g0-2TR">
-                                <rect key="frame" x="0.0" y="962" width="712" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem style="plain" id="fYe-9b-qqB">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GvW-CO-7Zt">
-                                            <rect key="frame" x="20" y="11" width="51" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="plus" catalog="system"/>
-                                        </button>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" id="8Mp-gA-A7e">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BTO-Ux-Pam">
-                                            <rect key="frame" x="618" y="11" width="74" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="trash" catalog="system"/>
-                                        </button>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6f9-tb-5oP"/>
                     </view>
@@ -140,7 +115,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yFv-tw-dpy">
-                                <rect key="frame" x="0.0" y="134" width="712" height="873"/>
+                                <rect key="frame" x="0.0" y="67" width="712" height="940"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckedOutCell" id="0FT-zz-EOQ" userLabel="CheckedOutCell" customClass="CheckOutCell" customModule="InventoryApp" customModuleProvider="target">
@@ -181,13 +156,35 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wBt-WD-YVh">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <items>
+                                    <navigationItem title="Title" id="GS6-PM-ixp">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="LSk-uh-VJp">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Khs-WF-rG0">
+                                                <rect key="frame" x="606" y="11.5" width="86" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                                <connections>
+                                                    <segue destination="7eJ-hD-Aud" kind="show" identifier="viewCheckedOutTOaddCheckedOut" id="wh3-no-fpg"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="yFv-tw-dpy" firstAttribute="top" secondItem="wBt-WD-YVh" secondAttribute="bottom" constant="11" id="9Ps-OV-Iwd"/>
                             <constraint firstItem="yFv-tw-dpy" firstAttribute="leading" secondItem="otV-dz-K33" secondAttribute="leading" id="A2p-IR-biM"/>
-                            <constraint firstItem="yFv-tw-dpy" firstAttribute="top" secondItem="otV-dz-K33" secondAttribute="top" constant="134" id="IPZ-dI-fmJ"/>
+                            <constraint firstItem="wBt-WD-YVh" firstAttribute="trailing" secondItem="otV-dz-K33" secondAttribute="trailing" id="Any-qZ-gXH"/>
                             <constraint firstItem="yFv-tw-dpy" firstAttribute="trailing" secondItem="otV-dz-K33" secondAttribute="trailing" id="Ng0-fA-taI"/>
                             <constraint firstItem="yFv-tw-dpy" firstAttribute="bottom" secondItem="otV-dz-K33" secondAttribute="bottom" id="esp-LD-KrZ"/>
+                            <constraint firstItem="wBt-WD-YVh" firstAttribute="leading" secondItem="otV-dz-K33" secondAttribute="leading" id="mVX-yq-RQn"/>
+                            <constraint firstItem="wBt-WD-YVh" firstAttribute="top" secondItem="otV-dz-K33" secondAttribute="top" id="t21-zY-xAq"/>
+                            <constraint firstItem="yFv-tw-dpy" firstAttribute="top" secondItem="wBt-WD-YVh" secondAttribute="bottom" constant="11" id="wvX-7Z-err"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="otV-dz-K33"/>
                     </view>
@@ -315,11 +312,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDU-Q4-m3u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="840.74074074074065" y="-427.22222222222223"/>
+            <point key="canvasLocation" x="1704" y="974"/>
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="trash" catalog="system" width="60" height="64"/>
+        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>
