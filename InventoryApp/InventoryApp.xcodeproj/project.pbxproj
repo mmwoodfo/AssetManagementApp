@@ -23,7 +23,7 @@
 		0DFB153F2360F3C300F64EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB153D2360F3C300F64EE0 /* LaunchScreen.storyboard */; };
 		0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */; };
 		0DFB154B2361010000F64EE0 /* ConsumablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB154A2361010000F64EE0 /* ConsumablesViewController.swift */; };
-		0DFB154D2361011700F64EE0 /* AssignedCheckedOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB154C2361011700F64EE0 /* AssignedCheckedOutViewController.swift */; };
+		0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */; };
 		92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DEDC3B237E00570093D911 /* CheckOutCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 		0DFB15402360F3C300F64EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		0DFB154A2361010000F64EE0 /* ConsumablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumablesViewController.swift; sourceTree = "<group>"; };
-		0DFB154C2361011700F64EE0 /* AssignedCheckedOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedCheckedOutViewController.swift; sourceTree = "<group>"; };
+		0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfCheckedOutItemsViewController.swift; sourceTree = "<group>"; };
 		92DEDC3B237E00570093D911 /* CheckOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,7 +136,7 @@
 				92DEDC38237DFF680093D911 /* CellClasses */,
 				0DFB15332360F3C200F64EE0 /* ViewController.swift */,
 				0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */,
-				0DFB154C2361011700F64EE0 /* AssignedCheckedOutViewController.swift */,
+				0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */,
 				0DFB154A2361010000F64EE0 /* ConsumablesViewController.swift */,
 				0D860317237354EA00E5D313 /* MethodsForControllers.swift */,
 			);
@@ -235,7 +235,7 @@
 				0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */,
 				0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */,
 				0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */,
-				0DFB154D2361011700F64EE0 /* AssignedCheckedOutViewController.swift in Sources */,
+				0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */,
 				0D01C63223732B91009E4D15 /* AssignedEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

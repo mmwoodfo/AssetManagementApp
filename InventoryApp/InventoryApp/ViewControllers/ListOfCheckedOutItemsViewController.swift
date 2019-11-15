@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AssignedCheckedOutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
 
@@ -44,7 +44,7 @@ class AssignedCheckedOutViewController: UIViewController, UITableViewDelegate, U
         cell.layer.borderWidth = 1.5
         cell.layer.borderColor = UIColor.white.cgColor
         cell.backgroundColor = UIColor.green
-        cell.name.text = check[indexPath.row].name
+        cell.name.text = checkedOutAdapterArray[indexPath.row].name
 
         return cell
         
