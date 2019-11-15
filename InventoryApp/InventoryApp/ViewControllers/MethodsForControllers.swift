@@ -101,6 +101,11 @@ public class MethodsForController{
         return checkedout
     }
     
+    //----------------- RETURN NUMBER OF CHECKED OUT ENTITIES IN CORE DATA --------------------//
+    func fetchRecord() -> Int{
+        return fetchCheckedoutEntity().count
+    }
+    
     //------------------ RETURN LIST OF ASSIGNED ENTITIES IN CORE DATA ----------------------//
     func fetchConsumableEntity() -> [AssignedEntity]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AssignedEntity")

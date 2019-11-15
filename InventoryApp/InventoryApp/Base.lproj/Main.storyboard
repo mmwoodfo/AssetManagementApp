@@ -100,6 +100,28 @@
                     <view key="view" contentMode="scaleToFill" id="aqK-YK-4Vc">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oF-g0-2TR">
+                                <rect key="frame" x="0.0" y="962" width="712" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" id="fYe-9b-qqB">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GvW-CO-7Zt">
+                                            <rect key="frame" x="20" y="11" width="51" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="plus" catalog="system"/>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="8Mp-gA-A7e">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BTO-Ux-Pam">
+                                            <rect key="frame" x="618" y="11" width="74" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="trash" catalog="system"/>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6f9-tb-5oP"/>
                     </view>
@@ -114,14 +136,14 @@
             <objects>
                 <viewController id="9yF-if-mak" customClass="ListOfCheckedOutItemsViewController" customModule="InventoryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GSh-4L-JFe">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yFv-tw-dpy">
                                 <rect key="frame" x="0.0" y="134" width="712" height="873"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0FT-zz-EOQ" userLabel="CheckedOutCell" customClass="CheckOutCell" customModule="InventoryApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CheckedOutCell" id="0FT-zz-EOQ" userLabel="CheckedOutCell" customClass="CheckOutCell" customModule="InventoryApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="712" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0FT-zz-EOQ" id="XHa-d3-TcW">
@@ -170,6 +192,9 @@
                         <viewLayoutGuide key="safeArea" id="otV-dz-K33"/>
                     </view>
                     <navigationItem key="navigationItem" id="z05-xf-rLt"/>
+                    <connections>
+                        <outlet property="checkedOutTable" destination="yFv-tw-dpy" id="Bch-du-jgs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TbE-zj-JZi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -293,4 +318,8 @@
             <point key="canvasLocation" x="840.74074074074065" y="-427.22222222222223"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus" catalog="system" width="64" height="56"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
+    </resources>
 </document>

@@ -8,25 +8,19 @@
 
 import UIKit
 
-class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var checkedOutTable: UITableView!
     
-
-  
-     private var methods:MethodsForController = MethodsForController()
-    
+    private var methods:MethodsForController = MethodsForController()
     private var checkedOutAdapterArray = [CheckoutEntity]()
-    
-    
-    
-    
-    
-    
     
     override func viewDidLoad() {
         
         checkedOutAdapterArray = methods.fetchCheckedoutEntity()
         
+        self.checkedOutTable.dataSource = self
+        self.checkedOutTable.delegate = self
         
         super.viewDidLoad()
 
@@ -36,7 +30,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDelegate
     
     //===========================Functions for Table view Cells and the Table=======================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        checkedOutAdapterArray.count
+        return methods.fetchRecord()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,6 +47,5 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-    
 
 }
