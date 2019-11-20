@@ -71,7 +71,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             methods.deleteConsumableEntity(entity: consumableArray[indexPath.row])
             reloadTableView()
         }
-        
+      
     @IBAction func addConsumable(_ sender: Any) {
         let consumableAlert = UIAlertController(title: "Add Consumable", message: nil, preferredStyle: .alert)
         consumableAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -92,6 +92,8 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                 if let count = consumableAlert.textFields?[1].text{
                     if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0){
                         self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
+                    }else{
+                        self.reloadTableView()
                     }
                 }
             }
