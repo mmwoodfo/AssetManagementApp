@@ -11,8 +11,9 @@ import UIKit
 class CheckOutCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var item: UILabel!
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var returnDate: UILabel!
+    @IBOutlet weak var reason: UILabel!
+    @IBOutlet weak var adapterType: UILabel!
     
 
     override func awakeFromNib() {

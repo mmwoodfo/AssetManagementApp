@@ -29,6 +29,17 @@ public class MethodsForController{
         return alert
     }
     
+    //---------------- Checks to see if adapter is due for return ------------------------
+    func checkOverdue(dateStr: String) -> Bool{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        let date = dateFormatter.date(from: dateStr)!
+        
+        let todayDate = Date()
+        
+        return date < todayDate
+    }
+    
     //========================================= CORE DATA ==========================================================//
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext //moc = managed object context
@@ -89,6 +100,17 @@ public class MethodsForController{
             return true
         }catch _{
             return false
+        }
+    }
+    
+    //----------------------- REMOVE CONSUMABLE ENTITY FROM CORE DATA ---------------------------//
+    func deleteCheckedoutEntity(entity:CheckoutEntity){
+        moc.delete(entity)
+        do{
+            try moc.save()
+            print("Saved.")
+        }catch let error as NSError {
+            print("Could not save. \(error)")
         }
     }
     

@@ -35,7 +35,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var adapterSelector: UITextField!
     @IBOutlet weak var SuccessLabel: UILabel!
     @IBOutlet weak var dateHolder: UILabel!
-    @IBOutlet weak var todayDateField: UITextField!
+    @IBOutlet weak var returnDateField: UITextField!
     @IBOutlet weak var btnCheckout: UIButton!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
@@ -63,7 +63,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(CheckoutViewController.dateChanged(datePicker:)), for: .valueChanged)
-        todayDateField.inputView = datePicker
+        returnDateField.inputView = datePicker
         
 
         
@@ -88,7 +88,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-YYY"
-        todayDateField.text = dateFormatter.string(from: datePicker.date)
+        returnDateField.text = dateFormatter.string(from: datePicker.date)
     }
 
 //------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
@@ -98,7 +98,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.present(methods.displayAlert(givenTitle: "Missing information", givenMessage: "Please fill out all required fields"), animated: true)
         }else{
             /*If important information is not empty add to core data & check if method added succussfully*/
-            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: todayDateField.text ?? "", expectedReturnDate: dateHolder.text ?? "", adaptorName: adapterSelector.text ?? "")){
+            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", adaptorName: adapterSelector.text ?? "")){
                 methods.clearUI(viewController: self)
                 SuccessLabel.isHidden = false
             }else{
@@ -107,11 +107,17 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
+//------------------------------- PREPARE FOR UNWIND SEGUE --------------------------------------//
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        let destinationViewControler = segue.destination as! ListOfCheckedOutItemsViewController
+        destinationViewControler.reloadTableView()
+    }
+    
 //------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//
     @IBAction func ClearFields(_ sender: Any) {
         methods.clearUI(viewController: self)
     }
-    
+
 //------------------------------- ADAPTER PICKER SET UP --------------------------------------//
     func createPickerView(){
         picker1.delegate = self

@@ -13,6 +13,7 @@
 		0D01C63323732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63123732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift */; };
 		0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */; };
 		0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */; };
+		0D2AC66E2385C75D00B914CB /* CheckedOutDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */; };
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
 		0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */; };
 		0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */; };
@@ -34,6 +35,7 @@
 		0D01C63123732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssignedEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedOutDetailViewController.swift; sourceTree = "<group>"; };
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
 		0DFB152C2360F3C200F64EE0 /* InventoryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InventoryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 			path = CheckedOutEntity;
 			sourceTree = "<group>";
 		};
+		0D2AC66C2385C73C00B914CB /* Detailed Views */ = {
+			isa = PBXGroup;
+			children = (
+				0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */,
+			);
+			path = "Detailed Views";
+			sourceTree = "<group>";
+		};
 		0DFB15232360F3C200F64EE0 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 		0DFB154E2361029C00F64EE0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0D2AC66C2385C73C00B914CB /* Detailed Views */,
 				92DEDC38237DFF680093D911 /* CellClasses */,
 				0DFB15332360F3C200F64EE0 /* ViewController.swift */,
 				0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */,
@@ -222,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2AC66E2385C75D00B914CB /* CheckedOutDetailViewController.swift in Sources */,
 				92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */,
 				0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */,
 				0D01C63323732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift in Sources */,
