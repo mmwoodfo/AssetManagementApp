@@ -14,6 +14,10 @@
 		0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */; };
 		0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */; };
 		0D2AC66E2385C75D00B914CB /* CheckedOutDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */; };
+		0D5AA0E02385D73B006B0023 /* ListOfAssignedItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */; };
+		0D5AA0E42385D827006B0023 /* ConsumablesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0E32385D827006B0023 /* ConsumablesCell.swift */; };
+		0D5AA0E62385D855006B0023 /* AssignedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0E52385D855006B0023 /* AssignedCell.swift */; };
+		0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */; };
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
 		0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */; };
 		0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */; };
@@ -23,7 +27,6 @@
 		0DFB153C2360F3C300F64EE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB153B2360F3C300F64EE0 /* Assets.xcassets */; };
 		0DFB153F2360F3C300F64EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB153D2360F3C300F64EE0 /* LaunchScreen.storyboard */; };
 		0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */; };
-		0DFB154B2361010000F64EE0 /* ConsumablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB154A2361010000F64EE0 /* ConsumablesViewController.swift */; };
 		0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */; };
 		92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DEDC3B237E00570093D911 /* CheckOutCell.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +39,10 @@
 		0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedOutDetailViewController.swift; sourceTree = "<group>"; };
+		0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAssignedItemsViewController.swift; sourceTree = "<group>"; };
+		0D5AA0E32385D827006B0023 /* ConsumablesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumablesCell.swift; sourceTree = "<group>"; };
+		0D5AA0E52385D855006B0023 /* AssignedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedCell.swift; sourceTree = "<group>"; };
+		0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfConsumablesViewController.swift; sourceTree = "<group>"; };
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
 		0DFB152C2360F3C200F64EE0 /* InventoryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InventoryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +54,6 @@
 		0DFB153E2360F3C300F64EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DFB15402360F3C300F64EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
-		0DFB154A2361010000F64EE0 /* ConsumablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumablesViewController.swift; sourceTree = "<group>"; };
 		0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfCheckedOutItemsViewController.swift; sourceTree = "<group>"; };
 		92DEDC3B237E00570093D911 /* CheckOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,8 +154,9 @@
 				0DFB15332360F3C200F64EE0 /* ViewController.swift */,
 				0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */,
 				0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */,
-				0DFB154A2361010000F64EE0 /* ConsumablesViewController.swift */,
 				0D860317237354EA00E5D313 /* MethodsForControllers.swift */,
+				0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */,
+				0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -158,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				92DEDC3B237E00570093D911 /* CheckOutCell.swift */,
+				0D5AA0E32385D827006B0023 /* ConsumablesCell.swift */,
+				0D5AA0E52385D855006B0023 /* AssignedCell.swift */,
 			);
 			path = CellClasses;
 			sourceTree = "<group>";
@@ -237,9 +246,11 @@
 				92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */,
 				0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */,
 				0D01C63323732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift in Sources */,
+				0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */,
+				0D5AA0E62385D855006B0023 /* AssignedCell.swift in Sources */,
+				0D5AA0E42385D827006B0023 /* ConsumablesCell.swift in Sources */,
 				0D01C62C237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift in Sources */,
 				0DFB153A2360F3C200F64EE0 /* InventoryApp.xcdatamodeld in Sources */,
-				0DFB154B2361010000F64EE0 /* ConsumablesViewController.swift in Sources */,
 				0D01C62D237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift in Sources */,
 				0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */,
 				0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */,
@@ -248,6 +259,7 @@
 				0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */,
 				0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */,
 				0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */,
+				0D5AA0E02385D73B006B0023 /* ListOfAssignedItemsViewController.swift in Sources */,
 				0D01C63223732B91009E4D15 /* AssignedEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

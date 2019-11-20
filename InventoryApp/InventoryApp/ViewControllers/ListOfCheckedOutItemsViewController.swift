@@ -39,7 +39,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     //===========================Functions for Table view Cells and the Table=======================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return methods.fetchRecord()
+        return checkedOutAdapterArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,7 +88,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     //-------------- SHOW CELL DETAILS ON DETAILS PAGE ------------------//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailCheckedOutView"{
+        if segue.identifier == "CheckedoutToDetailed"{
             let selectedIndex: IndexPath = self.checkedOutTable.indexPath(for: sender as! UITableViewCell)!
             let checkedOutItem = checkedOutAdapterArray[selectedIndex.row]
             

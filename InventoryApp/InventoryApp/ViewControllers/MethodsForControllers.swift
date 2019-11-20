@@ -103,7 +103,7 @@ public class MethodsForController{
         }
     }
     
-    //----------------------- REMOVE CONSUMABLE ENTITY FROM CORE DATA ---------------------------//
+    //----------------------- REMOVE CHECKEDOUT ENTITY FROM CORE DATA ---------------------------//
     func deleteCheckedoutEntity(entity:CheckoutEntity){
         moc.delete(entity)
         do{
@@ -123,18 +123,24 @@ public class MethodsForController{
         return checkedout
     }
     
-    //----------------- RETURN NUMBER OF CHECKED OUT ENTITIES IN CORE DATA --------------------//
-    func fetchRecord() -> Int{
-        return fetchCheckedoutEntity().count
-    }
-    
     //------------------ RETURN LIST OF ASSIGNED ENTITIES IN CORE DATA ----------------------//
-    func fetchConsumableEntity() -> [AssignedEntity]{
+    func fetchAssignedEntity() -> [AssignedEntity]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AssignedEntity")
 
         assigned = ((try? moc.fetch(fetchRequest)) as? [AssignedEntity])!
         
         return assigned
+    }
+    
+    //----------------------- REMOVE CONSUMABLE ENTITY FROM CORE DATA ---------------------------//
+    func deleteConsumableEntity(entity:ConsumableEntity){
+        moc.delete(entity)
+        do{
+            try moc.save()
+            print("Saved.")
+        }catch let error as NSError {
+            print("Could not save. \(error)")
+        }
     }
     
     //----------------------- RETURN LIST OF CONSUMABLE TYPES IN CORE DATA -----------------------//
