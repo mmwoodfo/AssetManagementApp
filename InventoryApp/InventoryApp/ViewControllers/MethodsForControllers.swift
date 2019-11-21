@@ -180,7 +180,7 @@ public class MethodsForController{
     func changeConsumableCount(consumableName:String, newCount:Int32) -> Bool{
         let consumableList = fetchConsumableEntity()
         
-        var index = 0
+        var index = -1
         
         for entity in consumableList{
             index = index + 1
@@ -204,7 +204,6 @@ public class MethodsForController{
         
         for entity in consumableList{
             index += 1
-            print("EntityName: \(entity.type) and ConsumableName: \(consumableName)")
             if entity.type == consumableName{
                 found = true
                 break

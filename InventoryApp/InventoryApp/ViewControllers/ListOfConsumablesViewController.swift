@@ -54,7 +54,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 90
         }
-        
+    
         func reloadTableView(){
             populateConsumableArray()
             consumableTable.reloadData()
@@ -69,13 +69,39 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell.EditingStyle {
             return UITableViewCell.EditingStyle.delete
         }
-        
-        
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-        {
+    
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
             methods.deleteConsumableEntity(entity: consumableArray[indexPath.row])
             reloadTableView()
         }
+    
+    //=============== EDIT CELLS IN TABLE  ======================
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let editConsumableCount = UIAlertController(title: "Change Count", message: nil, preferredStyle: .alert)
+        editConsumableCount.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        editConsumableCount.addTextField(configurationHandler: {
+            textField in
+            textField.placeholder = "Consumable Count"
+        })
+        
+        editConsumableCount.addAction(UIAlertAction(title: "Add", style: .default, handler: {
+            action in
+            if let count = editConsumableCount.textFields?[0].text{
+                if count != "" {
+                    if self.methods.changeConsumableCount(consumableName: self.consumableArray[indexPath.item].type ?? "", newCount: Int32(count) ?? 0) {
+                        print("Count Changed")
+                    }else{
+                        print("Count not Changed")
+                    }
+                    self.reloadTableView()
+                }
+            }
+        }))
+        
+        self.present(editConsumableCount, animated: true)
+        
+    }
       
     @IBAction func addConsumable(_ sender: Any) {
         let consumableAlert = UIAlertController(title: "Add Consumable", message: nil, preferredStyle: .alert)
