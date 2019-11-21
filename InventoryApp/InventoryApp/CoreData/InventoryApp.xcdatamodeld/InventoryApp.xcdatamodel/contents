@@ -21,11 +21,12 @@
     </entity>
     <entity name="ConsumableEntity" representedClassName="ConsumableEntity" syncable="YES">
         <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sku" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="AssignedEntity" positionX="-36" positionY="18" width="128" height="148"/>
         <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="163"/>
-        <element name="ConsumableEntity" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="ConsumableEntity" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

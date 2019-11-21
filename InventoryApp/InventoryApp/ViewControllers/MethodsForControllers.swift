@@ -40,6 +40,14 @@ public class MethodsForController{
         return date < todayDate
     }
     
+    //--------- Checks to see if string is a date ------------
+    func checkNotDate(dateStr: String) -> Bool{
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "MM-dd-yyyy"
+
+        return dateFormatterGet.date(from: dateStr) == nil
+    }
+    
     //========================================= CORE DATA ==========================================================//
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext //moc = managed object context
@@ -89,11 +97,12 @@ public class MethodsForController{
     }
     
     //----------------------- ADD CONSUMABLE ENTITY TO CORE DATA ---------------------------//
-    func addConsumableEntityToCoreData(type:String, count:Int32) -> Bool{
+    func addConsumableEntityToCoreData(type:String, count:Int32, sku:String) -> Bool{
         let ent = NSEntityDescription.entity(forEntityName: "ConsumableEntity", in: moc)
         let newConsumableItem = ConsumableEntity(entity: ent!, insertInto: moc)
         newConsumableItem.type = type
         newConsumableItem.count = count
+        newConsumableItem.sku = sku
         
         do{
             try moc.save()
@@ -165,5 +174,80 @@ public class MethodsForController{
         consumable = ((try? moc.fetch(fetchRequest)) as? [ConsumableEntity])!
         
         return consumable
+    }
+    
+    //--------------- CHANGE COUNT OF CONSUMABLE IN CORE DATA -----------------//
+    func changeConsumableCount(consumableName:String, newCount:Int32) -> Bool{
+        let consumableList = fetchConsumableEntity()
+        
+        var index = 0
+        
+        for entity in consumableList{
+            index = index + 1
+            if entity.type == consumableName{
+                break
+            }
+        }
+        
+        let savedType = consumableList[index].type
+        let savedSku = consumableList[index].sku
+        deleteConsumableEntity(entity: consumableList[index])
+        return addConsumableEntityToCoreData(type: savedType ?? "", count: newCount, sku: savedSku ?? "")
+    }
+    
+    //--------------- INCREASE COUNT OF CONSUMABLE IN CORE DATA -----------------//
+    func IncreaseConsumableCount(consumableName:String) -> Bool{
+        let consumableList = fetchConsumableEntity()
+        
+        var index = -1
+        var found = false
+        
+        for entity in consumableList{
+            index += 1
+            print("EntityName: \(entity.type) and ConsumableName: \(consumableName)")
+            if entity.type == consumableName{
+                found = true
+                break
+            }
+        }
+        
+        if found{
+            let savedType = consumableList[index].type
+            let savedSku = consumableList[index].sku
+            let oldCount = consumableList[index].count
+            let newCount = oldCount + 1
+            deleteConsumableEntity(entity: consumableList[index])
+            return addConsumableEntityToCoreData(type: savedType ?? "", count: newCount, sku: savedSku ?? "")
+        }else{
+            return false
+        }
+    }
+    
+    //--------------- DECREASE COUNT OF CONSUMABLE IN CORE DATA -----------------//
+    func decreaseConsumableCount(consumableName:String) -> Bool{
+        let consumableList = fetchConsumableEntity()
+        
+        var index = -1
+        var found = false
+        
+        for entity in consumableList{
+            index += 1
+            //print("EntityName: \(entity.type) and ConsumableName: \(consumableName)")
+            if entity.type == consumableName{
+                found = true
+                break
+            }
+        }
+        
+        if found{
+            let savedType = consumableList[index].type
+            let savedSku = consumableList[index].sku
+            let oldCount = consumableList[index].count
+            let newCount = oldCount - 1
+            deleteConsumableEntity(entity: consumableList[index])
+            return addConsumableEntityToCoreData(type: savedType ?? "", count: newCount, sku: savedSku ?? "")
+        }else{
+            return false
+        }
     }
 }

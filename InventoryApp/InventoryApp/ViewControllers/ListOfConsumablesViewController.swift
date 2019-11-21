@@ -27,9 +27,10 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         //---------------------- POPULATE CONSUMABLE ARRAY --------------------------------//
         private func populateConsumableArray(){
             consumableArray = methods.fetchConsumableEntity()
+            consumableArray.sort{ ($0.type ?? "") < ($1.type ?? "") }
         }
-        
-       //===========================Functions for Table view Cells and the Table=======================
+    
+    //===========================Functions for Table view Cells and the Table=======================
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return consumableArray.count
         }
@@ -42,6 +43,10 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             cell.backgroundColor = UIColor.white
             cell.adapterType.text = consumableArray[indexPath.row].type
             cell.count.text = String(consumableArray[indexPath.row].count)
+            
+            if consumableArray[indexPath.row].count <= 0{
+                cell.count.textColor = UIColor.red
+            }
             
             return cell
         }
@@ -86,14 +91,30 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             textField.placeholder = "Consumable Count"
         })
         
+        consumableAlert.addTextField(configurationHandler: {
+            textField in
+            textField.placeholder = "Item SKU"
+        })
+        
         consumableAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: {
             action in
             if let name = consumableAlert.textFields?[0].text{
                 if let count = consumableAlert.textFields?[1].text{
-                    if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0){
-                        self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
-                    }else{
-                        self.reloadTableView()
+                    if let sku = consumableAlert.textFields?[2].text{
+                        if name != "" && count != "" && sku != ""{
+                            let consumableTemp = self.methods.fetchConsumableTypes()
+                            //check to make sure item is not a duplicate
+                            if consumableTemp.contains(name){
+                                self.present(self.methods.displayAlert(givenTitle: "Error adding - That Consumable Already Exists", givenMessage: "The consumable \(name) is already in this list"), animated: true)
+                            //add to core data
+                            }else if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0, sku: sku){
+                                self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
+                            }else{
+                                self.reloadTableView()
+                            }
+                        }else{
+                            self.present(self.methods.displayAlert(givenTitle: "Error adding - Missing Information", givenMessage: "Please try again and fill out all the required information"), animated: true)
+                        }
                     }
                 }
             }

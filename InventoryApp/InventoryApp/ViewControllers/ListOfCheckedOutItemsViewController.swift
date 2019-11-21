@@ -82,6 +82,12 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
+        let cell = self.checkedOutTable.cellForRow(at: indexPath) as! CheckOutCell?
+        if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? ""){
+            print("Count increased")
+        }else{
+            print("Error, could not increase count")
+        }
         methods.deleteCheckedoutEntity(entity: checkedOutAdapterArray[indexPath.row])
         reloadTableView()
     }

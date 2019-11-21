@@ -19,5 +19,6 @@ extension ConsumableEntity {
 
     @NSManaged public var type: String?
     @NSManaged public var count: Int32
+    @NSManaged public var sku: String?
 
 }
