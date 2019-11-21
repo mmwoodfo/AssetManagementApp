@@ -48,6 +48,8 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                 cell.count.textColor = UIColor.red
             }
             
+            cell.sku.text = consumableArray[indexPath.row].sku
+            
             return cell
         }
         
