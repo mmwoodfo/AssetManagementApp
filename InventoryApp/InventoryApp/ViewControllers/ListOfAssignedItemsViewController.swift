@@ -80,6 +80,11 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
        reloadTableView()
    }
    
+    //------------------------------- UNWIND SEGUE --------------------------------------//
+    @IBAction func unwindToAssignedList(_ sender: UIStoryboardSegue) {
+        
+    }
+    
    //-------------- SHOW CELL DETAILS ON DETAILS PAGE ------------------//
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "AssignedToDetails"{

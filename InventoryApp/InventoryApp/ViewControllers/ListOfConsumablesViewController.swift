@@ -87,7 +87,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             textField.placeholder = "Consumable Count"
         })
         
-        editConsumableCount.addAction(UIAlertAction(title: "Add", style: .default, handler: {
+        editConsumableCount.addAction(UIAlertAction(title: "Update", style: .default, handler: {
             action in
             if let count = editConsumableCount.textFields?[0].text{
                 if count != "" {

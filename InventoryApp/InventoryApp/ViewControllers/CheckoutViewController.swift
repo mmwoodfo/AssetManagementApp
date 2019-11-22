@@ -87,7 +87,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @objc func dateChanged(datePicker: UIDatePicker){
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-YYY"
+        dateFormatter.dateFormat = "MM-dd-yyyy"
         returnDateField.text = dateFormatter.string(from: datePicker.date)
     }
 
