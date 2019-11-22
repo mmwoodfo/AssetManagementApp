@@ -94,8 +94,10 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
     @IBAction func CheckOutItem(_ sender: Any) {
         /*Validate that important information is not empty**/
-        if(nameField.text == "" || asuField.text == "" || emailField.text == "" || reasonField.text == ""){
-            self.present(methods.displayAlert(givenTitle: "Missing information", givenMessage: "Please fill out all required fields"), animated: true)
+        if(nameField.text == "" || asuField.text == "" || reasonField.text == ""){
+        self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
+        }else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
+            self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
         }else if methods.checkNotDate(dateStr: returnDateField.text ?? ""){
             self.present(methods.displayAlert(givenTitle: "Not a valid date", givenMessage: "Please fill out all required fields"), animated: true)
         }else{

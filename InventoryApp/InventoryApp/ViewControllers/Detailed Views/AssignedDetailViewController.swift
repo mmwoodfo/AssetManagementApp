@@ -17,6 +17,7 @@ class AssignedDetailViewController: UIViewController {
     @IBOutlet weak var phoneNumber: UILabel!
     @IBOutlet weak var adapterType: UILabel!
     @IBOutlet weak var assignedDate: UILabel!
+    @IBOutlet weak var reason: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,5 +27,6 @@ class AssignedDetailViewController: UIViewController {
         phoneNumber.text = selectedAssignedItem?.phoneNumber
         adapterType.text = selectedAssignedItem?.adaptorName
         assignedDate.text = selectedAssignedItem?.loanedDate
+        reason.text = selectedAssignedItem?.reason
     }
 }

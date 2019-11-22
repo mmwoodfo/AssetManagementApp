@@ -46,6 +46,8 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             
             if consumableArray[indexPath.row].count <= 0{
                 cell.count.textColor = UIColor.red
+            }else{
+                cell.count.textColor = UIColor.black
             }
             
             cell.sku.text = consumableArray[indexPath.row].sku
@@ -90,12 +92,13 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         editConsumableCount.addAction(UIAlertAction(title: "Update", style: .default, handler: {
             action in
             if let count = editConsumableCount.textFields?[0].text{
-                if count != "" {
+                if Int(count) != nil {
                     if self.methods.changeConsumableCount(consumableName: self.consumableArray[indexPath.item].type ?? "", newCount: Int32(count) ?? 0) {
                         print("Count Changed")
                     }else{
-                        print("Count not Changed")
+                        self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
                     }
+                    
                     self.reloadTableView()
                 }
             }
@@ -135,6 +138,8 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                             if consumableTemp.contains(name){
                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - That Consumable Already Exists", givenMessage: "The consumable \(name) is already in this list"), animated: true)
                             //add to core data
+                            }else if Int(count) == nil{
+                                self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
                             }else if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0, sku: sku){
                                 self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
                             }else{

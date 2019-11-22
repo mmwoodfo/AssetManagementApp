@@ -106,7 +106,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="View Assigned Consumables">
+                                <state key="normal" title="List of Assigned Consumables">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -121,7 +121,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="View Consumables">
+                                <state key="normal" title="View All Consumables">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -704,11 +704,12 @@
                     <navigationItem key="navigationItem" id="Cca-Kf-SCF"/>
                     <connections>
                         <outlet property="adapterType" destination="tVj-bK-1MT" id="wBH-Iy-i9d"/>
+                        <outlet property="assignedDate" destination="X5H-Bg-J3P" id="kDj-bQ-FZ5"/>
                         <outlet property="asurite" destination="wn1-dd-nVb" id="gZo-jn-K6F"/>
                         <outlet property="email" destination="Q2w-x1-2pb" id="RaU-TF-qtC"/>
-                        <outlet property="loanedDate" destination="X5H-Bg-J3P" id="gLf-XI-1pc"/>
                         <outlet property="name" destination="Svb-TZ-Tfw" id="rW9-pm-qjF"/>
                         <outlet property="phoneNumber" destination="Bb2-lC-Nwh" id="tWf-fg-v3F"/>
+                        <outlet property="reason" destination="6fi-W8-dhm" id="wVS-6I-OjC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ami-Gl-uvT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -723,8 +724,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Checkout Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkj-lG-6iq">
-                                <rect key="frame" x="298" y="58" width="117" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Assign Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkj-lG-6iq">
+                                <rect key="frame" x="298" y="58" width="94" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>

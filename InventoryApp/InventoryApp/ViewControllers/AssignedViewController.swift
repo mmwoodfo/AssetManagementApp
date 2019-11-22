@@ -74,8 +74,10 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //------------------------ ASSIGN ITEM BUTTON PRESSED ---------------------------//
     @IBAction func AssignItem(_ sender: Any) {
         /*Validate that important information is not empty**/
-        if(nameField.text == "" || asuField.text == "" || emailField.text == "" || reasonField.text == ""){
-            self.present(methods.displayAlert(givenTitle: "Missing information", givenMessage: "Please fill out all required fields"), animated: true)
+        if(nameField.text == "" || asuField.text == "" || reasonField.text == ""){
+        self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
+        }else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
+            self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
         }else{
             /*If important information is not empty add to core data & check if method added succussfully*/
             if(methods.addAssignedEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", adaptorName: adapterSelector.text ?? "")){
