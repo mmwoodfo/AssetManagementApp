@@ -1,17 +1,14 @@
 //
-//  CheckoutViewController.swift
+//  AssignedViewController.swift
 //  InventoryApp
 //
-//  Created by Meghan on 10/23/19.
+//  Created by Meghan on 11/22/19.
 //  Copyright © 2019 Herberger IT. All rights reserved.
 //
 
 import UIKit
-import CoreData
-weak var field: UITextField!
 
-
-class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
     
     private var methods:MethodsForController = MethodsForController()
@@ -24,7 +21,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var checkedout = [CheckoutEntity]()
+    var assigned = [AssignedEntity]()
 
     //Outlets to handle passing data to the model
     @IBOutlet weak var nameField: UITextField!
@@ -35,8 +32,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var adapterSelector: UITextField!
     @IBOutlet weak var SuccessLabel: UILabel!
     @IBOutlet weak var dateHolder: UILabel!
-    @IBOutlet weak var returnDateField: UITextField!
-    @IBOutlet weak var btnCheckout: UIButton!
+    @IBOutlet weak var btnAssign: UIButton!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad() {
@@ -44,7 +40,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
          super.viewDidLoad()
         
         //set button designs
-        btnCheckout.layer.cornerRadius = 10
+        btnAssign.layer.cornerRadius = 10
         
         //Set adaptors
         tempAdapterArray = methods.fetchConsumableTypes()
@@ -59,15 +55,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let formattedDate = format.string(from: date)
         dateHolder.text = formattedDate
         
-        //Date Picker setup
-        datePicker = UIDatePicker()
-        datePicker?.datePickerMode = .date
-        datePicker?.addTarget(self, action: #selector(CheckoutViewController.dateChanged(datePicker:)), for: .valueChanged)
-        returnDateField.inputView = datePicker
-        
-
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CheckoutViewController.viewTapped(gestureRecognixer:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AssignedViewController.viewTapped(gestureRecognixer:)))
         view.addGestureRecognizer(tapGesture)
         
         // Stuff for Adapter selector
@@ -82,25 +70,15 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
         view.endEditing(true)
     }
-    
-//------------------------ DATE CHANGED FUNCTION ----------------------------------//
-    @objc func dateChanged(datePicker: UIDatePicker){
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-YYY"
-        returnDateField.text = dateFormatter.string(from: datePicker.date)
-    }
 
-//------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
-    @IBAction func CheckOutItem(_ sender: Any) {
+//------------------------ ASSIGN ITEM BUTTON PRESSED ---------------------------//
+    @IBAction func AssignItem(_ sender: Any) {
         /*Validate that important information is not empty**/
         if(nameField.text == "" || asuField.text == "" || emailField.text == "" || reasonField.text == ""){
             self.present(methods.displayAlert(givenTitle: "Missing information", givenMessage: "Please fill out all required fields"), animated: true)
-        }else if methods.checkNotDate(dateStr: returnDateField.text ?? ""){
-            self.present(methods.displayAlert(givenTitle: "Not a valid date", givenMessage: "Please fill out all required fields"), animated: true)
         }else{
             /*If important information is not empty add to core data & check if method added succussfully*/
-            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "00-00-0000", adaptorName: adapterSelector.text ?? "")){
+            if(methods.addAssignedEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", adaptorName: adapterSelector.text ?? "")){
                 if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
                     print("Count decreased")
                 }else{
@@ -109,14 +87,14 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 methods.clearUI(viewController: self)
                 SuccessLabel.isHidden = false
             }else{
-                self.present(methods.displayAlert(givenTitle: "Something went wrong", givenMessage: "The item could not be added to the list of checkedout consumables"), animated: true)
+                self.present(methods.displayAlert(givenTitle: "Something went wrong", givenMessage: "The item could not be added to the list of assigned consumables"), animated: true)
             }
         }
     }
     
 //------------------------------- PREPARE FOR UNWIND SEGUE --------------------------------------//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        let destinationViewControler = segue.destination as! ListOfCheckedOutItemsViewController
+        let destinationViewControler = segue.destination as! ListOfAssignedItemsViewController
         destinationViewControler.reloadTableView()
     }
     
@@ -197,7 +175,5 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
 
            }
-    
+
 }
-
-

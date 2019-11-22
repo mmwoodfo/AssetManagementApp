@@ -132,6 +132,17 @@ public class MethodsForController{
         return checkedout
     }
     
+    //----------------------- REMOVE ASSIGNED ENTITY FROM CORE DATA ---------------------------//
+    func deleteAssignedEntity(entity:AssignedEntity){
+        moc.delete(entity)
+        do{
+            try moc.save()
+            print("Saved.")
+        }catch let error as NSError {
+            print("Could not save. \(error)")
+        }
+    }
+    
     //------------------ RETURN LIST OF ASSIGNED ENTITIES IN CORE DATA ----------------------//
     func fetchAssignedEntity() -> [AssignedEntity]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AssignedEntity")

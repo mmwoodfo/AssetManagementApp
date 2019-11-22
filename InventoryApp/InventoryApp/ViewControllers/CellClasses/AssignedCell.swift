@@ -10,6 +10,10 @@ import UIKit
 
 class AssignedCell: UITableViewCell {
 
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var adapter: UILabel!
+    @IBOutlet weak var reason: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
