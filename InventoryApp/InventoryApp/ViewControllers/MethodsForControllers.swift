@@ -50,7 +50,9 @@ public class MethodsForController{
         dateFormatter.dateFormat = "MM-dd-yyyy"
         let date = dateFormatter.date(from: dateStr)!
         
-        let todayDate = Date()
+        var todayDate = Date()
+        let today = dateFormatter.string(from: todayDate)
+        todayDate = dateFormatter.date(from: today)!
         
         return date < todayDate
     }

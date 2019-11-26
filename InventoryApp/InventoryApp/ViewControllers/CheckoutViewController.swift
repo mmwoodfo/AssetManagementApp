@@ -58,6 +58,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         format.dateFormat = "MM-dd-yyyy"
         let formattedDate = format.string(from: date)
         dateHolder.text = formattedDate
+        returnDateField.text = formattedDate
         
         //Date Picker setup
         datePicker = UIDatePicker()
@@ -94,7 +95,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
     @IBAction func CheckOutItem(_ sender: Any) {
         /*Validate that important information is not empty**/
-        if(nameField.text == "" || asuField.text == "" || reasonField.text == ""){
+        if(nameField.text == "" || asuField.text == "" || reasonField.text == "" || adapterSelector.text == ""){
         self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
         }else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
             self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)

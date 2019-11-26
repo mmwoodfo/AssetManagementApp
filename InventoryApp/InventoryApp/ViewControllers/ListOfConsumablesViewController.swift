@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
      private var methods:MethodsForController = MethodsForController()
-        private var consumableArray = [ConsumableEntity]()
-        
+     private var consumableArray = [ConsumableEntity]()
+     private var adapterImg:Data?
+     let picker = UIImagePickerController()
+    
         @IBOutlet weak var consumableTable: UITableView!
         
         override func viewDidLoad() {
@@ -137,9 +139,10 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                             //check to make sure item is not a duplicate
                             if consumableTemp.contains(name){
                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - That Consumable Already Exists", givenMessage: "The consumable \(name) is already in this list"), animated: true)
-                            //add to core data
+                            //check count
                             }else if Int(count) == nil{
                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
+                            //add to core data
                             }else if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0, sku: sku){
                                 self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
                             }else{

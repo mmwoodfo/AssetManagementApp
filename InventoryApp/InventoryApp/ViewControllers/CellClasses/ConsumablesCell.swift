@@ -13,6 +13,7 @@ class ConsumablesCell: UITableViewCell {
     @IBOutlet weak var adapterType: UILabel!
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var sku: UILabel!
+    @IBOutlet weak var adapterPicture: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

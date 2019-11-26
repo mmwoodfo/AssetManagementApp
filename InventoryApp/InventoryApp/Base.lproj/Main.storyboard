@@ -21,10 +21,12 @@
                                 <items>
                                     <navigationItem title="Assigned Consumables List" id="U9L-f4-g7o">
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="gs1-0q-ni5">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jaT-js-VJT">
-                                                <rect key="frame" x="672" y="17" width="20" height="22"/>
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="jaT-js-VJT">
+                                                <rect key="frame" x="667" y="16" width="25" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="plus.circle.fill" catalog="system"/>
+                                                <state key="normal">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                </state>
                                                 <connections>
                                                     <segue destination="LRh-W7-CZX" kind="show" identifier="AssignedToNewAssigned" id="Bfy-lZ-pLh"/>
                                                 </connections>
@@ -98,45 +100,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-f5-fyF">
-                                <rect key="frame" x="34" y="385" width="743" height="123"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-f5-fyF">
+                                <rect key="frame" x="34" y="555" width="743" height="123"/>
                                 <color key="backgroundColor" red="0.55118113759999998" green="0.1120348945" blue="0.2517451644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="123" id="j7M-Nw-mxd"/>
+                                    <constraint firstAttribute="height" constant="123" id="442-lQ-h7x"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="List of Assigned Consumables">
+                                <state key="normal" title="Assigned Consumables">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <segue destination="UXA-vF-P75" kind="show" identifier="MainToAssigned" id="JzY-uc-s7A"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-cG-qQD">
-                                <rect key="frame" x="34" y="560" width="743" height="123"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MHj-Af-9uP">
+                                <rect key="frame" x="34" y="382" width="743" height="123"/>
                                 <color key="backgroundColor" red="0.55118113759999998" green="0.1120348945" blue="0.2517451644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="123" id="xS4-P6-2qW"/>
+                                    <constraint firstAttribute="height" constant="123" id="uFR-9f-M6e"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="View All Consumables">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="dOq-CO-1Kq" kind="show" identifier="MainToConsumables" id="l8L-sk-GhT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MHj-Af-9uP">
-                                <rect key="frame" x="34" y="740" width="743" height="123"/>
-                                <color key="backgroundColor" red="0.55118113759999998" green="0.1120348945" blue="0.2517451644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="123" id="xPf-KZ-myz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="View Checkedout Consumables">
+                                <state key="normal" title="Loaned Consumables">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -144,27 +131,39 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kux-nY-MVj">
-                                <rect key="frame" x="161" y="54" width="520" height="249"/>
+                                <rect key="frame" x="161" y="54" width="520" height="246"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-cG-qQD">
+                                <rect key="frame" x="34" y="727" width="743" height="123"/>
+                                <color key="backgroundColor" red="0.55118113759999998" green="0.1120348945" blue="0.2517451644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="E4E-SM-Wrl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="View In Stock Consumables">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="dOq-CO-1Kq" kind="show" identifier="MainToConsumables" id="l8L-sk-GhT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="1Sm-cG-qQD" firstAttribute="top" secondItem="0hc-f5-fyF" secondAttribute="bottom" constant="52" id="7uL-IL-wkA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MHj-Af-9uP" secondAttribute="trailing" constant="33" id="9FU-Jb-tBh"/>
-                            <constraint firstItem="0hc-f5-fyF" firstAttribute="top" secondItem="Kux-nY-MVj" secondAttribute="bottom" constant="82" id="9gW-Vv-prP"/>
-                            <constraint firstItem="MHj-Af-9uP" firstAttribute="top" secondItem="1Sm-cG-qQD" secondAttribute="bottom" constant="57" id="Cl2-Sf-k71"/>
-                            <constraint firstItem="Kux-nY-MVj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="54" id="CmR-YD-FTW"/>
-                            <constraint firstItem="1Sm-cG-qQD" firstAttribute="top" secondItem="0hc-f5-fyF" secondAttribute="bottom" constant="52" id="FhC-fp-WW1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Sm-cG-qQD" secondAttribute="trailing" constant="33" id="WTs-bh-gNs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0hc-f5-fyF" secondAttribute="trailing" constant="33" id="drm-dE-x3W"/>
-                            <constraint firstItem="0hc-f5-fyF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="eDd-8l-6Tm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MHj-Af-9uP" secondAttribute="bottom" constant="217" id="fxD-tH-tbH"/>
-                            <constraint firstItem="MHj-Af-9uP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="mcN-cg-iZU"/>
-                            <constraint firstItem="1Sm-cG-qQD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="oGF-ua-oRW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kux-nY-MVj" secondAttribute="trailing" constant="129" id="sLg-z0-hed"/>
-                            <constraint firstItem="MHj-Af-9uP" firstAttribute="top" secondItem="1Sm-cG-qQD" secondAttribute="bottom" constant="57" id="xup-mo-GaS"/>
-                            <constraint firstItem="Kux-nY-MVj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="161" id="zNu-yi-cn9"/>
-                            <constraint firstItem="0hc-f5-fyF" firstAttribute="top" secondItem="Kux-nY-MVj" secondAttribute="bottom" constant="82" id="zYH-9F-aBd"/>
+                            <constraint firstItem="MHj-Af-9uP" firstAttribute="top" secondItem="Kux-nY-MVj" secondAttribute="bottom" constant="82" id="EeX-4Q-mJ3"/>
+                            <constraint firstItem="MHj-Af-9uP" firstAttribute="trailing" secondItem="0hc-f5-fyF" secondAttribute="trailing" id="Htc-ie-5Xa"/>
+                            <constraint firstItem="MHj-Af-9uP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="Qqe-eZ-vwb"/>
+                            <constraint firstItem="1Sm-cG-qQD" firstAttribute="top" secondItem="0hc-f5-fyF" secondAttribute="bottom" constant="49" id="aA4-mu-T0e"/>
+                            <constraint firstItem="0hc-f5-fyF" firstAttribute="trailing" secondItem="1Sm-cG-qQD" secondAttribute="trailing" id="eBu-4Y-flq"/>
+                            <constraint firstItem="Kux-nY-MVj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="161" id="grZ-Vg-m0z"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1Sm-cG-qQD" secondAttribute="bottom" constant="230" id="jl3-Zl-ZZc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kux-nY-MVj" secondAttribute="trailing" constant="129" id="nbQ-DH-F3K"/>
+                            <constraint firstItem="0hc-f5-fyF" firstAttribute="top" secondItem="MHj-Af-9uP" secondAttribute="bottom" constant="50" id="o7e-s7-yJB"/>
+                            <constraint firstItem="Kux-nY-MVj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="54" id="oLR-uP-iXn"/>
+                            <constraint firstItem="0hc-f5-fyF" firstAttribute="leading" secondItem="1Sm-cG-qQD" secondAttribute="leading" id="oib-Yx-uWw"/>
+                            <constraint firstItem="MHj-Af-9uP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="shD-ng-Hqx"/>
+                            <constraint firstItem="MHj-Af-9uP" firstAttribute="leading" secondItem="0hc-f5-fyF" secondAttribute="leading" id="tgq-FL-gi2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -200,7 +199,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Adapter Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4K-Pm-Qth">
-                                                    <rect key="frame" x="26" y="11" width="408" height="21"/>
+                                                    <rect key="frame" x="117" y="11" width="408" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -214,15 +213,20 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vql-zF-7tM">
-                                                    <rect key="frame" x="26" y="56" width="408" height="21"/>
+                                                    <rect key="frame" x="117" y="56" width="408" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a83-K2-DBY">
+                                                    <rect key="frame" x="12" y="11" width="80" height="66"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="adapterPicture" destination="a83-K2-DBY" id="KZL-BI-2sY"/>
                                             <outlet property="adapterType" destination="r4K-Pm-Qth" id="vAl-6w-KK7"/>
                                             <outlet property="count" destination="q1M-kv-wk9" id="yry-9x-e3n"/>
                                             <outlet property="sku" destination="Vql-zF-7tM" id="Ruh-cF-52h"/>
@@ -234,12 +238,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Consumables List" id="ddK-Nz-x5J">
+                                    <navigationItem title="Consumable Inventory List" id="ddK-Nz-x5J">
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="Quo-QE-lNv">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DEu-b7-Hoy">
-                                                <rect key="frame" x="672" y="17" width="20" height="22"/>
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="DEu-b7-Hoy">
+                                                <rect key="frame" x="667" y="16" width="25" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="plus.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="addConsumable:" destination="dOq-CO-1Kq" eventType="touchUpInside" id="kG8-b7-JIT"/>
                                                 </connections>
@@ -339,8 +342,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contnact Information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QiF-uU-QyF">
-                                <rect key="frame" x="12" y="20" width="181" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QiF-uU-QyF">
+                                <rect key="frame" x="12" y="20" width="171" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -449,13 +452,11 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wBt-WD-YVh">
                                 <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                                 <items>
-                                    <navigationItem title="Checkedout Consumables List" id="GS6-PM-ixp">
+                                    <navigationItem title="Loaned Consumable List" id="GS6-PM-ixp">
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="LSk-uh-VJp">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Khs-WF-rG0">
-                                                <rect key="frame" x="606" y="11.5" width="86" height="33"/>
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="Khs-WF-rG0">
+                                                <rect key="frame" x="667" y="16" width="25" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" image="plus.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <segue destination="7eJ-hD-Aud" kind="show" identifier="viewCheckedOutTOaddCheckedOut" id="wh3-no-fpg"/>
                                                 </connections>
@@ -520,13 +521,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DZj-S6-N5c" userLabel="emailField">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address ( email@asu.edu )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DZj-S6-N5c" userLabel="emailField">
                                 <rect key="frame" x="65" y="342" width="571" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Office Phone #" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Szm-mG-uKe" userLabel="phoneField">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Office Phone ( ###-###-#### )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Szm-mG-uKe" userLabel="phoneField">
                                 <rect key="frame" x="65" y="387" width="571" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -648,8 +649,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contnact Information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYY-3T-rgO">
-                                <rect key="frame" x="12" y="20" width="181" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYY-3T-rgO">
+                                <rect key="frame" x="12" y="20" width="171" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -743,13 +744,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ueX-Xy-TKe" userLabel="emailField">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address ( email@asu.edu )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ueX-Xy-TKe" userLabel="emailField">
                                 <rect key="frame" x="65" y="342" width="571" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Office Phone #" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6l-OR-xfP" userLabel="phoneField">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Office Phone ( ###-###-#### )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6l-OR-xfP" userLabel="phoneField">
                                 <rect key="frame" x="65" y="387" width="571" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -829,7 +830,4 @@
             <point key="canvasLocation" x="-1550" y="243"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
-    </resources>
 </document>

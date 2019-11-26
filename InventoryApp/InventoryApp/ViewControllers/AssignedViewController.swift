@@ -74,7 +74,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //------------------------ ASSIGN ITEM BUTTON PRESSED ---------------------------//
     @IBAction func AssignItem(_ sender: Any) {
         /*Validate that important information is not empty**/
-        if(nameField.text == "" || asuField.text == "" || reasonField.text == ""){
+        if(nameField.text == "" || asuField.text == "" || reasonField.text == "" || adapterSelector.text == ""){
         self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
         }else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
             self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
