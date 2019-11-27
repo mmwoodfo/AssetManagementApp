@@ -37,6 +37,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var dateHolder: UILabel!
     @IBOutlet weak var returnDateField: UITextField!
     @IBOutlet weak var btnCheckout: UIButton!
+    @IBOutlet weak var ticketNumber: UITextField!
+    @IBOutlet weak var signitureField: UIImageView!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad() {
@@ -103,7 +105,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.present(methods.displayAlert(givenTitle: "Not a valid date", givenMessage: "Please fill out all required fields"), animated: true)
         }else{
             /*If important information is not empty add to core data & check if method added succussfully*/
-            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "00-00-0000", adaptorName: adapterSelector.text ?? "")){
+            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "00-00-0000", adaptorName: adapterSelector.text ?? "", ticketNumber: ticketNumber.text ?? "")){
                 if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
                     print("Count decreased")
                 }else{
@@ -197,10 +199,10 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
            
                activeTextField = 1
                picker1.reloadAllComponents()
-
-
-           }
+        }
     
+    //------------------------------- SIGNITURE IMAGE SET UP --------------------------------------//
+
 }
 
 

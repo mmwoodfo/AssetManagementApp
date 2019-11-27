@@ -24,5 +24,6 @@ extension AssignedEntity {
     @NSManaged public var reason: String?
     @NSManaged public var loanedDate: String?
     @NSManaged public var adaptorName: String?
+    @NSManaged public var ticketNumber: String?
 
 }

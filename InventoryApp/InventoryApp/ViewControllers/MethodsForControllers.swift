@@ -73,7 +73,7 @@ public class MethodsForController{
     var consumable = [ConsumableEntity]()
     
     //----------------------- ADD CHECKED OUT ENTITY TO CORE DATA ---------------------------//
-    func addCheckoutEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, expectedReturnDate:String, adaptorName:String) -> Bool{
+    func addCheckoutEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, expectedReturnDate:String, adaptorName:String, ticketNumber:String) -> Bool{
         let ent = NSEntityDescription.entity(forEntityName: "CheckoutEntity", in: moc)
         let newCheckedOutItem = CheckoutEntity(entity: ent!, insertInto: moc)
         newCheckedOutItem.name = name
@@ -84,6 +84,7 @@ public class MethodsForController{
         newCheckedOutItem.loanedDate = todayDate
         newCheckedOutItem.expectedReturnDate = expectedReturnDate
         newCheckedOutItem.adaptorName = adaptorName
+        newCheckedOutItem.ticketNumber = ticketNumber
         
         do{
             try moc.save()
@@ -94,7 +95,7 @@ public class MethodsForController{
     }
     
     //----------------------- ADD ASSIGNED ENTITY TO CORE DATA ---------------------------//
-    func addAssignedEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, adaptorName:String) -> Bool{
+    func addAssignedEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, adaptorName:String, ticketNumber:String) -> Bool{
         let ent = NSEntityDescription.entity(forEntityName: "AssignedEntity", in: moc)
         let newAssignedItem = AssignedEntity(entity: ent!, insertInto: moc)
         newAssignedItem.name = name
@@ -104,6 +105,7 @@ public class MethodsForController{
         newAssignedItem.reason = reason
         newAssignedItem.loanedDate = todayDate
         newAssignedItem.adaptorName = adaptorName
+        newAssignedItem.ticketNumber = ticketNumber
         
         do{
             try moc.save()

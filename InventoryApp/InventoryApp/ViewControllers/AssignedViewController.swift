@@ -33,6 +33,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var SuccessLabel: UILabel!
     @IBOutlet weak var dateHolder: UILabel!
     @IBOutlet weak var btnAssign: UIButton!
+    @IBOutlet weak var ticketNumber: UITextField!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad() {
@@ -80,7 +81,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
         }else{
             /*If important information is not empty add to core data & check if method added succussfully*/
-            if(methods.addAssignedEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", adaptorName: adapterSelector.text ?? "")){
+            if(methods.addAssignedEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", adaptorName: adapterSelector.text ?? "", ticketNumber: ticketNumber.text ?? "")){
                 if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
                     print("Count decreased")
                 }else{

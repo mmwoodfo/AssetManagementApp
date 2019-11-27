@@ -21,6 +21,7 @@ class CheckedOutDetailViewController: UIViewController {
     @IBOutlet weak var loanedDate: UILabel!
     @IBOutlet weak var returnDate: UILabel!
     @IBOutlet weak var reason: UILabel!
+    @IBOutlet weak var ticketNumber: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class CheckedOutDetailViewController: UIViewController {
         adapterType.text = selectedCheckedOutItem?.adaptorName
         loanedDate.text = selectedCheckedOutItem?.loanedDate
         returnDate.text = selectedCheckedOutItem?.expectedReturnDate
+        ticketNumber.text = selectedCheckedOutItem?.ticketNumber
         reason.text = selectedCheckedOutItem?.reason
         
         //if true, change return date text to red

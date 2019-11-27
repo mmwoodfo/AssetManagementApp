@@ -8,6 +8,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
+        <attribute name="ticketNumber" optional="YES" attributeType="String"/>
     </entity>
     <entity name="CheckoutEntity" representedClassName="CheckoutEntity" syncable="YES">
         <attribute name="adaptorName" optional="YES" attributeType="String"/>
@@ -18,6 +19,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
+        <attribute name="ticketNumber" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ConsumableEntity" representedClassName="ConsumableEntity" syncable="YES">
         <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -25,8 +27,8 @@
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="AssignedEntity" positionX="-36" positionY="18" width="128" height="148"/>
-        <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="163"/>
+        <element name="AssignedEntity" positionX="-36" positionY="18" width="128" height="163"/>
+        <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="178"/>
         <element name="ConsumableEntity" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>
