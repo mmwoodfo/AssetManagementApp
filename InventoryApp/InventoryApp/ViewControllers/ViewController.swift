@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         btnCheckout.layer.cornerRadius = 10
         btnConsumables.layer.cornerRadius = 10
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
         
         hidaLogo.image = UIImage(named: "HIDA logo")
     }
+    
     @IBOutlet weak var btnCheckout: UIButton!
     @IBOutlet weak var btnConsumables: UIButton!
     @IBOutlet weak var btnView: UIButton!

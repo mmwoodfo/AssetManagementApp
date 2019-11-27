@@ -20,7 +20,8 @@ class AssignedDetailViewController: UIViewController {
     @IBOutlet weak var reason: UILabel!
     @IBOutlet weak var ticketNumber: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         name.text = selectedAssignedItem?.name
         asurite.text = selectedAssignedItem?.asuriteId

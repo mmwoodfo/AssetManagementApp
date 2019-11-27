@@ -15,7 +15,6 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
     
     private var methods:MethodsForController = MethodsForController()
-    
     private var tempAdapterArray = [String]()
     private let picker1 = UIPickerView()
     private var activeTextField = 0
@@ -45,8 +44,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var signitureField: UIImageView!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
-    override func viewDidLoad() {
-        
+    override func viewDidLoad()
+    {
          super.viewDidLoad()
         
         //set button designs
@@ -54,7 +53,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         //Set adaptors
         tempAdapterArray = methods.fetchConsumableTypes()
-        if(tempAdapterArray.isEmpty){
+        if(tempAdapterArray.isEmpty)
+        {
             tempAdapterArray.append("")
         }
         
@@ -86,133 +86,170 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
 //------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//
     //Function that allows UI elements to close when tapped outside
-    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
+    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer)
+    {
         view.endEditing(true)
     }
     
 //------------------------ DATE CHANGED FUNCTION ----------------------------------//
-    @objc func dateChanged(datePicker: UIDatePicker){
-        
+    @objc func dateChanged(datePicker: UIDatePicker)
+    {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
         returnDateField.text = dateFormatter.string(from: datePicker.date)
     }
 
 //------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
-    @IBAction func CheckOutItem(_ sender: Any) {
+    @IBAction func CheckOutItem(_ sender: Any)
+    {
         /*Validate that important information is not empty**/
-        if(nameField.text == "" || asuField.text == "" || reasonField.text == "" || adapterSelector.text == ""){
+        if(
+            nameField.text == "" ||
+            asuField.text == "" ||
+            reasonField.text == "" ||
+            adapterSelector.text == "")
+        {
         self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
-        }else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
+        }
+        else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? "")
+        {
             self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
-        }else if methods.checkNotDate(dateStr: returnDateField.text ?? ""){
+        }
+        else if methods.checkNotDate(dateStr: returnDateField.text ?? "")
+        {
             self.present(methods.displayAlert(givenTitle: "Not a valid date", givenMessage: "Please fill out all required fields"), animated: true)
-        }else{
+        }
+        else
+        {
             /*If important information is not empty add to core data & check if method added succussfully*/
             saveSigniture()
-            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "00-00-0000", adaptorName: adapterSelector.text ?? "", ticketNumber: ticketNumber.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)){
-                if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
+            
+            if(methods.addCheckoutEntityToCoreData(
+                name: nameField.text ?? "",
+                asurite: asuField.text ?? "",
+                email: emailField.text ?? "",
+                phone: phoneField.text ?? "",
+                reason: reasonField.text ?? "",
+                todayDate: dateHolder.text ?? "",
+                expectedReturnDate: returnDateField.text ?? "00-00-0000",
+                adaptorName: adapterSelector.text ?? "",
+                ticketNumber: ticketNumber.text ?? "",
+                signiture: signiture.pngData() ??
+                UIImage(named: "defaultSigniture.png")!.pngData()!
+            ))
+            {//if methods.addCheckoutEntityToCoreData()
+                
+                if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? "")
+                {
                     print("Count decreased")
-                }else{
+                }
+                else
+                {
                     print("Error, count not decreased")
                 }
                 methods.clearUI(viewController: self)
                 SuccessLabel.isHidden = false
-            }else{
+            }
+            else
+            {
                 self.present(methods.displayAlert(givenTitle: "Something went wrong", givenMessage: "The item could not be added to the list of checkedout consumables"), animated: true)
             }
         }
     }
     
 //------------------------------- PREPARE FOR UNWIND SEGUE --------------------------------------//
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
         let destinationViewControler = segue.destination as! ListOfCheckedOutItemsViewController
         destinationViewControler.reloadTableView()
     }
     
 //------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//
-    @IBAction func ClearFields(_ sender: Any) {
+    @IBAction func ClearFields(_ sender: Any)
+    {
         methods.clearUI(viewController: self)
         clearCanvas()
     }
 
 //------------------------------- ADAPTER PICKER SET UP --------------------------------------//
-    func createPickerView(){
+    func createPickerView()
+    {
         picker1.delegate = self
         picker1.delegate?.pickerView?(picker1, didSelectRow: 0, inComponent: 0)
         adapterSelector.inputView = picker1
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
         1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
         
         return tempAdapterArray.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-       {
-
-               return tempAdapterArray[row]
-
-       }
+    {
+        return tempAdapterArray[row]
+    }
        
-       func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        adapterSelector.text =  tempAdapterArray[row]
+    }
+       
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 200.0
+    }
+       
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 60.0
+    }
 
-               adapterSelector.text =  tempAdapterArray[row]
-    
-       }
-       
-       func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-           return 200.0
-       }
-       
-       func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-           return 60.0
-       }
-
-       func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-           
-           
-           switch activeTextField{
-           case 1:
-           var label:UILabel
-           
-           if let v = view as? UILabel{
-               label = v
-           }
-           else{
-               label = UILabel()
-           }
-           
-           label.textColor = UIColor.black
-           label.textAlignment = .left
-           label.font = UIFont(name: "Helvetica", size: 16)
-           
-           label.text = tempAdapterArray[row]
-           
-           return label
-    
-               
-           default:
-               return UILabel()
-               
-           }
-       }
-       
-       func textFieldDidBeginEditing(_ textField: UITextField) {
-               activeTextField = 1
-               picker1.reloadAllComponents()
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        switch activeTextField{
+        case 1:
+        var label:UILabel
+        
+        if let v = view as? UILabel
+        {
+            label = v
         }
+        else
+        {
+            label = UILabel()
+        }
+           
+        label.textColor = UIColor.black
+        label.textAlignment = .left
+        label.font = UIFont(name: "Helvetica", size: 16)
+        
+        label.text = tempAdapterArray[row]
+           
+        return label
+    
+               
+        default:
+            return UILabel()
+               
+        }
+    }
+       
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = 1
+        picker1.reloadAllComponents()
+    }
     
     //------------------------------- SIGNITURE IMAGE SET UP --------------------------------------//
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
         let touch = touches.first
         startingPoint = touch?.location(in: signitureField)
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
         let touch = touches.first
         touchPoint = touch?.location(in: signitureField)
         path = UIBezierPath()
@@ -223,7 +260,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         drawShapeLayer()
     }
     
-    func drawShapeLayer(){
+    func drawShapeLayer()
+    {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = UIColor.black.cgColor
@@ -233,14 +271,15 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         signitureField.setNeedsDisplay()
     }
     
-    func clearCanvas(){
+    func clearCanvas()
+    {
         path.removeAllPoints()
         signitureField.layer.sublayers = nil
         signitureField.setNeedsDisplay()
     }
     
-    func saveSigniture() {
-
+    func saveSigniture()
+    {
         UIGraphicsBeginImageContext(self.signitureField.bounds.size)
 
         // The code below may solve your problem

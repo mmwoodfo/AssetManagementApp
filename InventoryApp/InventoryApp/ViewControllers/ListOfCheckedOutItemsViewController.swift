@@ -15,8 +15,8 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     private var methods:MethodsForController = MethodsForController()
     private var checkedOutAdapterArray = [CheckoutEntity]()
     
-    override func viewDidLoad() {
-        
+    override func viewDidLoad()
+    {
         populateAdapterArray()
         
         self.checkedOutTable.dataSource = self
@@ -28,21 +28,22 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     }
     
    //------------------------------- UNWIND SEGUE --------------------------------------//
-   @IBAction func unwindToCheckedOutList(_ sender: UIStoryboardSegue) {
-       
-   }
+   @IBAction func unwindToCheckedOutList(_ sender: UIStoryboardSegue){}
     
     //---------------------- POPULATE ADAPTER ARRAY --------------------------------//
-    public func populateAdapterArray() {
+    public func populateAdapterArray()
+    {
         checkedOutAdapterArray = methods.fetchCheckedoutEntity()
     }
     
     //===========================Functions for Table view Cells and the Table=======================
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return checkedOutAdapterArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckedOutCell", for: indexPath) as! CheckOutCell
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGray.cgColor
@@ -52,19 +53,21 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         cell.adapterType.text = checkedOutAdapterArray[indexPath.row].adaptorName
         cell.reason.text = checkedOutAdapterArray[indexPath.row].reason
 
-        if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].expectedReturnDate ?? ""){
+        if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].expectedReturnDate ?? "")
+        {
             cell.returnDate.textColor = UIColor.red
         }
         
         return cell
-        
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 90
     }
     
-    func reloadTableView(){
+    func reloadTableView()
+    {
         populateAdapterArray()
         checkedOutTable.reloadData()
     }
@@ -75,7 +78,8 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         return true
     }
     
-    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell.EditingStyle {
+    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell.EditingStyle
+    {
         return UITableViewCell.EditingStyle.delete
     }
     
@@ -83,26 +87,33 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
         let cell = self.checkedOutTable.cellForRow(at: indexPath) as! CheckOutCell?
-        if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? ""){
+        
+        if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? "")
+        {
             print("Count increased")
-        }else{
+        }
+        else
+        {
             print("Error, could not increase count")
         }
+        
         methods.deleteCheckedoutEntity(entity: checkedOutAdapterArray[indexPath.row])
         reloadTableView()
     }
     
     //-------------- SHOW CELL DETAILS ON DETAILS PAGE ------------------//
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CheckedoutToDetailed"{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "CheckedoutToDetailed"
+        {
             let selectedIndex: IndexPath = self.checkedOutTable.indexPath(for: sender as! UITableViewCell)!
             let checkedOutItem = checkedOutAdapterArray[selectedIndex.row]
             
-            if let viewController: CheckedOutDetailViewController = segue.destination as? CheckedOutDetailViewController {
+            if let viewController: CheckedOutDetailViewController = segue.destination as? CheckedOutDetailViewController
+            {
                 viewController.selectedCheckedOutItem = checkedOutItem
                 print("Going to detailed view")
             }
         }
     }
-
 }
