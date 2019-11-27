@@ -19,6 +19,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phoneNumber" optional="YES" attributeType="String"/>
         <attribute name="reason" optional="YES" attributeType="String"/>
+        <attribute name="signiture" optional="YES" attributeType="Binary"/>
         <attribute name="ticketNumber" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ConsumableEntity" representedClassName="ConsumableEntity" syncable="YES">
@@ -28,7 +29,7 @@
     </entity>
     <elements>
         <element name="AssignedEntity" positionX="-36" positionY="18" width="128" height="163"/>
-        <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="178"/>
+        <element name="CheckoutEntity" positionX="-54" positionY="9" width="128" height="193"/>
         <element name="ConsumableEntity" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

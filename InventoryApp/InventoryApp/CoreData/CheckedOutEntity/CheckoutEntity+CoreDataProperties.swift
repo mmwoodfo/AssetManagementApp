@@ -26,5 +26,6 @@ extension CheckoutEntity {
     @NSManaged public var expectedReturnDate: String?
     @NSManaged public var adaptorName: String?
     @NSManaged public var ticketNumber: String?
+    @NSManaged public var signiture: Data?
 
 }

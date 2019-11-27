@@ -21,6 +21,10 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private var activeTextField = 0
     private var datePicker: UIDatePicker?
     private var selectedAdapter: String = ""
+    private var startingPoint: CGPoint!
+    private var touchPoint: CGPoint!
+    private var path:UIBezierPath!
+    private var signiture:UIImage!
     
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -105,7 +109,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.present(methods.displayAlert(givenTitle: "Not a valid date", givenMessage: "Please fill out all required fields"), animated: true)
         }else{
             /*If important information is not empty add to core data & check if method added succussfully*/
-            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "00-00-0000", adaptorName: adapterSelector.text ?? "", ticketNumber: ticketNumber.text ?? "")){
+            saveSigniture()
+            if(methods.addCheckoutEntityToCoreData(name: nameField.text ?? "", asurite: asuField.text ?? "", email: emailField.text ?? "", phone: phoneField.text ?? "", reason: reasonField.text ?? "", todayDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "00-00-0000", adaptorName: adapterSelector.text ?? "", ticketNumber: ticketNumber.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)){
                 if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
                     print("Count decreased")
                 }else{
@@ -128,6 +133,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//
     @IBAction func ClearFields(_ sender: Any) {
         methods.clearUI(viewController: self)
+        clearCanvas()
     }
 
 //------------------------------- ADAPTER PICKER SET UP --------------------------------------//
@@ -196,13 +202,53 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
        }
        
        func textFieldDidBeginEditing(_ textField: UITextField) {
-           
                activeTextField = 1
                picker1.reloadAllComponents()
         }
     
     //------------------------------- SIGNITURE IMAGE SET UP --------------------------------------//
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        startingPoint = touch?.location(in: signitureField)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
+        let touch = touches.first
+        touchPoint = touch?.location(in: signitureField)
+        path = UIBezierPath()
+        path.move(to: startingPoint)
+        path.addLine(to: touchPoint)
+        startingPoint = touchPoint
+        
+        drawShapeLayer()
+    }
+    
+    func drawShapeLayer(){
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.lineWidth = 3
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        signitureField.layer.addSublayer(shapeLayer)
+        signitureField.setNeedsDisplay()
+    }
+    
+    func clearCanvas(){
+        path.removeAllPoints()
+        signitureField.layer.sublayers = nil
+        signitureField.setNeedsDisplay()
+    }
+    
+    func saveSigniture() {
 
+        UIGraphicsBeginImageContext(self.signitureField.bounds.size)
+
+        // The code below may solve your problem
+        signitureField.layer.render(in: UIGraphicsGetCurrentContext()!)
+
+        signiture = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+    }
 }
 
 

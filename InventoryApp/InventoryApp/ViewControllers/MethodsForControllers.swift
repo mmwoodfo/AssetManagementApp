@@ -73,7 +73,7 @@ public class MethodsForController{
     var consumable = [ConsumableEntity]()
     
     //----------------------- ADD CHECKED OUT ENTITY TO CORE DATA ---------------------------//
-    func addCheckoutEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, expectedReturnDate:String, adaptorName:String, ticketNumber:String) -> Bool{
+    func addCheckoutEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, expectedReturnDate:String, adaptorName:String, ticketNumber:String, signiture:Data) -> Bool{
         let ent = NSEntityDescription.entity(forEntityName: "CheckoutEntity", in: moc)
         let newCheckedOutItem = CheckoutEntity(entity: ent!, insertInto: moc)
         newCheckedOutItem.name = name
@@ -85,6 +85,7 @@ public class MethodsForController{
         newCheckedOutItem.expectedReturnDate = expectedReturnDate
         newCheckedOutItem.adaptorName = adaptorName
         newCheckedOutItem.ticketNumber = ticketNumber
+        newCheckedOutItem.signiture = signiture
         
         do{
             try moc.save()

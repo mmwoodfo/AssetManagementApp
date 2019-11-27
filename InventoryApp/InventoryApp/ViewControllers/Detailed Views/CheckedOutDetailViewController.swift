@@ -22,6 +22,7 @@ class CheckedOutDetailViewController: UIViewController {
     @IBOutlet weak var returnDate: UILabel!
     @IBOutlet weak var reason: UILabel!
     @IBOutlet weak var ticketNumber: UILabel!
+    @IBOutlet weak var signitureImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class CheckedOutDetailViewController: UIViewController {
         returnDate.text = selectedCheckedOutItem?.expectedReturnDate
         ticketNumber.text = selectedCheckedOutItem?.ticketNumber
         reason.text = selectedCheckedOutItem?.reason
+        signitureImage.image = UIImage(data: (selectedCheckedOutItem?.signiture!)!, scale:1.0)!
         
         //if true, change return date text to red
         if methods.checkOverdue(dateStr: returnDate.text ?? ""){
