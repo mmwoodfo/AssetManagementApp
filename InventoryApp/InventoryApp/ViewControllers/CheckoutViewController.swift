@@ -40,16 +40,20 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var dateHolder: UILabel!
     @IBOutlet weak var returnDateField: UITextField!
     @IBOutlet weak var btnCheckout: UIButton!
+    @IBOutlet weak var btnExit: UIButton!
     @IBOutlet weak var ticketNumber: UITextField!
     @IBOutlet weak var signitureField: UIImageView!
+
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad()
     {
-         super.viewDidLoad()
+        super.viewDidLoad()
+        
         
         //set button designs
         btnCheckout.layer.cornerRadius = 10
+        btnExit.layer.cornerRadius = 10
         
         //Set adaptors
         tempAdapterArray = methods.fetchConsumableTypes()
