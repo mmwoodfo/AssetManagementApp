@@ -24,6 +24,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private var touchPoint: CGPoint!
     private var path:UIBezierPath!
     private var signiture:UIImage!
+    private var savedObject:Bool = false
     
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -102,7 +103,11 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         dateFormatter.dateFormat = "MM-dd-yyyy"
         returnDateField.text = dateFormatter.string(from: datePicker.date)
     }
-
+//----------------------------- EXIT CHECKOUT PAGE --------------------------------//
+    @IBAction func ExitCheckoutPage(_ sender: Any) {
+        savedObject = true
+    }
+    
 //------------------------ CHECKOUT ITEM BUTTON PRESSED ---------------------------//
     @IBAction func CheckOutItem(_ sender: Any)
     {
@@ -142,7 +147,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 UIImage(named: "defaultSigniture.png")!.pngData()!
             ))
             {//if methods.addCheckoutEntityToCoreData()
-                
+                savedObject = true
                 if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? "")
                 {
                     print("Count decreased")
@@ -164,8 +169,18 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //------------------------------- PREPARE FOR UNWIND SEGUE --------------------------------------//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        let destinationViewControler = segue.destination as! ListOfCheckedOutItemsViewController
-        destinationViewControler.reloadTableView()
+        if(savedObject){
+            let destinationViewControler = segue.destination as! ListOfCheckedOutItemsViewController
+            destinationViewControler.reloadTableView()
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if(savedObject){
+            return true
+        }else{
+            return false
+        }
     }
     
 //------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//

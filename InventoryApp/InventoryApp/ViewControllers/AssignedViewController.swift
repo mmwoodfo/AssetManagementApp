@@ -18,6 +18,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private var activeTextField = 0
     private var datePicker: UIDatePicker?
     private var selectedAdapter: String = ""
+    private var savedObject: Bool = false
     
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -33,6 +34,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var SuccessLabel: UILabel!
     @IBOutlet weak var dateHolder: UILabel!
     @IBOutlet weak var btnAssign: UIButton!
+    @IBOutlet weak var btnExit: UIButton!
     @IBOutlet weak var ticketNumber: UITextField!
     
 //------------------------ VIEW DID LOAD FUNCTION --------------------------//
@@ -42,6 +44,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         //set button designs
         btnAssign.layer.cornerRadius = 10
+        btnExit.layer.cornerRadius = 10
         
         //Set adaptors
         tempAdapterArray = methods.fetchConsumableTypes()
@@ -72,7 +75,12 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     {
         view.endEditing(true)
     }
-
+    
+//---------------------------- EXIT ASSIGNED PAGE --------------------------------//
+    @IBAction func ExitAssignedPage(_ sender: Any) {
+        savedObject = true
+    }
+    
 //------------------------ ASSIGN ITEM BUTTON PRESSED ---------------------------//
     @IBAction func AssignItem(_ sender: Any)
     {
@@ -106,6 +114,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
                     ticketNumber: ticketNumber.text ?? ""
                 ))
             {//if methods.addAssignedEntityToCoreData()
+                savedObject = true
                 if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
                     print("Count decreased")
                 }
@@ -128,6 +137,14 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     {
         let destinationViewControler = segue.destination as! ListOfAssignedItemsViewController
         destinationViewControler.reloadTableView()
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if(savedObject){
+            return true
+        }else{
+            return false
+        }
     }
     
 //------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//

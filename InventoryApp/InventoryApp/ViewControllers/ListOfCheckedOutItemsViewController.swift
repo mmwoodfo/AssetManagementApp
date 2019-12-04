@@ -27,7 +27,111 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         // Do any additional setup after loading the view.
     }
     
-   //------------------------------- UNWIND SEGUE --------------------------------------//
+    //--------------------------- SORTS BY ASCENDING ----------------------------------//
+    @IBAction func SortListAscending(_ sender: Any) {
+        let sortAlert = UIAlertController(title: "Sort List", message: "Sort the list by:", preferredStyle: .alert)
+        sortAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        sortAlert.addAction(UIAlertAction(title: "Name", style: .default, handler: {
+            action in
+            self.checkedOutAdapterArray.sort {
+                $0.name!.lowercased() < $1.name!.lowercased()
+            }
+            
+            self.checkedOutTable.reloadData()
+        }))
+        
+        sortAlert.addAction(UIAlertAction(title: "Adapter", style: .default, handler: {
+            action in
+            self.checkedOutAdapterArray.sort {
+                $0.adaptorName!.lowercased() < $1.adaptorName!.lowercased()
+            }
+            
+            self.checkedOutTable.reloadData()
+        }))
+        
+        sortAlert.addAction(UIAlertAction(title: "Date", style: .default, handler: {
+            action in
+            self.checkedOutAdapterArray.sort {
+                $0.loanedDate! < $1.loanedDate!
+            }
+            
+            self.checkedOutTable.reloadData()
+        }))
+        
+        self.present(sortAlert, animated: true)
+    }
+    
+    //------------------------------- SEARCH --------------------------------------//
+    @IBAction func SearchConsumable(_ sender: Any) {
+        let searchAlert = UIAlertController(title: "Search List", message: "Search the list by borrowers name", preferredStyle: .alert)
+        searchAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        searchAlert.addTextField(configurationHandler: {
+            textField in
+            textField.placeholder = "Name of borrower"
+        })
+        
+        searchAlert.addAction(UIAlertAction(title: "Search", style: .default, handler: {
+            action in
+            if let name = searchAlert.textFields?[0].text{
+                var searchedItems = [CheckoutEntity]()
+                for item in self.checkedOutAdapterArray{
+                    if item.name!.lowercased() == name.lowercased(){
+                        searchedItems.append(item)
+                    }
+                }
+                
+                if !searchedItems.isEmpty{
+                    self.checkedOutAdapterArray = searchedItems
+                    self.checkedOutTable.reloadData()
+                }else{
+                    self.present(self.methods.displayAlert(givenTitle: "No results found for \(name)", givenMessage:"Please check the spelling and try again"), animated: true)
+                }
+                
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Name field left blank", givenMessage:"Please specify a name and try again"), animated: true)
+            }
+        }))
+        
+        self.present(searchAlert, animated: true)
+        
+        /*
+         consumableAlert.addTextField(configurationHandler: {
+             textField in
+             textField.placeholder = "Item SKU"
+         })
+         
+         consumableAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: {
+             action in
+             if let name = consumableAlert.textFields?[0].text{
+                 if let count = consumableAlert.textFields?[1].text{
+                     if let sku = consumableAlert.textFields?[2].text{
+                         if name != "" && count != "" && sku != ""{
+                             let consumableTemp = self.methods.fetchConsumableTypes()
+                             //check to make sure item is not a duplicate
+                             if consumableTemp.contains(name){
+                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - That Consumable Already Exists", givenMessage: "The consumable \(name) is already in this list"), animated: true)
+                             //check count
+                             }else if Int(count) == nil{
+                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
+                             //add to core data
+                             }else if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0, sku: sku){
+                                 self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
+                             }else{
+                                 self.reloadTableView()
+                             }
+                         }else{
+                             self.present(self.methods.displayAlert(givenTitle: "Error adding - Missing Information", givenMessage: "Please try again and fill out all the required information"), animated: true)
+                         }
+                     }
+                 }
+             }
+         }))
+         */
+    }
+    
+    //------------------------------- UNWIND SEGUE --------------------------------------//
    @IBAction func unwindToCheckedOutList(_ sender: UIStoryboardSegue){}
     
     //---------------------- POPULATE ADAPTER ARRAY --------------------------------//
@@ -56,6 +160,8 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].expectedReturnDate ?? "")
         {
             cell.returnDate.textColor = UIColor.red
+        }else{
+            cell.returnDate.textColor = UIColor.black
         }
         
         return cell
