@@ -95,40 +95,6 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         }))
         
         self.present(searchAlert, animated: true)
-        
-        /*
-         consumableAlert.addTextField(configurationHandler: {
-             textField in
-             textField.placeholder = "Item SKU"
-         })
-         
-         consumableAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: {
-             action in
-             if let name = consumableAlert.textFields?[0].text{
-                 if let count = consumableAlert.textFields?[1].text{
-                     if let sku = consumableAlert.textFields?[2].text{
-                         if name != "" && count != "" && sku != ""{
-                             let consumableTemp = self.methods.fetchConsumableTypes()
-                             //check to make sure item is not a duplicate
-                             if consumableTemp.contains(name){
-                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - That Consumable Already Exists", givenMessage: "The consumable \(name) is already in this list"), animated: true)
-                             //check count
-                             }else if Int(count) == nil{
-                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
-                             //add to core data
-                             }else if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0, sku: sku){
-                                 self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
-                             }else{
-                                 self.reloadTableView()
-                             }
-                         }else{
-                             self.present(self.methods.displayAlert(givenTitle: "Error adding - Missing Information", givenMessage: "Please try again and fill out all the required information"), animated: true)
-                         }
-                     }
-                 }
-             }
-         }))
-         */
     }
     
     //------------------------------- UNWIND SEGUE --------------------------------------//

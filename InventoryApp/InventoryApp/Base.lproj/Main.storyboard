@@ -12,7 +12,7 @@
             <objects>
                 <viewController id="UXA-vF-P75" customClass="ListOfAssignedItemsViewController" customModule="InventoryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fOS-s5-9kp">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sFj-sm-Ni8">
@@ -20,6 +20,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Assigned Consumables List" id="U9L-f4-g7o">
+                                        <leftBarButtonItems>
+                                            <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="VRN-oC-rbl">
+                                                <connections>
+                                                    <action selector="SearchAssigned:" destination="UXA-vF-P75" id="ORg-zd-Zy7"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Item" image="arrow.up.arrow.down" catalog="system" id="5S0-Yf-sbJ">
+                                                <connections>
+                                                    <action selector="SortListAscending:" destination="UXA-vF-P75" id="Ggv-Hj-4bw"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="gs1-0q-ni5">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="jaT-js-VJT">
                                                 <rect key="frame" x="667" y="16" width="25" height="24"/>
@@ -403,7 +415,7 @@
             <objects>
                 <viewController id="9yF-if-mak" customClass="ListOfCheckedOutItemsViewController" customModule="InventoryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GSh-4L-JFe">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yFv-tw-dpy">

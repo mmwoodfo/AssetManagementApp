@@ -30,6 +30,66 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     {
         assignedAdapterArray = methods.fetchAssignedEntity()
     }
+    
+    //--------------------------- SORTS BY ASCENDING ----------------------------------//
+    @IBAction func SortListAscending(_ sender: Any) {
+        let sortAlert = UIAlertController(title: "Sort List", message: "Sort the list by:", preferredStyle: .alert)
+        sortAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        sortAlert.addAction(UIAlertAction(title: "Name", style: .default, handler: {
+            action in
+            self.assignedAdapterArray.sort {
+                $0.name!.lowercased() < $1.name!.lowercased()
+            }
+            
+            self.assignedTable.reloadData()
+        }))
+        
+        sortAlert.addAction(UIAlertAction(title: "Adapter", style: .default, handler: {
+            action in
+            self.assignedAdapterArray.sort {
+                $0.adaptorName!.lowercased() < $1.adaptorName!.lowercased()
+            }
+            
+            self.assignedTable.reloadData()
+        }))
+        self.present(sortAlert, animated: true)
+    }
+    
+    //------------------------------- SEARCH --------------------------------------//
+    @IBAction func SearchAssigned(_ sender: Any) {
+        let searchAlert = UIAlertController(title: "Search List", message: "Search the list by borrowers name", preferredStyle: .alert)
+        searchAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        searchAlert.addTextField(configurationHandler: {
+            textField in
+            textField.placeholder = "Name of borrower"
+        })
+        
+        searchAlert.addAction(UIAlertAction(title: "Search", style: .default, handler: {
+            action in
+            if let name = searchAlert.textFields?[0].text{
+                var searchedItems = [AssignedEntity]()
+                for item in self.assignedAdapterArray{
+                    if item.name!.lowercased() == name.lowercased(){
+                        searchedItems.append(item)
+                    }
+                }
+                
+                if !searchedItems.isEmpty{
+                    self.assignedAdapterArray = searchedItems
+                    self.assignedTable.reloadData()
+                }else{
+                    self.present(self.methods.displayAlert(givenTitle: "No results found for \(name)", givenMessage:"Please check the spelling and try again"), animated: true)
+                }
+                
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Name field left blank", givenMessage:"Please specify a name and try again"), animated: true)
+            }
+        }))
+        
+        self.present(searchAlert, animated: true)
+    }
    
     //===========================Functions for Table view Cells and the Table=======================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
