@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import Firebase
 
 class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
      private var methods:MethodsForController = MethodsForController()
      private var consumableArray = [ConsumableEntity]()
      private var adapterImg:Data?
+    private var ref:DatabaseReference?
+    
      let picker = UIImagePickerController()
     
         @IBOutlet weak var consumableTable: UITableView!
         
         override func viewDidLoad() {
             super.viewDidLoad()
-
+            
+            ref = Database.database().reference()
+            
             populateConsumableArray()
             
             self.consumableTable.dataSource = self
@@ -110,6 +115,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         
     }
       
+    //=============== ADD CELLS TO TABLE  ======================
     @IBAction func addConsumable(_ sender: Any) {
         let consumableAlert = UIAlertController(title: "Add Consumable", message: nil, preferredStyle: .alert)
         consumableAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -142,9 +148,11 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                             //check count
                             }else if Int(count) == nil{
                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
-                            //add to core data
+                                
+                            //add to Firebase data
                             }else if !self.methods.addConsumableEntityToCoreData(type: name, count: Int32(count) ?? 0, sku: sku){
                                 self.present(self.methods.displayAlert(givenTitle:"Error adding to core data", givenMessage:"Check your values and try again"), animated: true)
+                            
                             }else{
                                 self.reloadTableView()
                             }
