@@ -9,7 +9,7 @@
 import UIKit
 
 class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var checkedOutTable: UITableView!
     
     private var methods:MethodsForController = MethodsForController()
@@ -23,7 +23,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         self.checkedOutTable.delegate = self
         
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -98,7 +98,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     }
     
     //------------------------------- UNWIND SEGUE --------------------------------------//
-   @IBAction func unwindToCheckedOutList(_ sender: UIStoryboardSegue){}
+    @IBAction func unwindToCheckedOutList(_ sender: UIStoryboardSegue){}
     
     //---------------------- POPULATE ADAPTER ARRAY --------------------------------//
     public func populateAdapterArray()
@@ -122,7 +122,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         cell.returnDate.text = checkedOutAdapterArray[indexPath.row].expectedReturnDate
         cell.adapterType.text = checkedOutAdapterArray[indexPath.row].adaptorName
         cell.reason.text = checkedOutAdapterArray[indexPath.row].reason
-
+        
         if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].expectedReturnDate ?? "")
         {
             cell.returnDate.textColor = UIColor.red
@@ -160,14 +160,14 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     {
         let cell = self.checkedOutTable.cellForRow(at: indexPath) as! CheckOutCell?
         
-        if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? "")
-        {
-            print("Count increased")
-        }
-        else
-        {
-            print("Error, could not increase count")
-        }
+        //if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? "")
+        //{
+          //  print("Count increased")
+        //}
+        //else
+        //{
+          //  print("Error, could not increase count")
+        //}
         
         methods.deleteCheckedoutEntity(entity: checkedOutAdapterArray[indexPath.row])
         reloadTableView()

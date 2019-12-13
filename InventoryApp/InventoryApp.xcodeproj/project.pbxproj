@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,8 @@
 		0D5FE3922388392500136B9C /* AssignedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */; };
 		0D5FE39423883A7400136B9C /* AssignedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE39323883A7400136B9C /* AssignedViewController.swift */; };
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
+		0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */; };
+		0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A423A3E6870089AD3B /* Consumable.swift */; };
 		0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */; };
 		0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */; };
 		0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15332360F3C200F64EE0 /* ViewController.swift */; };
@@ -51,6 +53,8 @@
 		0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedDetailViewController.swift; sourceTree = "<group>"; };
 		0D5FE39323883A7400136B9C /* AssignedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedViewController.swift; sourceTree = "<group>"; };
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
+		0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseMethods.swift; sourceTree = "<group>"; };
+		0D87A4A423A3E6870089AD3B /* Consumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumable.swift; sourceTree = "<group>"; };
 		0DFB152C2360F3C200F64EE0 /* inventoryapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inventoryapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				0D01C62523732881009E4D15 /* CoreData */,
 				0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */,
 				0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */,
+				0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */,
+				0D87A4A423A3E6870089AD3B /* Consumable.swift */,
 				0DFB154E2361029C00F64EE0 /* ViewControllers */,
 				0DFB15352360F3C200F64EE0 /* Main.storyboard */,
 				0DFB153B2360F3C300F64EE0 /* Assets.xcassets */,
@@ -193,7 +199,6 @@
 				765AB383B22F157158C1B5D9 /* Pods-InventoryApp.debug.xcconfig */,
 				FA01D5051D31A4B63BD65A51 /* Pods-InventoryApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -322,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D2AC66E2385C75D00B914CB /* CheckedOutDetailViewController.swift in Sources */,
+				0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */,
 				92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */,
 				0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */,
 				0D01C63323732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift in Sources */,
@@ -331,6 +337,7 @@
 				0D01C62C237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift in Sources */,
 				0DFB153A2360F3C200F64EE0 /* InventoryApp.xcdatamodeld in Sources */,
 				0D01C62D237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift in Sources */,
+				0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */,
 				0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */,
 				0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */,
 				0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */,
