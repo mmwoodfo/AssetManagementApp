@@ -112,7 +112,6 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             if let count = editConsumableCount.textFields?[0].text{
                 if Int(count) != nil {
                     self.ref?.child("Consumables").child(self.consumableArray[indexPath.item].getType()).child("Count").setValue(count)
-                    
                     self.consumableArray[indexPath.item].setCount(count: count)
                     
                     self.reloadTable()
@@ -153,7 +152,11 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                 if let count = consumableAlert.textFields?[1].text{
                     if let sku = consumableAlert.textFields?[2].text{
                         if type != "" && count != "" && sku != ""{
-                            self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku, ref: self.ref!)
+                            if(Int(count) != nil){
+                                self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku, ref: self.ref!)
+                            }else{
+                                self.present(self.methods.displayAlert(givenTitle: "Error adding - NaN", givenMessage: "\(count) is not a number, please enter a number and try again"), animated: true)
+                            }
                         }else{
                             self.present(self.methods.displayAlert(givenTitle: "Error adding - Missing Information", givenMessage: "Please try again and fill out all the required information"), animated: true)
                         }

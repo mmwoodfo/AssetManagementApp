@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import Firebase
 weak var field: UITextField!
 
 
@@ -15,6 +15,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     
     private var methods:MethodsForController = MethodsForController()
+    private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     private var tempAdapterArray = [String]()
     private let picker1 = UIPickerView()
     private var activeTextField = 0
@@ -25,6 +26,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private var path:UIBezierPath!
     private var signiture:UIImage!
     private var savedObject:Bool = false
+    private var ref:DatabaseReference?
     
     //Core data variables
     let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -60,6 +62,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         if(tempAdapterArray.isEmpty){
             tempAdapterArray.append("")
         }
+        
+        ref = Database.database().reference()
         
         //To get current date
         let date = Date()
@@ -123,33 +127,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         else{
             /*If important information is not empty add to core data & check if method added succussfully*/
             saveSigniture()
+            fireBaseMethods.addCheckedOutToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", loanedDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!, ref: ref!)
             
-            if(methods.addCheckoutEntityToCoreData(
-                name: nameField.text ?? "",
-                asurite: asuField.text ?? "",
-                email: emailField.text ?? "",
-                phone: phoneField.text ?? "",
-                reason: reasonField.text ?? "",
-                todayDate: dateHolder.text ?? "",
-                expectedReturnDate: returnDateField.text ?? "00-00-0000",
-                adaptorName: adapterSelector.text ?? "",
-                ticketNumber: ticketNumber.text ?? "",
-                signiture: signiture.pngData() ??
-                    UIImage(named: "defaultSigniture.png")!.pngData()!
-            )){//if methods.addCheckoutEntityToCoreData()
-                savedObject = true
-                //if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
-                  //  print("Count decreased")
-                //}
-                //else{
-                 //   print("Error, count not decreased")
-                //}
-                methods.clearUI(viewController: self)
-                SuccessLabel.isHidden = false
-            }
-            else{
-                self.present(methods.displayAlert(givenTitle: "Something went wrong", givenMessage: "The item could not be added to the list of checkedout consumables"), animated: true)
-            }
         }
     }
     

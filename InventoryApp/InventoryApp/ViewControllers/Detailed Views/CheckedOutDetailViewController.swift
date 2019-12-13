@@ -10,7 +10,7 @@ import UIKit
 
 class CheckedOutDetailViewController: UIViewController {
 
-    var selectedCheckedOutItem: CheckoutEntity?
+    var selectedCheckedOutItem: CheckedOut?
     private var methods:MethodsForController = MethodsForController()
     
     @IBOutlet weak var name: UILabel!
@@ -27,16 +27,16 @@ class CheckedOutDetailViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        name.text = selectedCheckedOutItem?.name
-        asurite.text = selectedCheckedOutItem?.asuriteId
-        email.text = selectedCheckedOutItem?.email
-        phoneNumber.text = selectedCheckedOutItem?.phoneNumber
-        adapterType.text = selectedCheckedOutItem?.adaptorName
-        loanedDate.text = selectedCheckedOutItem?.loanedDate
-        returnDate.text = selectedCheckedOutItem?.expectedReturnDate
-        ticketNumber.text = selectedCheckedOutItem?.ticketNumber
-        reason.text = selectedCheckedOutItem?.reason
-        signitureImage.image = UIImage(data: (selectedCheckedOutItem?.signiture!)!, scale:1.0)!
+        name.text = selectedCheckedOutItem?.getName()
+        asurite.text = selectedCheckedOutItem?.getAsuriteId()
+        email.text = selectedCheckedOutItem?.getEmail()
+        phoneNumber.text = selectedCheckedOutItem?.getPhone()
+        adapterType.text = selectedCheckedOutItem?.getAdaptorType()
+        loanedDate.text = selectedCheckedOutItem?.getLoanedDate()
+        returnDate.text = selectedCheckedOutItem?.getExpectedReturnDate()
+        ticketNumber.text = selectedCheckedOutItem?.getTicketNumber()
+        reason.text = selectedCheckedOutItem?.getReason()
+        signitureImage.image = UIImage(data: (selectedCheckedOutItem?.getSigniture())!, scale:1.0)!
         
         //if true, change return date text to red
         if methods.checkOverdue(dateStr: returnDate.text ?? "")

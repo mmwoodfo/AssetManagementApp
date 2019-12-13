@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import Firebase
 
 class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var checkedOutTable: UITableView!
     
     private var methods:MethodsForController = MethodsForController()
-    private var checkedOutAdapterArray = [CheckoutEntity]()
+    private var checkedOutAdapterArray = [CheckedOut]()
+    private var ref:DatabaseReference?
     
     override func viewDidLoad()
     {
+        ref = Database.database().reference()
+        
         populateAdapterArray()
         
         self.checkedOutTable.dataSource = self
@@ -35,7 +39,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         sortAlert.addAction(UIAlertAction(title: "Name", style: .default, handler: {
             action in
             self.checkedOutAdapterArray.sort {
-                $0.name!.lowercased() < $1.name!.lowercased()
+                $0.getName().lowercased() < $1.getName().lowercased()
             }
             
             self.checkedOutTable.reloadData()
@@ -44,7 +48,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         sortAlert.addAction(UIAlertAction(title: "Adapter", style: .default, handler: {
             action in
             self.checkedOutAdapterArray.sort {
-                $0.adaptorName!.lowercased() < $1.adaptorName!.lowercased()
+                $0.getAdaptorType().lowercased() < $1.getAdaptorType().lowercased()
             }
             
             self.checkedOutTable.reloadData()
@@ -53,7 +57,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         sortAlert.addAction(UIAlertAction(title: "Date", style: .default, handler: {
             action in
             self.checkedOutAdapterArray.sort {
-                $0.loanedDate! < $1.loanedDate!
+                $0.getLoanedDate() < $1.getLoanedDate()
             }
             
             self.checkedOutTable.reloadData()
@@ -75,9 +79,9 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         searchAlert.addAction(UIAlertAction(title: "Search", style: .default, handler: {
             action in
             if let name = searchAlert.textFields?[0].text{
-                var searchedItems = [CheckoutEntity]()
+                var searchedItems = [CheckedOut]()
                 for item in self.checkedOutAdapterArray{
-                    if item.name!.lowercased() == name.lowercased(){
+                    if item.getName().lowercased() == name.lowercased(){
                         searchedItems.append(item)
                     }
                 }
@@ -103,7 +107,15 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     //---------------------- POPULATE ADAPTER ARRAY --------------------------------//
     public func populateAdapterArray()
     {
-        checkedOutAdapterArray = methods.fetchCheckedoutEntity()
+        //let the object populate itself.
+        self.ref?.child("CheckedOutConsumables").observe(.childAdded, with: { [weak self] snapshot in
+            guard let self = self else { return }
+            let dataChange = snapshot.value as? [String:AnyObject]
+            let aRequest = CheckedOut(aDict: dataChange!)
+            self.checkedOutAdapterArray.append(aRequest)
+            
+            self.checkedOutTable.reloadData()
+        })
     }
     
     //===========================Functions for Table view Cells and the Table=======================
@@ -118,12 +130,12 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.backgroundColor = UIColor.white
-        cell.name.text = checkedOutAdapterArray[indexPath.row].name
-        cell.returnDate.text = checkedOutAdapterArray[indexPath.row].expectedReturnDate
-        cell.adapterType.text = checkedOutAdapterArray[indexPath.row].adaptorName
-        cell.reason.text = checkedOutAdapterArray[indexPath.row].reason
+        cell.name.text = checkedOutAdapterArray[indexPath.row].getName()
+        cell.returnDate.text = checkedOutAdapterArray[indexPath.row].getExpectedReturnDate()
+        cell.adapterType.text = checkedOutAdapterArray[indexPath.row].getAdaptorType()
+        cell.reason.text = checkedOutAdapterArray[indexPath.row].getReason()
         
-        if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].expectedReturnDate ?? "")
+        if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate())
         {
             cell.returnDate.textColor = UIColor.red
         }else{
@@ -158,7 +170,13 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        let cell = self.checkedOutTable.cellForRow(at: indexPath) as! CheckOutCell?
+        //let cell = self.checkedOutTable.cellForRow(at: indexPath) as! CheckOutCell?
+        
+        //let count = (Int)checkedOutAdapterArray[indexPath.item].getCount();
+        
+        
+        //self.ref?.child("CheckedOutConsumables").child(self.consumableArray[indexPath.item].getType()).child("Count").setValue(count)
+        //self.checkedOutAdapterArray[indexPath.item].setCount(count: count)
         
         //if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? "")
         //{
@@ -169,7 +187,11 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
           //  print("Error, could not increase count")
         //}
         
-        methods.deleteCheckedoutEntity(entity: checkedOutAdapterArray[indexPath.row])
+        let refToDelete = self.ref?.child("CheckedOutConsumables").child(checkedOutAdapterArray[indexPath.row].getName())
+        refToDelete?.removeValue()
+        checkedOutAdapterArray.remove(at: indexPath.row)
+        self.checkedOutTable.reloadData()
+        
         reloadTableView()
     }
     

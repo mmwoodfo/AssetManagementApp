@@ -72,29 +72,6 @@ public class MethodsForController{
     var assigned = [AssignedEntity]()
     var consumable = [ConsumableEntity]()
     
-    //----------------------- ADD CHECKED OUT ENTITY TO CORE DATA ---------------------------//
-    func addCheckoutEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, expectedReturnDate:String, adaptorName:String, ticketNumber:String, signiture:Data) -> Bool{
-        let ent = NSEntityDescription.entity(forEntityName: "CheckoutEntity", in: moc)
-        let newCheckedOutItem = CheckoutEntity(entity: ent!, insertInto: moc)
-        newCheckedOutItem.name = name
-        newCheckedOutItem.asuriteId = asurite
-        newCheckedOutItem.email = email
-        newCheckedOutItem.phoneNumber = phone
-        newCheckedOutItem.reason = reason
-        newCheckedOutItem.loanedDate = todayDate
-        newCheckedOutItem.expectedReturnDate = expectedReturnDate
-        newCheckedOutItem.adaptorName = adaptorName
-        newCheckedOutItem.ticketNumber = ticketNumber
-        newCheckedOutItem.signiture = signiture
-        
-        do{
-            try moc.save()
-            return true
-        }catch _{
-            return false
-        }
-    }
-    
     //----------------------- ADD ASSIGNED ENTITY TO CORE DATA ---------------------------//
     func addAssignedEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, adaptorName:String, ticketNumber:String) -> Bool{
         let ent = NSEntityDescription.entity(forEntityName: "AssignedEntity", in: moc)
@@ -114,26 +91,6 @@ public class MethodsForController{
         }catch _{
             return false
         }
-    }
-    
-    //----------------------- REMOVE CHECKEDOUT ENTITY FROM CORE DATA ---------------------------//
-    func deleteCheckedoutEntity(entity:CheckoutEntity){
-        moc.delete(entity)
-        do{
-            try moc.save()
-            print("Saved.")
-        }catch let error as NSError {
-            print("Could not save. \(error)")
-        }
-    }
-    
-    //------------------ RETURN LIST OF CHECKED OUT ENTITIES IN CORE DATA ----------------------//
-    func fetchCheckedoutEntity() -> [CheckoutEntity]{
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CheckoutEntity")
-        
-        checkedout = ((try? moc.fetch(fetchRequest)) as? [CheckoutEntity])!
-        
-        return checkedout
     }
     
     //----------------------- REMOVE ASSIGNED ENTITY FROM CORE DATA ---------------------------//
@@ -169,14 +126,5 @@ public class MethodsForController{
         }
         
         return types
-    }
-    
-    //------------------ RETURN LIST OF CONSUMABLE ENTITIES IN CORE DATA ----------------------//
-    func fetchConsumableEntity() -> [ConsumableEntity]{
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ConsumableEntity")
-        
-        consumable = ((try? moc.fetch(fetchRequest)) as? [ConsumableEntity])!
-        
-        return consumable
     }
 }

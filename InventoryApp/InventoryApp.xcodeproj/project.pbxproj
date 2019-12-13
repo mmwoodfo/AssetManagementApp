@@ -21,6 +21,7 @@
 		0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */; };
 		0D5FE3922388392500136B9C /* AssignedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */; };
 		0D5FE39423883A7400136B9C /* AssignedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE39323883A7400136B9C /* AssignedViewController.swift */; };
+		0D7BF99323A43F1F00392C5F /* CheckedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7BF99223A43F1F00392C5F /* CheckedOut.swift */; };
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
 		0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */; };
 		0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A423A3E6870089AD3B /* Consumable.swift */; };
@@ -52,6 +53,7 @@
 		0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfConsumablesViewController.swift; sourceTree = "<group>"; };
 		0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedDetailViewController.swift; sourceTree = "<group>"; };
 		0D5FE39323883A7400136B9C /* AssignedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedViewController.swift; sourceTree = "<group>"; };
+		0D7BF99223A43F1F00392C5F /* CheckedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedOut.swift; sourceTree = "<group>"; };
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
 		0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseMethods.swift; sourceTree = "<group>"; };
 		0D87A4A423A3E6870089AD3B /* Consumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumable.swift; sourceTree = "<group>"; };
@@ -131,6 +133,43 @@
 			path = "Detailed Views";
 			sourceTree = "<group>";
 		};
+		0D7BF98D23A43E0600392C5F /* Tableviews */ = {
+			isa = PBXGroup;
+			children = (
+				0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */,
+				0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */,
+				0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */,
+			);
+			path = Tableviews;
+			sourceTree = "<group>";
+		};
+		0D7BF98E23A43E2C00392C5F /* Adding View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0D5FE39323883A7400136B9C /* AssignedViewController.swift */,
+				0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */,
+			);
+			path = "Adding View Controllers";
+			sourceTree = "<group>";
+		};
+		0D7BF99023A43EAD00392C5F /* Firebase Objects */ = {
+			isa = PBXGroup;
+			children = (
+				0D87A4A423A3E6870089AD3B /* Consumable.swift */,
+				0D7BF99223A43F1F00392C5F /* CheckedOut.swift */,
+			);
+			path = "Firebase Objects";
+			sourceTree = "<group>";
+		};
+		0D7BF99123A43F0200392C5F /* Methods */ = {
+			isa = PBXGroup;
+			children = (
+				0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */,
+				0D860317237354EA00E5D313 /* MethodsForControllers.swift */,
+			);
+			path = Methods;
+			sourceTree = "<group>";
+		};
 		0DFB15232360F3C200F64EE0 = {
 			isa = PBXGroup;
 			children = (
@@ -152,17 +191,17 @@
 		0DFB152E2360F3C200F64EE0 /* InventoryApp */ = {
 			isa = PBXGroup;
 			children = (
+				0D7BF99023A43EAD00392C5F /* Firebase Objects */,
 				0D01C62523732881009E4D15 /* CoreData */,
 				0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */,
 				0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */,
-				0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */,
-				0D87A4A423A3E6870089AD3B /* Consumable.swift */,
+				0D7BF99123A43F0200392C5F /* Methods */,
 				0DFB154E2361029C00F64EE0 /* ViewControllers */,
 				0DFB15352360F3C200F64EE0 /* Main.storyboard */,
-				0DFB153B2360F3C300F64EE0 /* Assets.xcassets */,
-				0DFB153D2360F3C300F64EE0 /* LaunchScreen.storyboard */,
 				0DFB15402360F3C300F64EE0 /* Info.plist */,
 				0D218EB023A2AE5A00B41F56 /* GoogleService-Info.plist */,
+				0DFB153D2360F3C300F64EE0 /* LaunchScreen.storyboard */,
+				0DFB153B2360F3C300F64EE0 /* Assets.xcassets */,
 			);
 			path = InventoryApp;
 			sourceTree = "<group>";
@@ -170,15 +209,11 @@
 		0DFB154E2361029C00F64EE0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0D7BF98E23A43E2C00392C5F /* Adding View Controllers */,
+				0D7BF98D23A43E0600392C5F /* Tableviews */,
 				0D2AC66C2385C73C00B914CB /* Detailed Views */,
 				92DEDC38237DFF680093D911 /* CellClasses */,
 				0DFB15332360F3C200F64EE0 /* ViewController.swift */,
-				0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */,
-				0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */,
-				0D860317237354EA00E5D313 /* MethodsForControllers.swift */,
-				0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */,
-				0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */,
-				0D5FE39323883A7400136B9C /* AssignedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -344,6 +379,7 @@
 				0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */,
 				0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */,
 				0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */,
+				0D7BF99323A43F1F00392C5F /* CheckedOut.swift in Sources */,
 				0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */,
 				0D5FE39423883A7400136B9C /* AssignedViewController.swift in Sources */,
 				0D5FE3922388392500136B9C /* AssignedDetailViewController.swift in Sources */,
