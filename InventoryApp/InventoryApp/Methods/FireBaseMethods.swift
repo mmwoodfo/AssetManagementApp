@@ -29,11 +29,11 @@ public class FireBaseMethods{
             "Name":  name,
             "AsuriteID": asuriteId,
             "Email":   email,
-            "Phone#": phoneNumber,
+            "PhoneNumber": phoneNumber,
             "Reason": reason,
             "LoanedDate": loanedDate,
             "AdaptorType": adaptorType,
-            "Ticket#": ticketNumber,
+            "TicketNumber": ticketNumber,
         ]
         
         ref.child("AssignedConsumables").child(name).setValue(assigned)
@@ -45,12 +45,12 @@ public class FireBaseMethods{
             "Name":  name,
             "AsuriteID": asuriteId,
             "Email":   email,
-            "Phone#": phoneNumber,
+            "PhoneNumber": phoneNumber,
             "Reason": reason,
             "LoanedDate": loanedDate,
             "ExpectedReturnDate": expectedReturnDate,
             "AdaptorType": adaptorType,
-            "Ticket#": ticketNumber,
+            "TicketNumber": ticketNumber,
             "Signiture": signiture
             ] as [String : Any]
         
@@ -59,40 +59,34 @@ public class FireBaseMethods{
     }
     
     //-------------- POPULATE TABLE ARRAY -----------------//
-    public func populateConsumableTableArray() -> [Consumable]{
-        var tableArray = [Consumable]()
-        
+    public func populateConsumableTableArray(completion: @escaping (Consumable) -> Void) {
+
         //let the object populate itself.
         ref.child("Consumables").observe(.childAdded, with: { snapshot in
             let dataChange = snapshot.value as? [String:AnyObject]
             let aRequest = Consumable(aDict: dataChange!)
-            tableArray.append(aRequest)
+            completion(aRequest)
         })
-        return tableArray
     }
     
-    public func populateCheckedOutTableArray() -> [CheckedOut]{
-        var tableArray = [CheckedOut]()
-        
+    public func populateCheckedOutTableArray(completion: @escaping (CheckedOut) -> Void) {
+
         //let the object populate itself.
         ref.child("CheckedOutConsumables").observe(.childAdded, with: { snapshot in
             let dataChange = snapshot.value as? [String:AnyObject]
             let aRequest = CheckedOut(aDict: dataChange!)
-            tableArray.append(aRequest)
+            completion(aRequest)
         })
-        return tableArray
     }
     
-    public func populateAssignedTableArray() -> [Assigned]{
-        var tableArray = [Assigned]()
-        
+    public func populateAssignedTableArray(completion: @escaping (Assigned) -> Void) {
+
         //let the object populate itself.
         ref.child("AssignedConsumables").observe(.childAdded, with: { snapshot in
             let dataChange = snapshot.value as? [String:AnyObject]
             let aRequest = Assigned(aDict: dataChange!)
-            tableArray.append(aRequest)
+            completion(aRequest)
         })
-        return tableArray
     }
     
     //---------------- REMOVE FROM FIREBASE ----------------//

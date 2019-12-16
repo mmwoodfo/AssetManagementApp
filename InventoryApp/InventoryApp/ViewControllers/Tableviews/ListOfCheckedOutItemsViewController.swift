@@ -20,13 +20,16 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     //-------------------- VIEW DID LOAD -----------------------//
     override func viewDidLoad()
     {
-        checkedOutAdapterArray = fireBaseMethods.populateCheckedOutTableArray()
-        checkedOutTable.reloadData()
-        
+        super.viewDidLoad()
         self.checkedOutTable.dataSource = self
         self.checkedOutTable.delegate = self
         
-        super.viewDidLoad()
+        fireBaseMethods.populateCheckedOutTableArray { [unowned self] checkedOut in
+            self.checkedOutAdapterArray.append(checkedOut)
+            DispatchQueue.main.async {
+                self.checkedOutTable.reloadData()
+            }
+        }
     }
     
     //--------------------------- SORTS BY ASCENDING ----------------------------------//

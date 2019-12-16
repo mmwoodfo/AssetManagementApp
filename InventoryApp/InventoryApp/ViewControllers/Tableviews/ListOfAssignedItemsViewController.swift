@@ -19,14 +19,16 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     
     //-------------------- VIEW DID LOAD -----------------------//
     override func viewDidLoad(){
-        
-        assignedAdapterArray = fireBaseMethods.populateAssignedTableArray()
-        assignedTable.reloadData()
-        
+        super.viewDidLoad()
         self.assignedTable.dataSource = self
         self.assignedTable.delegate = self
         
-        super.viewDidLoad()
+        fireBaseMethods.populateAssignedTableArray { [unowned self] assigned in
+            self.assignedAdapterArray.append(assigned)
+            DispatchQueue.main.async {
+                self.assignedTable.reloadData()
+            }
+        }
     }
     
     //--------------------------- SORTS BY ASCENDING ----------------------------------//

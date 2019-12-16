@@ -22,12 +22,15 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
     //-------------------- VIEW DID LOAD -----------------------//
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        consumableArray = fireBaseMethods.populateConsumableTableArray()
-        consumableTable.reloadData()
-        
         self.consumableTable.dataSource = self
         self.consumableTable.delegate = self
+        
+        fireBaseMethods.populateConsumableTableArray { [unowned self] consumable in
+            self.consumableArray.append(consumable)
+            DispatchQueue.main.async {
+                self.consumableTable.reloadData()
+            }
+        }
     }
     
     //----------------------- RELOAD TABLE --------------------//
@@ -64,6 +67,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                         if type != "" && count != "" && sku != ""{
                             if(Int(count) != nil){
                                 self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku)
+                                self.consumableTable.reloadData()
                             }else{
                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - NaN", givenMessage: "\(count) is not a number, please enter a number and try again"), animated: true)
                             }
