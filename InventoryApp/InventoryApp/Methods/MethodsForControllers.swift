@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 public class MethodsForController{
     /*clearUI is used to clear all of the text fields in the view controller**/
@@ -63,68 +62,5 @@ public class MethodsForController{
         dateFormatterGet.dateFormat = "MM-dd-yyyy"
         
         return dateFormatterGet.date(from: dateStr) == nil
-    }
-    
-    //========================================= CORE DATA ==========================================================//
-    //Core data variables
-    let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext //moc = managed object context
-    var checkedout = [CheckoutEntity]()
-    var assigned = [AssignedEntity]()
-    var consumable = [ConsumableEntity]()
-    
-    //----------------------- ADD ASSIGNED ENTITY TO CORE DATA ---------------------------//
-    func addAssignedEntityToCoreData(name:String, asurite:String, email:String, phone:String, reason:String, todayDate:String, adaptorName:String, ticketNumber:String) -> Bool{
-        let ent = NSEntityDescription.entity(forEntityName: "AssignedEntity", in: moc)
-        let newAssignedItem = AssignedEntity(entity: ent!, insertInto: moc)
-        newAssignedItem.name = name
-        newAssignedItem.asuriteId = asurite
-        newAssignedItem.email = email
-        newAssignedItem.phoneNumber = phone
-        newAssignedItem.reason = reason
-        newAssignedItem.loanedDate = todayDate
-        newAssignedItem.adaptorName = adaptorName
-        newAssignedItem.ticketNumber = ticketNumber
-        
-        do{
-            try moc.save()
-            return true
-        }catch _{
-            return false
-        }
-    }
-    
-    //----------------------- REMOVE ASSIGNED ENTITY FROM CORE DATA ---------------------------//
-    func deleteAssignedEntity(entity:AssignedEntity){
-        moc.delete(entity)
-        do{
-            try moc.save()
-            print("Saved.")
-        }catch let error as NSError {
-            print("Could not save. \(error)")
-        }
-    }
-    
-    //------------------ RETURN LIST OF ASSIGNED ENTITIES IN CORE DATA ----------------------//
-    func fetchAssignedEntity() -> [AssignedEntity]{
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "AssignedEntity")
-        
-        assigned = ((try? moc.fetch(fetchRequest)) as? [AssignedEntity])!
-        
-        return assigned
-    }
-    
-    //----------------------- RETURN LIST OF CONSUMABLE TYPES IN CORE DATA -----------------------//
-    func fetchConsumableTypes() -> [String] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ConsumableEntity")
-        
-        consumable = ((try? moc.fetch(fetchRequest)) as? [ConsumableEntity])!
-        
-        var types = [String]()
-        
-        for item in consumable{
-            types.append(item.type ?? "")
-        }
-        
-        return types
     }
 }

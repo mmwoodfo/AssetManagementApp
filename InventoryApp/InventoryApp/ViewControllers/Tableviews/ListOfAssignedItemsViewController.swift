@@ -13,20 +13,20 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var assignedTable: UITableView!
     
     private var methods:MethodsForController = MethodsForController()
-    private var assignedAdapterArray = [AssignedEntity]()
+    private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     
+    private var assignedAdapterArray = [Assigned]()
+    
+    //-------------------- VIEW DID LOAD -----------------------//
     override func viewDidLoad(){
-        populateAssignedAdapterArray()
+        
+        assignedAdapterArray = fireBaseMethods.populateAssignedTableArray()
+        assignedTable.reloadData()
         
         self.assignedTable.dataSource = self
         self.assignedTable.delegate = self
         
         super.viewDidLoad()
-    }
-    
-    //---------------------- POPULATE ADAPTER ARRAY --------------------------------//
-    public func populateAssignedAdapterArray(){
-        assignedAdapterArray = methods.fetchAssignedEntity()
     }
     
     //--------------------------- SORTS BY ASCENDING ----------------------------------//
@@ -37,7 +37,7 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
         sortAlert.addAction(UIAlertAction(title: "Name", style: .default, handler: {
             action in
             self.assignedAdapterArray.sort {
-                $0.name!.lowercased() < $1.name!.lowercased()
+                $0.getName().lowercased() < $1.getName().lowercased()
             }
             
             self.assignedTable.reloadData()
@@ -46,7 +46,7 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
         sortAlert.addAction(UIAlertAction(title: "Adapter", style: .default, handler: {
             action in
             self.assignedAdapterArray.sort {
-                $0.adaptorName!.lowercased() < $1.adaptorName!.lowercased()
+                $0.getAdaptorType().lowercased() < $1.getAdaptorType().lowercased()
             }
             
             self.assignedTable.reloadData()
@@ -67,9 +67,9 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
         searchAlert.addAction(UIAlertAction(title: "Search", style: .default, handler: {
             action in
             if let name = searchAlert.textFields?[0].text{
-                var searchedItems = [AssignedEntity]()
+                var searchedItems = [Assigned]()
                 for item in self.assignedAdapterArray{
-                    if item.name!.lowercased() == name.lowercased(){
+                    if item.getName().lowercased() == name.lowercased(){
                         searchedItems.append(item)
                     }
                 }
@@ -89,32 +89,7 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
         self.present(searchAlert, animated: true)
     }
     
-    //===========================Functions for Table view Cells and the Table=======================
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return assignedAdapterArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "assignedCell", for: indexPath) as! AssignedCell
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        cell.backgroundColor = UIColor.white
-        cell.name.text = assignedAdapterArray[indexPath.item].name
-        cell.adapter.text = assignedAdapterArray[indexPath.item].adaptorName
-        cell.reason.text = assignedAdapterArray[indexPath.item].reason
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 90
-    }
-    
-    func reloadTableView(){
-        populateAssignedAdapterArray()
-        assignedTable.reloadData()
-    }
-    
-    //=============== Delete From Table  ======================
+    //---------------------- DELETE FROM TABLE ----------------------//
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
         return true
     }
@@ -125,15 +100,10 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
-        let cell = self.assignedTable.cellForRow(at: indexPath) as! AssignedCell?
-        //if methods.IncreaseConsumableCount(consumableName: cell?.adapter.text ?? ""){
-          //  print("Count increased")
-        //}
-        //else{
-          //  print("Error, could not increase count")
-        //}
-        methods.deleteAssignedEntity(entity: assignedAdapterArray[indexPath.row])
-        reloadTableView()
+        fireBaseMethods.removeAssignedFromFirebase(name: assignedAdapterArray[indexPath.row].getName(), type: assignedAdapterArray[indexPath.row].getAdaptorType())
+        assignedAdapterArray.remove(at: indexPath.row)
+        
+        self.assignedTable.reloadData()
     }
     
     //------------------------------- UNWIND SEGUE --------------------------------------//
@@ -150,5 +120,25 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
                 print("Going to detailed view")
             }
         }
+    }
+    
+    //---------------------- FUNCTIONS FOR TABLE VIEW CELLS & TABLE ----------------------//
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return assignedAdapterArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assignedCell", for: indexPath) as! AssignedCell
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.backgroundColor = UIColor.white
+        cell.name.text = assignedAdapterArray[indexPath.item].getName()
+        cell.adapter.text = assignedAdapterArray[indexPath.item].getAdaptorType()
+        cell.reason.text = assignedAdapterArray[indexPath.item].getReason()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        return 90
     }
 }

@@ -7,30 +7,26 @@
 //
 
 import UIKit
-import Firebase
-weak var field: UITextField!
-
 
 class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     
     private var methods:MethodsForController = MethodsForController()
     private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
+    
+    var checkedout = [CheckedOut]()
+    
     private var tempAdapterArray = [String]()
-    private let picker1 = UIPickerView()
+    private let adapterPicker = UIPickerView()
+    private var selectedAdapter: String = ""
     private var activeTextField = 0
     private var datePicker: UIDatePicker?
-    private var selectedAdapter: String = ""
+    private var savedObject:Bool = false
+    //signiture
     private var startingPoint: CGPoint!
     private var touchPoint: CGPoint!
     private var path:UIBezierPath!
     private var signiture:UIImage!
-    private var savedObject:Bool = false
-    private var ref:DatabaseReference?
-    
-    //Core data variables
-    let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var checkedout = [CheckoutEntity]()
     
     //Outlets to handle passing data to the model
     @IBOutlet weak var nameField: UITextField!
@@ -52,18 +48,12 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        
         //set button designs
         btnCheckout.layer.cornerRadius = 10
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
-        tempAdapterArray = methods.fetchConsumableTypes()
-        if(tempAdapterArray.isEmpty){
-            tempAdapterArray.append("")
-        }
-        
-        ref = Database.database().reference()
+        tempAdapterArray = fireBaseMethods.getAdapterTypes()
         
         //To get current date
         let date = Date()
@@ -91,18 +81,6 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         SuccessLabel.isHidden = true
     }
     
-    //------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//
-    //Function that allows UI elements to close when tapped outside
-    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
-        view.endEditing(true)
-    }
-    
-    //------------------------ DATE CHANGED FUNCTION ----------------------------------//
-    @objc func dateChanged(datePicker: UIDatePicker){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy"
-        returnDateField.text = dateFormatter.string(from: datePicker.date)
-    }
     //----------------------------- EXIT CHECKOUT PAGE --------------------------------//
     @IBAction func ExitCheckoutPage(_ sender: Any) {
         savedObject = true
@@ -127,8 +105,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         else{
             /*If important information is not empty add to core data & check if method added succussfully*/
             saveSigniture()
-            fireBaseMethods.addCheckedOutToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", loanedDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!, ref: ref!)
-            
+            fireBaseMethods.addCheckedOutToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", loanedDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)
         }
     }
     
@@ -136,7 +113,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if(savedObject){
             let destinationViewControler = segue.destination as! ListOfCheckedOutItemsViewController
-            destinationViewControler.reloadTableView()
+            destinationViewControler.checkedOutTable.reloadData()
         }
     }
     
@@ -154,11 +131,24 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         clearCanvas()
     }
     
+    //------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//
+    //Function that allows UI elements to close when tapped outside
+    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+    //------------------------ DATE CHANGED FUNCTION ----------------------------------//
+    @objc func dateChanged(datePicker: UIDatePicker){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        returnDateField.text = dateFormatter.string(from: datePicker.date)
+    }
+    
     //------------------------------- ADAPTER PICKER SET UP --------------------------------------//
     func createPickerView(){
-        picker1.delegate = self
-        picker1.delegate?.pickerView?(picker1, didSelectRow: 0, inComponent: 0)
-        adapterSelector.inputView = picker1
+        adapterPicker.delegate = self
+        adapterPicker.delegate?.pickerView?(adapterPicker, didSelectRow: 0, inComponent: 0)
+        adapterSelector.inputView = adapterPicker
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int{
@@ -217,7 +207,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = 1
-        picker1.reloadAllComponents()
+        adapterPicker.reloadAllComponents()
     }
     
     //------------------------------- SIGNITURE IMAGE SET UP --------------------------------------//

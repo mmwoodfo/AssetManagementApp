@@ -10,7 +10,7 @@ import UIKit
 
 class AssignedDetailViewController: UIViewController {
 
-    var selectedAssignedItem: AssignedEntity?
+    var selectedAssignedItem: Assigned?
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var asurite: UILabel!
     @IBOutlet weak var email: UILabel!
@@ -23,13 +23,13 @@ class AssignedDetailViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        name.text = selectedAssignedItem?.name
-        asurite.text = selectedAssignedItem?.asuriteId
-        email.text = selectedAssignedItem?.email
-        phoneNumber.text = selectedAssignedItem?.phoneNumber
-        adapterType.text = selectedAssignedItem?.adaptorName
-        assignedDate.text = selectedAssignedItem?.loanedDate
-        ticketNumber.text = selectedAssignedItem?.ticketNumber
-        reason.text = selectedAssignedItem?.reason
+        name.text = selectedAssignedItem?.getName()
+        asurite.text = selectedAssignedItem?.getAsuriteId()
+        email.text = selectedAssignedItem?.getEmail()
+        phoneNumber.text = selectedAssignedItem?.getPhone()
+        adapterType.text = selectedAssignedItem?.getAdaptorType()
+        assignedDate.text = selectedAssignedItem?.getLoanedDate()
+        ticketNumber.text = selectedAssignedItem?.getTicketNumber()
+        reason.text = selectedAssignedItem?.getReason()
     }
 }

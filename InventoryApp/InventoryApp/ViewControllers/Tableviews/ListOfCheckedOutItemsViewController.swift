@@ -7,28 +7,26 @@
 //
 
 import UIKit
-import Firebase
 
 class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var checkedOutTable: UITableView!
     
     private var methods:MethodsForController = MethodsForController()
-    private var checkedOutAdapterArray = [CheckedOut]()
-    private var ref:DatabaseReference?
+    private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     
+    private var checkedOutAdapterArray = [CheckedOut]()
+    
+    //-------------------- VIEW DID LOAD -----------------------//
     override func viewDidLoad()
     {
-        ref = Database.database().reference()
-        
-        populateAdapterArray()
+        checkedOutAdapterArray = fireBaseMethods.populateCheckedOutTableArray()
+        checkedOutTable.reloadData()
         
         self.checkedOutTable.dataSource = self
         self.checkedOutTable.delegate = self
         
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     //--------------------------- SORTS BY ASCENDING ----------------------------------//
@@ -104,21 +102,43 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     //------------------------------- UNWIND SEGUE --------------------------------------//
     @IBAction func unwindToCheckedOutList(_ sender: UIStoryboardSegue){}
     
-    //---------------------- POPULATE ADAPTER ARRAY --------------------------------//
-    public func populateAdapterArray()
+    //---------------------- DELETE FROM TABLE ----------------------//
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
-        //let the object populate itself.
-        self.ref?.child("CheckedOutConsumables").observe(.childAdded, with: { [weak self] snapshot in
-            guard let self = self else { return }
-            let dataChange = snapshot.value as? [String:AnyObject]
-            let aRequest = CheckedOut(aDict: dataChange!)
-            self.checkedOutAdapterArray.append(aRequest)
-            
-            self.checkedOutTable.reloadData()
-        })
+        return true
     }
     
-    //===========================Functions for Table view Cells and the Table=======================
+    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell.EditingStyle
+    {
+        return UITableViewCell.EditingStyle.delete
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+        fireBaseMethods.removeCheckedOutFromFirebase(name: checkedOutAdapterArray[indexPath.row].getName(), type: checkedOutAdapterArray[indexPath.row].getAdaptorType())
+        checkedOutAdapterArray.remove(at: indexPath.row)
+        
+        checkedOutTable.reloadData()
+    }
+    
+    //-------------- SHOW CELL DETAILS ON DETAILS PAGE ------------------//
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "CheckedoutToDetailed"
+        {
+            let selectedIndex: IndexPath = self.checkedOutTable.indexPath(for: sender as! UITableViewCell)!
+            let checkedOutItem = checkedOutAdapterArray[selectedIndex.row]
+            
+            if let viewController: CheckedOutDetailViewController = segue.destination as? CheckedOutDetailViewController
+            {
+                viewController.selectedCheckedOutItem = checkedOutItem
+                print("Going to detailed view")
+            }
+        }
+    }
+    
+    //---------------------- FUNCTIONS FOR TABLE VIEW CELLS & TABLE ----------------------//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return checkedOutAdapterArray.count
@@ -148,66 +168,5 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 90
-    }
-    
-    func reloadTableView()
-    {
-        populateAdapterArray()
-        checkedOutTable.reloadData()
-    }
-    
-    //=============== Delete From Table  ======================
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-    {
-        return true
-    }
-    
-    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell.EditingStyle
-    {
-        return UITableViewCell.EditingStyle.delete
-    }
-    
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
-        //let cell = self.checkedOutTable.cellForRow(at: indexPath) as! CheckOutCell?
-        
-        //let count = (Int)checkedOutAdapterArray[indexPath.item].getCount();
-        
-        
-        //self.ref?.child("CheckedOutConsumables").child(self.consumableArray[indexPath.item].getType()).child("Count").setValue(count)
-        //self.checkedOutAdapterArray[indexPath.item].setCount(count: count)
-        
-        //if methods.IncreaseConsumableCount(consumableName: cell?.adapterType.text ?? "")
-        //{
-          //  print("Count increased")
-        //}
-        //else
-        //{
-          //  print("Error, could not increase count")
-        //}
-        
-        let refToDelete = self.ref?.child("CheckedOutConsumables").child(checkedOutAdapterArray[indexPath.row].getName())
-        refToDelete?.removeValue()
-        checkedOutAdapterArray.remove(at: indexPath.row)
-        self.checkedOutTable.reloadData()
-        
-        reloadTableView()
-    }
-    
-    //-------------- SHOW CELL DETAILS ON DETAILS PAGE ------------------//
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.identifier == "CheckedoutToDetailed"
-        {
-            let selectedIndex: IndexPath = self.checkedOutTable.indexPath(for: sender as! UITableViewCell)!
-            let checkedOutItem = checkedOutAdapterArray[selectedIndex.row]
-            
-            if let viewController: CheckedOutDetailViewController = segue.destination as? CheckedOutDetailViewController
-            {
-                viewController.selectedCheckedOutItem = checkedOutItem
-                print("Going to detailed view")
-            }
-        }
     }
 }

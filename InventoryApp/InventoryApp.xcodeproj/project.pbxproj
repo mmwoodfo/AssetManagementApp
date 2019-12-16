@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D01C62C237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C62A237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift */; };
-		0D01C62D237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C62B237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift */; };
-		0D01C63223732B91009E4D15 /* AssignedEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63023732B91009E4D15 /* AssignedEntity+CoreDataClass.swift */; };
-		0D01C63323732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63123732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift */; };
-		0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */; };
-		0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */; };
 		0D218EB123A2AE5A00B41F56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D218EB023A2AE5A00B41F56 /* GoogleService-Info.plist */; };
 		0D2AC66E2385C75D00B914CB /* CheckedOutDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */; };
 		0D5AA0E02385D73B006B0023 /* ListOfAssignedItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */; };
@@ -25,11 +19,11 @@
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
 		0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */; };
 		0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A423A3E6870089AD3B /* Consumable.swift */; };
+		0DBC609C23A80113007CBB34 /* Assigned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBC609B23A80113007CBB34 /* Assigned.swift */; };
 		0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */; };
 		0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */; };
 		0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15332360F3C200F64EE0 /* ViewController.swift */; };
 		0DFB15372360F3C200F64EE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB15352360F3C200F64EE0 /* Main.storyboard */; };
-		0DFB153A2360F3C200F64EE0 /* InventoryApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15382360F3C200F64EE0 /* InventoryApp.xcdatamodeld */; };
 		0DFB153C2360F3C300F64EE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB153B2360F3C300F64EE0 /* Assets.xcassets */; };
 		0DFB153F2360F3C300F64EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB153D2360F3C300F64EE0 /* LaunchScreen.storyboard */; };
 		0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */; };
@@ -39,12 +33,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D01C62A237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConsumableEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0D01C62B237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConsumableEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		0D01C63023732B91009E4D15 /* AssignedEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssignedEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0D01C63123732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AssignedEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0D218EB023A2AE5A00B41F56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D2AC66D2385C75D00B914CB /* CheckedOutDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedOutDetailViewController.swift; sourceTree = "<group>"; };
 		0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAssignedItemsViewController.swift; sourceTree = "<group>"; };
@@ -57,12 +45,12 @@
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
 		0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseMethods.swift; sourceTree = "<group>"; };
 		0D87A4A423A3E6870089AD3B /* Consumable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumable.swift; sourceTree = "<group>"; };
+		0DBC609B23A80113007CBB34 /* Assigned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assigned.swift; sourceTree = "<group>"; };
 		0DFB152C2360F3C200F64EE0 /* inventoryapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inventoryapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0DFB15332360F3C200F64EE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0DFB15362360F3C200F64EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0DFB15392360F3C200F64EE0 /* InventoryApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InventoryApp.xcdatamodel; sourceTree = "<group>"; };
 		0DFB153B2360F3C300F64EE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DFB153E2360F3C300F64EE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DFB15402360F3C300F64EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,44 +74,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D01C62523732881009E4D15 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				0D01C63423732BA0009E4D15 /* CheckedOutEntity */,
-				0D01C62F23732ADC009E4D15 /* AssignedEntity */,
-				0D01C62E23732AC8009E4D15 /* ConsumableEntity */,
-				0DFB15382360F3C200F64EE0 /* InventoryApp.xcdatamodeld */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		0D01C62E23732AC8009E4D15 /* ConsumableEntity */ = {
-			isa = PBXGroup;
-			children = (
-				0D01C62A237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift */,
-				0D01C62B237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift */,
-			);
-			path = ConsumableEntity;
-			sourceTree = "<group>";
-		};
-		0D01C62F23732ADC009E4D15 /* AssignedEntity */ = {
-			isa = PBXGroup;
-			children = (
-				0D01C63023732B91009E4D15 /* AssignedEntity+CoreDataClass.swift */,
-				0D01C63123732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift */,
-			);
-			path = AssignedEntity;
-			sourceTree = "<group>";
-		};
-		0D01C63423732BA0009E4D15 /* CheckedOutEntity */ = {
-			isa = PBXGroup;
-			children = (
-				0D01C63523732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift */,
-				0D01C63623732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift */,
-			);
-			path = CheckedOutEntity;
-			sourceTree = "<group>";
-		};
 		0D2AC66C2385C73C00B914CB /* Detailed Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +107,7 @@
 			children = (
 				0D87A4A423A3E6870089AD3B /* Consumable.swift */,
 				0D7BF99223A43F1F00392C5F /* CheckedOut.swift */,
+				0DBC609B23A80113007CBB34 /* Assigned.swift */,
 			);
 			path = "Firebase Objects";
 			sourceTree = "<group>";
@@ -192,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				0D7BF99023A43EAD00392C5F /* Firebase Objects */,
-				0D01C62523732881009E4D15 /* CoreData */,
 				0DFB152F2360F3C200F64EE0 /* AppDelegate.swift */,
 				0DFB15312360F3C200F64EE0 /* SceneDelegate.swift */,
 				0D7BF99123A43F0200392C5F /* Methods */,
@@ -364,27 +314,21 @@
 				0D2AC66E2385C75D00B914CB /* CheckedOutDetailViewController.swift in Sources */,
 				0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */,
 				92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */,
-				0D01C63823732C13009E4D15 /* CheckoutEntity+CoreDataProperties.swift in Sources */,
-				0D01C63323732B91009E4D15 /* AssignedEntity+CoreDataProperties.swift in Sources */,
 				0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */,
 				0D5AA0E62385D855006B0023 /* AssignedCell.swift in Sources */,
 				0D5AA0E42385D827006B0023 /* ConsumablesCell.swift in Sources */,
-				0D01C62C237328FE009E4D15 /* ConsumableEntity+CoreDataClass.swift in Sources */,
-				0DFB153A2360F3C200F64EE0 /* InventoryApp.xcdatamodeld in Sources */,
-				0D01C62D237328FE009E4D15 /* ConsumableEntity+CoreDataProperties.swift in Sources */,
 				0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */,
 				0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */,
 				0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */,
 				0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */,
 				0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */,
-				0D01C63723732C13009E4D15 /* CheckoutEntity+CoreDataClass.swift in Sources */,
 				0DFB15322360F3C200F64EE0 /* SceneDelegate.swift in Sources */,
 				0D7BF99323A43F1F00392C5F /* CheckedOut.swift in Sources */,
 				0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */,
 				0D5FE39423883A7400136B9C /* AssignedViewController.swift in Sources */,
 				0D5FE3922388392500136B9C /* AssignedDetailViewController.swift in Sources */,
 				0D5AA0E02385D73B006B0023 /* ListOfAssignedItemsViewController.swift in Sources */,
-				0D01C63223732B91009E4D15 /* AssignedEntity+CoreDataClass.swift in Sources */,
+				0DBC609C23A80113007CBB34 /* Assigned.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,19 +526,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		0DFB15382360F3C200F64EE0 /* InventoryApp.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				0DFB15392360F3C200F64EE0 /* InventoryApp.xcdatamodel */,
-			);
-			currentVersion = 0DFB15392360F3C200F64EE0 /* InventoryApp.xcdatamodel */;
-			path = InventoryApp.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 0DFB15242360F3C200F64EE0 /* Project object */;
 }

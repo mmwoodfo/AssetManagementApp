@@ -12,17 +12,16 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     
     private var methods:MethodsForController = MethodsForController()
+    private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     
-    private var tempAdapterArray = [String]()
-    private let picker1 = UIPickerView()
-    private var activeTextField = 0
-    private var datePicker: UIDatePicker?
-    private var selectedAdapter: String = ""
+    var assigned = [Assigned]()
+    
     private var savedObject: Bool = false
-    
-    //Core data variables
-    let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var assigned = [AssignedEntity]()
+    private var tempAdapterArray = [String]()
+    private var datePicker: UIDatePicker?
+    private let adapterPicker = UIPickerView()
+    private var activeAdapterTextField = 0
+    private var selectedAdapter: String = ""
     
     //Outlets to handle passing data to the model
     @IBOutlet weak var nameField: UITextField!
@@ -40,16 +39,12 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad(){
         super.viewDidLoad()
-        
         //set button designs
         btnAssign.layer.cornerRadius = 10
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
-        tempAdapterArray = methods.fetchConsumableTypes()
-        if(tempAdapterArray.isEmpty){
-            tempAdapterArray.append("")
-        }
+        tempAdapterArray = fireBaseMethods.getAdapterTypes()
         
         //To get current date
         let date = Date()
@@ -68,12 +63,6 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         SuccessLabel.isHidden = true
     }
     
-    //------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//
-    //Function that allows UI elements to close when tapped outside
-    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
-        view.endEditing(true)
-    }
-    
     //---------------------------- EXIT ASSIGNED PAGE --------------------------------//
     @IBAction func ExitAssignedPage(_ sender: Any) {
         savedObject = true
@@ -82,51 +71,26 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     //------------------------ ASSIGN ITEM BUTTON PRESSED ---------------------------//
     @IBAction func AssignItem(_ sender: Any){
         /*Validate that important information is not empty**/
-        if(
-            nameField.text == "" ||
-                asuField.text == "" ||
-                reasonField.text == "" ||
-                adapterSelector.text == ""
-            ){
+        if(nameField.text == "" ||
+            asuField.text == "" ||
+            reasonField.text == "" ||
+            adapterSelector.text == ""){
             self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
         }
             
         else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
             self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
-        }
-        else{
-            /*If important information is not empty add to core data & check if method added succussfully*/
-            if(methods.addAssignedEntityToCoreData(
-                name: nameField.text ?? "",
-                asurite: asuField.text ?? "",
-                email: emailField.text ?? "",
-                phone: phoneField.text ?? "",
-                reason: reasonField.text ?? "",
-                todayDate: dateHolder.text ?? "",
-                adaptorName: adapterSelector.text ?? "",
-                ticketNumber: ticketNumber.text ?? ""
-            )){//if methods.addAssignedEntityToCoreData()
-                savedObject = true
-                //if methods.decreaseConsumableCount(consumableName: adapterSelector.text ?? ""){
-                  //  print("Count decreased")
-                //}
-                //else
-                //{
-                 //   print("Error, count not decreased")
-                //}
-                methods.clearUI(viewController: self)
-                SuccessLabel.isHidden = false
-            }
-            else{
-                self.present(methods.displayAlert(givenTitle: "Something went wrong", givenMessage: "The item could not be added to the list of assigned consumables"), animated: true)
-            }
+            
+        }else{
+            fireBaseMethods.addAssignedToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", loanedDate: dateHolder.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "")
+            savedObject = true
         }
     }
     
     //------------------------------- PREPARE FOR UNWIND SEGUE --------------------------------------//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         let destinationViewControler = segue.destination as! ListOfAssignedItemsViewController
-        destinationViewControler.reloadTableView()
+        destinationViewControler.assignedTable.reloadData()
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -142,11 +106,17 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         methods.clearUI(viewController: self)
     }
     
+    //------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//
+    //Function that allows UI elements to close when tapped outside
+    @objc func viewTapped(gestureRecognixer: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    
     //------------------------------- ADAPTER PICKER SET UP --------------------------------------//
     func createPickerView(){
-        picker1.delegate = self
-        picker1.delegate?.pickerView?(picker1, didSelectRow: 0, inComponent: 0)
-        adapterSelector.inputView = picker1
+        adapterPicker.delegate = self
+        adapterPicker.delegate?.pickerView?(adapterPicker, didSelectRow: 0, inComponent: 0)
+        adapterSelector.inputView = adapterPicker
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int{
@@ -174,7 +144,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView{
-        switch activeTextField{
+        switch activeAdapterTextField{
         case 1:
             var label:UILabel
             
@@ -199,8 +169,8 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = 1
-        picker1.reloadAllComponents()
+        activeAdapterTextField = 1
+        adapterPicker.reloadAllComponents()
     }
     
 }
