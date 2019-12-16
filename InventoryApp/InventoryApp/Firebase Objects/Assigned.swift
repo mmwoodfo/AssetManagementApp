@@ -21,11 +21,11 @@ public class Assigned{
         self.name = aDict["Name"] as! String
         self.asuriteId = aDict["AsuriteID"] as! String
         self.email = aDict["Email"] as! String
-        self.phoneNumber = aDict["Phone#"] as! String
+        self.phoneNumber = aDict["PhoneNumber"] as! String
         self.reason = aDict["Reason"] as! String
         self.loanedDate = aDict["LoanedDate"] as! String
         self.adaptorType = aDict["AdaptorType"] as! String
-        self.ticketNumber = aDict["Ticket#"] as! String
+        self.ticketNumber = aDict["TicketNumber"] as! String
     }
     
     //getter methods

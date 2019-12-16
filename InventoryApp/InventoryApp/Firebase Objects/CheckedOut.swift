@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 public class CheckedOut{
     private var name: String
     private var asuriteId: String
@@ -23,13 +25,13 @@ public class CheckedOut{
         self.name = aDict["Name"] as! String
         self.asuriteId = aDict["AsuriteID"] as! String
         self.email = aDict["Email"] as! String
-        self.phoneNumber = aDict["Phone#"] as! String
+        self.phoneNumber = aDict["PhoneNumber"] as! String
         self.reason = aDict["Reason"] as! String
         self.loanedDate = aDict["LoanedDate"] as! String
         self.expectedReturnDate = aDict["ExpectedReturnDate"] as! String
         self.adaptorType = aDict["AdaptorType"] as! String
-        self.ticketNumber = aDict["Ticket#"] as! String
-        self.signiture = aDict["Signiture"] as! Data
+        self.ticketNumber = aDict["TicketNumber"] as! String
+        self.signiture = aDict["Signiture"] as? Data ?? UIImage(named: "defaultSigniture.png")!.pngData()!
     }
     
     //getter methods
