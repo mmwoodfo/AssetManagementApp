@@ -51,7 +51,7 @@ public class FireBaseMethods{
             "ExpectedReturnDate": expectedReturnDate,
             "AdaptorType": adaptorType,
             "TicketNumber": ticketNumber,
-            "Signiture": signiture
+            //"Signiture": signiture
             ] as [String : Any]
         
         ref.child("CheckedOutConsumables").child(hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
@@ -64,12 +64,12 @@ public class FireBaseMethods{
     }
     
     func hashAssigned(asuriteId:String, adapterType:String, loanedDate:String) -> String{
-    return "\(asuriteId) \(adapterType) \(loanedDate)"
+        return "\(asuriteId) \(adapterType) \(loanedDate)"
     }
     
     //-------------- POPULATE TABLE ARRAY -----------------//
     public func populateConsumableTableArray(completion: @escaping (Consumable) -> Void) {
-
+        
         //let the object populate itself.
         ref.child("Consumables").observe(.childAdded, with: { snapshot in
             let dataChange = snapshot.value as? [String:AnyObject]
@@ -79,7 +79,7 @@ public class FireBaseMethods{
     }
     
     public func populateCheckedOutTableArray(completion: @escaping (CheckedOut) -> Void) {
-
+        
         //let the object populate itself.
         ref.child("CheckedOutConsumables").observe(.childAdded, with: { snapshot in
             let dataChange = snapshot.value as? [String:AnyObject]
@@ -89,7 +89,7 @@ public class FireBaseMethods{
     }
     
     public func populateAssignedTableArray(completion: @escaping (Assigned) -> Void) {
-
+        
         //let the object populate itself.
         ref.child("AssignedConsumables").observe(.childAdded, with: { snapshot in
             let dataChange = snapshot.value as? [String:AnyObject]
@@ -130,13 +130,37 @@ public class FireBaseMethods{
     
     //------------ DECREASE / INCREASE COUNT OF ADAPTERS -------------//
     public func increaseAdapterCount(adapterType:String){
-        let count = ref.child("Consumables").child(adapterType).value(forKey: "Count") as! Int
-        ref.child("Consumables").child(adapterType).setValue(count+1)
+        var consumableArray = [Consumable]()
+        var count:Int = 0
+        
+        populateConsumableTableArray { [unowned self] consumable in
+            consumableArray.append(consumable)
+            DispatchQueue.main.async {
+                for consumable in consumableArray{
+                    if(consumable.getType() == adapterType){
+                        count = Int(consumable.getCount()) ?? 0
+                        self.ref.child("Consumables").child(adapterType).child("Count").setValue(String(count+1))
+                    }
+                }
+            }
+        }
     }
     
     public func decreaseAdapterCount(adapterType:String){
-        let count = ref.child("Consumables").child(adapterType).value(forKey: "Count") as! Int
-        ref.child("Consumables").child(adapterType).setValue(count-1)
+        var consumableArray = [Consumable]()
+        var count:Int = 0
+        
+        populateConsumableTableArray { [unowned self] consumable in
+            consumableArray.append(consumable)
+            DispatchQueue.main.async {
+                for consumable in consumableArray{
+                    if(consumable.getType() == adapterType){
+                        count = Int(consumable.getCount()) ?? 0
+                        self.ref.child("Consumables").child(adapterType).child("Count").setValue(String(count-1))
+                    }
+                }
+            }
+        }
     }
     
     public func changeAdapterCount(type:String, count:String){

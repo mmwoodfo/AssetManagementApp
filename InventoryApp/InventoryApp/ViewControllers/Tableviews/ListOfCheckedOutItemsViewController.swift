@@ -18,16 +18,15 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     private var checkedOutAdapterArray = [CheckedOut]()
     
     //-------------------- VIEW DID LOAD -----------------------//
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad()
         self.checkedOutTable.dataSource = self
         self.checkedOutTable.delegate = self
         
-        fireBaseMethods.populateCheckedOutTableArray { [unowned self] checkedOut in
-            self.checkedOutAdapterArray.append(checkedOut)
+        fireBaseMethods.populateCheckedOutTableArray { [weak self] checkedOut in
+            self?.checkedOutAdapterArray.append(checkedOut)
             DispatchQueue.main.async {
-                self.checkedOutTable.reloadData()
+                self?.checkedOutTable.reloadData()
             }
         }
     }
@@ -119,7 +118,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        fireBaseMethods.removeCheckedOutFromFirebase(asuriteId: checkedOutAdapterArray[indexPath.row].getName(),
+        fireBaseMethods.removeCheckedOutFromFirebase(asuriteId: checkedOutAdapterArray[indexPath.row].getAsuriteId(),
                                                      type: checkedOutAdapterArray[indexPath.row].getAdaptorType(),
                                                      expectedReturn: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate(),
                                                      loanedDate: checkedOutAdapterArray[indexPath.row].getLoanedDate())
