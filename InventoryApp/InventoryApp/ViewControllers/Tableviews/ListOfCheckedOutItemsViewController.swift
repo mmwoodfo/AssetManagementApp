@@ -119,7 +119,11 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        fireBaseMethods.removeCheckedOutFromFirebase(name: checkedOutAdapterArray[indexPath.row].getName(), type: checkedOutAdapterArray[indexPath.row].getAdaptorType())
+        fireBaseMethods.removeCheckedOutFromFirebase(asuriteId: checkedOutAdapterArray[indexPath.row].getName(),
+                                                     type: checkedOutAdapterArray[indexPath.row].getAdaptorType(),
+                                                     expectedReturn: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate(),
+                                                     loanedDate: checkedOutAdapterArray[indexPath.row].getLoanedDate())
+        
         checkedOutAdapterArray.remove(at: indexPath.row)
         
         checkedOutTable.reloadData()

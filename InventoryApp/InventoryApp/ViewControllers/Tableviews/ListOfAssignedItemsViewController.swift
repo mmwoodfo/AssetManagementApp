@@ -102,7 +102,10 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
-        fireBaseMethods.removeAssignedFromFirebase(name: assignedAdapterArray[indexPath.row].getName(), type: assignedAdapterArray[indexPath.row].getAdaptorType())
+        fireBaseMethods.removeAssignedFromFirebase(asuriteId: assignedAdapterArray[indexPath.row].getAsuriteId(),
+                                                   type: assignedAdapterArray[indexPath.row].getAdaptorType(),
+                                                   loanedDate: assignedAdapterArray[indexPath.row].getLoanedDate())
+        
         assignedAdapterArray.remove(at: indexPath.row)
         
         self.assignedTable.reloadData()

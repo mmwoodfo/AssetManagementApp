@@ -44,7 +44,17 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
-        tempAdapterArray = fireBaseMethods.getAdapterTypes()
+        fireBaseMethods.getAdapterTypes { [unowned self] type in
+            self.tempAdapterArray.append(type)
+            DispatchQueue.main.async {
+                if(self.tempAdapterArray.isEmpty){
+                    self.tempAdapterArray.append("")
+                }
+                // Stuff for Adapter selector
+                self.adapterSelector.delegate = self
+                self.createPickerView()
+            }
+        }
         
         //To get current date
         let date = Date()
@@ -55,10 +65,6 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AssignedViewController.viewTapped(gestureRecognixer:)))
         view.addGestureRecognizer(tapGesture)
-        
-        // Stuff for Adapter selector
-        adapterSelector.delegate = self
-        createPickerView()
         
         SuccessLabel.isHidden = true
     }

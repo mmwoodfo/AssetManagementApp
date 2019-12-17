@@ -36,7 +36,7 @@ public class FireBaseMethods{
             "TicketNumber": ticketNumber,
         ]
         
-        ref.child("AssignedConsumables").child(name).setValue(assigned)
+        ref.child("AssignedConsumables").child(hashAssigned(asuriteId: asuriteId, adapterType: adaptorType, loanedDate: loanedDate)).setValue(assigned)
         decreaseAdapterCount(adapterType: adaptorType)
     }
     
@@ -54,8 +54,17 @@ public class FireBaseMethods{
             "Signiture": signiture
             ] as [String : Any]
         
-        ref.child("CheckedOutConsumables").child(name).setValue(checkedOut)
+        ref.child("CheckedOutConsumables").child(hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
         decreaseAdapterCount(adapterType: adaptorType)
+    }
+    
+    //------------------- Make Hash Name -----------------//
+    func hashCheckedOut(asuriteId:String, expectedReturn:String, adapterType:String, loanedDate:String) -> String{
+        return "\(asuriteId) \(expectedReturn) \(adapterType) \(loanedDate)"
+    }
+    
+    func hashAssigned(asuriteId:String, adapterType:String, loanedDate:String) -> String{
+    return "\(asuriteId) \(adapterType) \(loanedDate)"
     }
     
     //-------------- POPULATE TABLE ARRAY -----------------//
@@ -89,41 +98,34 @@ public class FireBaseMethods{
         })
     }
     
+    //----------------- GET ADAPTER TYPES -------------------//
+    public func getAdapterTypes(completion: @escaping (String) -> Void){
+        ref.child("Consumables").observeSingleEvent(of: .value, with: { (snapshot) in
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                completion(snap.key)
+            }
+        })
+    }
+    
     //---------------- REMOVE FROM FIREBASE ----------------//
     public func removeConsumableFromFirebase(type:String){
         let refToDelete = ref.child("Consumables").child(type)
         refToDelete.removeValue()
     }
     
-    public func removeCheckedOutFromFirebase(name:String, type:String){
+    public func removeCheckedOutFromFirebase(asuriteId:String, type:String, expectedReturn:String, loanedDate:String){
         increaseAdapterCount(adapterType: type)
         
-        let refToDelete = ref.child("CheckedOutConsumables").child(name)
+        let refToDelete = ref.child("CheckedOutConsumables").child(hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: type, loanedDate: loanedDate))
         refToDelete.removeValue()
     }
     
-    public func removeAssignedFromFirebase(name:String, type:String){
+    public func removeAssignedFromFirebase(asuriteId:String, type:String, loanedDate:String){
         increaseAdapterCount(adapterType: type)
         
-        let refToDelete = ref.child("AssignedConsumables").child(name)
+        let refToDelete = ref.child("AssignedConsumables").child(hashAssigned(asuriteId: asuriteId, adapterType: type, loanedDate: loanedDate))
         refToDelete.removeValue()
-    }
-    
-    //----------------- GET ADAPTER TYPES -------------------//
-    public func getAdapterTypes() -> [String]{
-        var adapterArray = [String]()
-        adapterArray.append("")
-        
-        ref.child("Consumables").observeSingleEvent(of: .value, with: { (snapshot) in
-            for child in snapshot.children {
-                let snap = child as! DataSnapshot
-                let key = snap.key
-                let value = snap.value
-                print("key = \(key)  value = \(value!)")
-                adapterArray.append(key)
-            }
-        })
-        return adapterArray
     }
     
     //------------ DECREASE / INCREASE COUNT OF ADAPTERS -------------//
