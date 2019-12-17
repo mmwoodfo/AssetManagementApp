@@ -7,5 +7,7 @@ target 'InventoryApp' do
 
   # Pods for InventoryApp
   pod 'Firebase/Database'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Email'
 
 end

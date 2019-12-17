@@ -15,6 +15,7 @@
 		0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */; };
 		0D5FE3922388392500136B9C /* AssignedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */; };
 		0D5FE39423883A7400136B9C /* AssignedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE39323883A7400136B9C /* AssignedViewController.swift */; };
+		0D61FDB023A9553100E9D949 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D61FDAF23A9553100E9D949 /* LoginViewController.swift */; };
 		0D7BF99323A43F1F00392C5F /* CheckedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7BF99223A43F1F00392C5F /* CheckedOut.swift */; };
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
 		0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */; };
@@ -41,6 +42,7 @@
 		0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfConsumablesViewController.swift; sourceTree = "<group>"; };
 		0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedDetailViewController.swift; sourceTree = "<group>"; };
 		0D5FE39323883A7400136B9C /* AssignedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedViewController.swift; sourceTree = "<group>"; };
+		0D61FDAF23A9553100E9D949 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0D7BF99223A43F1F00392C5F /* CheckedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedOut.swift; sourceTree = "<group>"; };
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
 		0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseMethods.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				0D2AC66C2385C73C00B914CB /* Detailed Views */,
 				92DEDC38237DFF680093D911 /* CellClasses */,
 				0DFB15332360F3C200F64EE0 /* ViewController.swift */,
+				0D61FDAF23A9553100E9D949 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				0DFB15292360F3C200F64EE0 /* Frameworks */,
 				0DFB152A2360F3C200F64EE0 /* Resources */,
 				1E260DEAE2AE9E1AC007E673 /* [CP] Embed Pods Frameworks */,
+				6C5060C4D7DE31D068C195A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -282,6 +286,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6C5060C4D7DE31D068C195A2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9524FA21124E3FFD4083071D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,6 +336,7 @@
 				0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */,
 				92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */,
 				0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */,
+				0D61FDB023A9553100E9D949 /* LoginViewController.swift in Sources */,
 				0D5AA0E62385D855006B0023 /* AssignedCell.swift in Sources */,
 				0D5AA0E42385D827006B0023 /* ConsumablesCell.swift in Sources */,
 				0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */,

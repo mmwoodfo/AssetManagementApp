@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ByJ-Tb-RWK">
     <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -104,10 +104,58 @@
             </objects>
             <point key="canvasLocation" x="-808.14814814814804" y="242.77777777777777"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="tfM-64-MhU">
+            <objects>
+                <viewController id="ByJ-Tb-RWK" customClass="LoginViewController" customModule="inventoryapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wau-ZG-lOp">
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="z5g-L0-Z31">
+                                <rect key="frame" x="34" y="434" width="743" height="123"/>
+                                <color key="backgroundColor" red="0.55118113759999998" green="0.1120348945" blue="0.2517451644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="WOA-LF-zjT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="LOG IN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginTapped:" destination="ByJ-Tb-RWK" eventType="touchUpInside" id="SWN-az-SlA"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFg-j1-UaO">
+                                <rect key="frame" x="145" y="96" width="520" height="246"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="uFg-j1-UaO" firstAttribute="top" secondItem="mTa-YC-0Y2" secondAttribute="top" constant="96" id="Adg-FC-G0n"/>
+                            <constraint firstItem="mTa-YC-0Y2" firstAttribute="trailing" secondItem="uFg-j1-UaO" secondAttribute="trailing" constant="145" id="Jb8-4q-fBg"/>
+                            <constraint firstItem="uFg-j1-UaO" firstAttribute="leading" secondItem="mTa-YC-0Y2" secondAttribute="leading" constant="145" id="Wgc-xy-nQp"/>
+                            <constraint firstItem="mTa-YC-0Y2" firstAttribute="trailing" secondItem="z5g-L0-Z31" secondAttribute="trailing" constant="33" id="crW-sH-0QY"/>
+                            <constraint firstItem="z5g-L0-Z31" firstAttribute="top" secondItem="uFg-j1-UaO" secondAttribute="bottom" constant="92" id="hdd-tb-dXQ"/>
+                            <constraint firstItem="z5g-L0-Z31" firstAttribute="leading" secondItem="mTa-YC-0Y2" secondAttribute="leading" constant="34" id="lyO-jA-Qep"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mTa-YC-0Y2"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnLogin" destination="z5g-L0-Z31" id="BAB-jX-eQG"/>
+                        <outlet property="hidaLogo" destination="uFg-j1-UaO" id="81q-M1-DNV"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="enterApp" id="msa-Qf-H1x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cGT-qH-ygt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-11" y="-583"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="inventoryapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="inventoryapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,6 +227,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ifr-Jz-eOz"/>
                     <connections>
                         <outlet property="btnCheckout" destination="0hc-f5-fyF" id="9nn-A6-QaW"/>
                         <outlet property="btnConsumables" destination="1Sm-cG-qQD" id="bWa-zY-ghD"/>
@@ -753,7 +802,7 @@
             <objects>
                 <viewController id="ily-ay-RxK" customClass="AssignedDetailViewController" customModule="inventoryapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dgd-9s-ei6">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svb-TZ-Tfw">

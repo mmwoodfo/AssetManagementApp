@@ -25,7 +25,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         self.consumableTable.dataSource = self
         self.consumableTable.delegate = self
         
-        fireBaseMethods.populateConsumableTableArray { [unowned self] consumable in
+        fireBaseMethods.populateConsumableTableArray { consumable in
             self.consumableArray.append(consumable)
             DispatchQueue.main.async {
                 self.consumableTable.reloadData()
