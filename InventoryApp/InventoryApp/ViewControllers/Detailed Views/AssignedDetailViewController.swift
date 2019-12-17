@@ -16,6 +16,7 @@ class AssignedDetailViewController: UIViewController {
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var phoneNumber: UILabel!
     @IBOutlet weak var adapterType: UILabel!
+    @IBOutlet weak var adapterCount: UILabel!
     @IBOutlet weak var assignedDate: UILabel!
     @IBOutlet weak var reason: UILabel!
     @IBOutlet weak var ticketNumber: UILabel!
@@ -28,6 +29,7 @@ class AssignedDetailViewController: UIViewController {
         email.text = selectedAssignedItem?.getEmail()
         phoneNumber.text = selectedAssignedItem?.getPhone()
         adapterType.text = selectedAssignedItem?.getAdaptorType()
+        adapterCount.text = selectedAssignedItem?.getCount()
         assignedDate.text = selectedAssignedItem?.getLoanedDate()
         ticketNumber.text = selectedAssignedItem?.getTicketNumber()
         reason.text = selectedAssignedItem?.getReason()

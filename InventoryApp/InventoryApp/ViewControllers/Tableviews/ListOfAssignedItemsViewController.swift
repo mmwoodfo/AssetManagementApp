@@ -104,7 +104,8 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         fireBaseMethods.removeAssignedFromFirebase(asuriteId: assignedAdapterArray[indexPath.row].getAsuriteId(),
                                                    type: assignedAdapterArray[indexPath.row].getAdaptorType(),
-                                                   loanedDate: assignedAdapterArray[indexPath.row].getLoanedDate())
+                                                   loanedDate: assignedAdapterArray[indexPath.row].getLoanedDate(),
+                                                   count: assignedAdapterArray[indexPath.row].getCount())
         
         assignedAdapterArray.remove(at: indexPath.row)
         

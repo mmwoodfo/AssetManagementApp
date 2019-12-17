@@ -15,6 +15,7 @@ public class Assigned{
     private var reason: String
     private var loanedDate: String
     private var adaptorType: String
+    private var count:String
     private var ticketNumber: String
     
     init (aDict: [String: AnyObject]){
@@ -25,6 +26,7 @@ public class Assigned{
         self.reason = aDict["Reason"] as! String
         self.loanedDate = aDict["LoanedDate"] as! String
         self.adaptorType = aDict["AdaptorType"] as! String
+        self.count = aDict["Count"] as! String
         self.ticketNumber = aDict["TicketNumber"] as! String
     }
     
@@ -55,6 +57,10 @@ public class Assigned{
     
     public func getAdaptorType() -> String{
         return self.adaptorType
+    }
+    
+    public func getCount() -> String{
+        return self.count
     }
     
     public func getTicketNumber() -> String{

@@ -30,6 +30,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var reasonField: UITextField!
     @IBOutlet weak var adapterSelector: UITextField!
+    @IBOutlet weak var countField: UITextField!
     @IBOutlet weak var SuccessLabel: UILabel!
     @IBOutlet weak var dateHolder: UILabel!
     @IBOutlet weak var btnAssign: UIButton!
@@ -88,7 +89,7 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.present(methods.displayAlert(givenTitle: "Invalid Phone or Email", givenMessage: ""), animated: true)
             
         }else{
-            fireBaseMethods.addAssignedToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", loanedDate: dateHolder.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "")
+            fireBaseMethods.addAssignedToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", count: countField.text ?? "1", loanedDate: dateHolder.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "")
             savedObject = true
         }
     }

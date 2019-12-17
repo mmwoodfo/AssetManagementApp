@@ -121,7 +121,8 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         fireBaseMethods.removeCheckedOutFromFirebase(asuriteId: checkedOutAdapterArray[indexPath.row].getAsuriteId(),
                                                      type: checkedOutAdapterArray[indexPath.row].getAdaptorType(),
                                                      expectedReturn: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate(),
-                                                     loanedDate: checkedOutAdapterArray[indexPath.row].getLoanedDate())
+                                                     loanedDate: checkedOutAdapterArray[indexPath.row].getLoanedDate(),
+                                                     count: checkedOutAdapterArray[indexPath.row].getCount())
         
         checkedOutAdapterArray.remove(at: indexPath.row)
         
@@ -145,13 +146,11 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     }
     
     //---------------------- FUNCTIONS FOR TABLE VIEW CELLS & TABLE ----------------------//
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return checkedOutAdapterArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "CheckedOutCell", for: indexPath) as! CheckOutCell
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGray.cgColor
@@ -161,8 +160,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         cell.adapterType.text = checkedOutAdapterArray[indexPath.row].getAdaptorType()
         cell.reason.text = checkedOutAdapterArray[indexPath.row].getReason()
         
-        if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate())
-        {
+        if methods.checkOverdue(dateStr: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate()){
             cell.returnDate.textColor = UIColor.red
         }else{
             cell.returnDate.textColor = UIColor.black
@@ -171,8 +169,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 90
     }
 }

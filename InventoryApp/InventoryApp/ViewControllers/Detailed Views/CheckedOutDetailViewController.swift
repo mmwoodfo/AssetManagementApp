@@ -18,6 +18,7 @@ class CheckedOutDetailViewController: UIViewController {
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var phoneNumber: UILabel!
     @IBOutlet weak var adapterType: UILabel!
+    @IBOutlet weak var adapterCount: UILabel!
     @IBOutlet weak var loanedDate: UILabel!
     @IBOutlet weak var returnDate: UILabel!
     @IBOutlet weak var reason: UILabel!
@@ -32,6 +33,7 @@ class CheckedOutDetailViewController: UIViewController {
         email.text = selectedCheckedOutItem?.getEmail()
         phoneNumber.text = selectedCheckedOutItem?.getPhone()
         adapterType.text = selectedCheckedOutItem?.getAdaptorType()
+        adapterCount.text = selectedCheckedOutItem?.getCount()
         loanedDate.text = selectedCheckedOutItem?.getLoanedDate()
         returnDate.text = selectedCheckedOutItem?.getExpectedReturnDate()
         ticketNumber.text = selectedCheckedOutItem?.getTicketNumber()
