@@ -44,17 +44,17 @@ public class FireBaseMethods{
     public func addCheckedOutToFirebase(name:String, asuriteId:String, email:String, phoneNumber:String, adaptorType:String, count:String, loanedDate:String, expectedReturnDate:String, ticketNumber:String, reason:String, signiture:Data){
         
         let child:String = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)
-        let storageRef = Storage.storage().reference().child(child)
-        let urlStr:String = ""
+        let storageRef = Storage.storage().reference().child("\(child).png")
         
-        storageRef.putData(signiture as Data, metadata: nil, completion: { (metadata, error) in
-            if(error != nil){
-                print(error as Any)
+        //upload image
+        storageRef.putData(signiture, metadata: nil) { (metadata, error) in
+            if error != nil{
+                print(error!)
                 return
             }
-            guard (Auth.auth().currentUser?.uid) != nil else {
-                return
-            }
+            
+            print(metadata!)
+            
             // Fetch the download URL
             storageRef.downloadURL { url, error in
                 if let error = error {
@@ -64,9 +64,14 @@ public class FireBaseMethods{
                 } else {
                     let urlStr:String = (url?.absoluteString) ?? ""
                     print(urlStr)
+                    
+                    self.addCheckedOutToFirebase(name: name, asuriteId: asuriteId, email: email, phoneNumber: phoneNumber, adaptorType: adaptorType, count: count, loanedDate: loanedDate, expectedReturnDate: expectedReturnDate, ticketNumber: ticketNumber, reason: reason, signitureUrl: urlStr)
                 }
             }
-        })
+        }
+    }
+    
+    public func addCheckedOutToFirebase(name:String, asuriteId:String, email:String, phoneNumber:String, adaptorType:String, count:String, loanedDate:String, expectedReturnDate:String, ticketNumber:String, reason:String, signitureUrl:String){
         
         let checkedOut = [
             "Name":  name,
@@ -79,14 +84,14 @@ public class FireBaseMethods{
             "AdaptorType": adaptorType,
             "Count": count,
             "TicketNumber": ticketNumber,
-            "SignitureUrl": urlStr
-            ]
+            "SignitureUrl": signitureUrl
+        ]
         
-        self.ref.child("CheckedOutConsumables").child(self.hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
-        self.decreaseAdapterCount(adapterType: adaptorType, amount: Int(count) ?? 1)
+        ref.child("CheckedOutConsumables").child(self.hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
+        decreaseAdapterCount(adapterType: adaptorType, amount: Int(count) ?? 1)
     }
     
-    //------------------- Make Hash Name -----------------//
+    //------------------- MAKE HASH NAME -----------------//
     func hashCheckedOut(asuriteId:String, expectedReturn:String, adapterType:String, loanedDate:String) -> String{
         return "\(asuriteId) \(expectedReturn) \(adapterType) \(loanedDate)"
     }

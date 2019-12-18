@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class CheckedOutDetailViewController: UIViewController {
 
     var selectedCheckedOutItem: CheckedOut?
     private var methods:MethodsForController = MethodsForController()
+    private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var asurite: UILabel!
@@ -38,6 +40,17 @@ class CheckedOutDetailViewController: UIViewController {
         returnDate.text = selectedCheckedOutItem?.getExpectedReturnDate()
         ticketNumber.text = selectedCheckedOutItem?.getTicketNumber()
         reason.text = selectedCheckedOutItem?.getReason()
+        
+        let storage = Storage.storage()
+        var reference: StorageReference!
+        
+        reference = storage.reference(forURL: selectedCheckedOutItem?.getSigniture() ?? "")
+        reference.downloadURL { (url, error) in
+            let data = NSData(contentsOf: url!)
+            let image = UIImage(data: data! as Data)
+            self.signitureImage.image = image
+        }
+        
         //signitureImage.image = UIImage(data: (selectedCheckedOutItem?.getSigniture())!, scale:1.0)!
     }
 }
