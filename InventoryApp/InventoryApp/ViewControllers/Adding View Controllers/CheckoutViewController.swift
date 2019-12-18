@@ -54,15 +54,15 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
-        fireBaseMethods.getAdapterTypes { [unowned self] type in
-            self.tempAdapterArray.append(type)
+        fireBaseMethods.getAdapterTypes { [weak self] type in
+            self?.tempAdapterArray.append(type)
             DispatchQueue.main.async {
-                if(self.tempAdapterArray.isEmpty){
-                    self.tempAdapterArray.append("")
+                if(self?.tempAdapterArray.isEmpty ?? true){
+                    self?.tempAdapterArray.append("")
                 }
                 // Stuff for Adapter selector
-                self.adapterSelector.delegate = self
-                self.createPickerView()
+                self?.adapterSelector.delegate = self
+                self?.createPickerView()
             }
         }
         
@@ -112,6 +112,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         else{
             /*If important information is not empty add to core data & check if method added succussfully*/
             saveSigniture()
+            
             fireBaseMethods.addCheckedOutToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", count: countField.text ?? "1", loanedDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)
             
             savedObject = true
@@ -137,6 +138,10 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     //------------------------------ CLEAR FIELDS & DISPLAY ERROR ALERTS ------------------------------//
     @IBAction func ClearFields(_ sender: Any){
         methods.clearUI(viewController: self)
+        clearCanvas()
+    }
+    
+    @IBAction func ClearSigniture(_ sender: Any) {
         clearCanvas()
     }
     

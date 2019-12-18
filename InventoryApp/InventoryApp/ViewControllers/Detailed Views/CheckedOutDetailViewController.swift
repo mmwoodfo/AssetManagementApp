@@ -38,12 +38,6 @@ class CheckedOutDetailViewController: UIViewController {
         returnDate.text = selectedCheckedOutItem?.getExpectedReturnDate()
         ticketNumber.text = selectedCheckedOutItem?.getTicketNumber()
         reason.text = selectedCheckedOutItem?.getReason()
-        signitureImage.image = UIImage(data: (selectedCheckedOutItem?.getSigniture())!, scale:1.0)!
-        
-        //if true, change return date text to red
-        if methods.checkOverdue(dateStr: returnDate.text ?? "")
-        {
-            returnDate.textColor = UIColor.red
-        }
+        //signitureImage.image = UIImage(data: (selectedCheckedOutItem?.getSigniture())!, scale:1.0)!
     }
 }

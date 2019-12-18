@@ -45,15 +45,15 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
-        fireBaseMethods.getAdapterTypes { [unowned self] type in
-            self.tempAdapterArray.append(type)
+        fireBaseMethods.getAdapterTypes { [weak self] type in
+            self?.tempAdapterArray.append(type)
             DispatchQueue.main.async {
-                if(self.tempAdapterArray.isEmpty){
-                    self.tempAdapterArray.append("")
+                if(self?.tempAdapterArray.isEmpty ?? true){
+                    self?.tempAdapterArray.append("")
                 }
                 // Stuff for Adapter selector
-                self.adapterSelector.delegate = self
-                self.createPickerView()
+                self?.adapterSelector.delegate = self
+                self?.createPickerView()
             }
         }
         

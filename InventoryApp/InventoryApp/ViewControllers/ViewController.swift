@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -18,6 +20,8 @@ class ViewController: UIViewController {
         btnView.layer.cornerRadius = 10
         
         hidaLogo.image = UIImage(named: "HIDA logo")
+        
+        fireBaseMethods.removeObservers()
     }
     
     @IBOutlet weak var btnCheckout: UIButton!

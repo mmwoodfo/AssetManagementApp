@@ -11,7 +11,7 @@ import Firebase
 
 public class FireBaseMethods{
     
-    private var ref:DatabaseReference = Database.database().reference()
+    private let ref = Database.database().reference()
     
     //------------------- ADD TO FIREBASE ------------------//
     
@@ -42,6 +42,32 @@ public class FireBaseMethods{
     }
     
     public func addCheckedOutToFirebase(name:String, asuriteId:String, email:String, phoneNumber:String, adaptorType:String, count:String, loanedDate:String, expectedReturnDate:String, ticketNumber:String, reason:String, signiture:Data){
+        
+        let child:String = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)
+        let storageRef = Storage.storage().reference().child(child)
+        let urlStr:String = ""
+        
+        storageRef.putData(signiture as Data, metadata: nil, completion: { (metadata, error) in
+            if(error != nil){
+                print(error as Any)
+                return
+            }
+            guard (Auth.auth().currentUser?.uid) != nil else {
+                return
+            }
+            // Fetch the download URL
+            storageRef.downloadURL { url, error in
+                if let error = error {
+                    // Handle any errors
+                    print(error)
+                    return
+                } else {
+                    let urlStr:String = (url?.absoluteString) ?? ""
+                    print(urlStr)
+                }
+            }
+        })
+        
         let checkedOut = [
             "Name":  name,
             "AsuriteID": asuriteId,
@@ -52,12 +78,12 @@ public class FireBaseMethods{
             "ExpectedReturnDate": expectedReturnDate,
             "AdaptorType": adaptorType,
             "Count": count,
-            "TicketNumber": ticketNumber
-            //"Signiture": signiture
-            ] as [String : Any]
+            "TicketNumber": ticketNumber,
+            "SignitureUrl": urlStr
+            ]
         
-        ref.child("CheckedOutConsumables").child(hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
-        decreaseAdapterCount(adapterType: adaptorType, amount: Int(count) ?? 1)
+        self.ref.child("CheckedOutConsumables").child(self.hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
+        self.decreaseAdapterCount(adapterType: adaptorType, amount: Int(count) ?? 1)
     }
     
     //------------------- Make Hash Name -----------------//
@@ -135,13 +161,13 @@ public class FireBaseMethods{
         var consumableArray = [Consumable]()
         var count:Int = 0
         
-        populateConsumableTableArray { [unowned self] consumable in
+        populateConsumableTableArray { [weak self] consumable in
             consumableArray.append(consumable)
             DispatchQueue.main.async {
                 for consumable in consumableArray{
                     if(consumable.getType() == adapterType){
                         count = Int(consumable.getCount()) ?? 0
-                        self.ref.child("Consumables").child(adapterType).child("Count").setValue(String(count+amount))
+                        self?.ref.child("Consumables").child(adapterType).child("Count").setValue(String(count+amount))
                     }
                 }
             }
@@ -152,13 +178,13 @@ public class FireBaseMethods{
         var consumableArray = [Consumable]()
         var count:Int = 0
         
-        populateConsumableTableArray { [unowned self] consumable in
+        populateConsumableTableArray { [weak self] consumable in
             consumableArray.append(consumable)
             DispatchQueue.main.async {
                 for consumable in consumableArray{
                     if(consumable.getType() == adapterType){
                         count = Int(consumable.getCount()) ?? 0
-                        self.ref.child("Consumables").child(adapterType).child("Count").setValue(String(count-amount))
+                        self?.ref.child("Consumables").child(adapterType).child("Count").setValue(String(count-amount))
                     }
                 }
             }
@@ -167,5 +193,11 @@ public class FireBaseMethods{
     
     public func changeAdapterCount(type:String, count:String){
         ref.child("Consumables").child(type).child("Count").setValue(count)
+    }
+    
+    public func removeObservers(){
+        self.ref.child("Consumables").removeAllObservers()
+        self.ref.child("CheckedOutConsumables").removeAllObservers()
+        self.ref.child("AssignedConsumables").removeAllObservers()
     }
 }

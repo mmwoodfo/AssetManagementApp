@@ -20,7 +20,7 @@ public class CheckedOut{
     private var adaptorType: String
     private var count:String
     private var ticketNumber: String
-    private var signiture: Data
+    private var signiture: String
     
     init (aDict: [String: AnyObject]){
         self.name = aDict["Name"] as! String
@@ -33,7 +33,7 @@ public class CheckedOut{
         self.adaptorType = aDict["AdaptorType"] as! String
         self.count = aDict["Count"] as! String
         self.ticketNumber = aDict["TicketNumber"] as! String
-        self.signiture = aDict["Signiture"] as? Data ?? UIImage(named: "defaultSigniture.png")!.pngData()!
+        self.signiture = aDict["SignitureUrl"] as? String ?? ""
     }
     
     //getter methods
@@ -77,7 +77,7 @@ public class CheckedOut{
         return self.ticketNumber
     }
     
-    public func getSigniture() -> Data{
+    public func getSigniture() -> String{
         return self.signiture
     }
 }
