@@ -99,20 +99,32 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
     
     //---------------------- EDIT CELLS IN TABLE ----------------------//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editConsumableCount = UIAlertController(title: "Change Count", message: nil, preferredStyle: .alert)
-        editConsumableCount.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        let editConsumable = UIAlertController(title: "Change Count", message: nil, preferredStyle: .alert)
+        editConsumable.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        editConsumableCount.addTextField(configurationHandler: {
+        editConsumable.addTextField(configurationHandler: {
             textField in
-            textField.placeholder = "Consumable Count"
+            textField.text = self.consumableArray[indexPath.row].getType()
         })
         
-        editConsumableCount.addAction(UIAlertAction(title: "Update", style: .default, handler: {
+        editConsumable.addTextField(configurationHandler: {
+            textField in
+            textField.text = self.consumableArray[indexPath.row].getCount()
+        })
+        
+        editConsumable.addTextField(configurationHandler: {
+            textField in
+            textField.text = self.consumableArray[indexPath.row].getSku()
+        })
+        
+        editConsumable.addAction(UIAlertAction(title: "Update", style: .default, handler: {
             action in
-            if let count = editConsumableCount.textFields?[0].text{
+            if let type = editConsumable.textFields?[0].text, let count = editConsumable.textFields?[1].text, let sku = editConsumable.textFields?[2].text {
                 if Int(count) != nil {
-                    self.fireBaseMethods.changeAdapterCount(type: self.consumableArray[indexPath.row].getType(), count: count)
+                    self.fireBaseMethods.editAdapter(type: self.consumableArray[indexPath.row].getType(), newType: type, newCount: count, newSku: sku)
+                    self.consumableArray[indexPath.row].setType(type: type)
                     self.consumableArray[indexPath.row].setCount(count: count)
+                    self.consumableArray[indexPath.row].setSku(sku: sku)
                     
                     self.reloadTable()
                     
@@ -122,13 +134,12 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             }
         }))
         
-        self.present(editConsumableCount, animated: true)
+        self.present(editConsumable, animated: true)
         
     }
     
     //---------------------- FUNCTIONS FOR TABLE VIEW CELLS & TABLE ----------------------//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(consumableArray.count)
         return consumableArray.count
     }
     

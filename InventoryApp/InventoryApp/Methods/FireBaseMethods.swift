@@ -196,8 +196,10 @@ public class FireBaseMethods{
         }
     }
     
-    public func changeAdapterCount(type:String, count:String){
-        ref.child("Consumables").child(type).child("Count").setValue(count)
+    public func editAdapter(type:String, newType:String, newCount:String, newSku:String){
+        ref.child("Consumables").child(type).child("Type").setValue(newType)
+        ref.child("Consumables").child(type).child("Count").setValue(newCount)
+        ref.child("Consumables").child(type).child("Sku").setValue(newSku)
     }
     
     public func removeObservers(){
