@@ -8,6 +8,7 @@ iOS 13.3 or higher is required to run this application
 * [Swift 5](https://swift.org/blog/swift-5-released/)
 * [XCode11.3](https://developer.apple.com/documentation/xcode_release_notes/xcode_11_3_release_notes)
 * [Firebase 6.13.0](https://firebase.google.com/support/release-notes/ios#6.13.0-patch)
+* [CocoaPods](https://cocoapods.org/)
 
 ## Authors
 * [Meghan Woodford](https://github.com/mmwoodfo)
