@@ -46,16 +46,20 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         
         consumableAlert.addTextField(configurationHandler: {
             textField in
+            textField.autocapitalizationType = .words
             textField.placeholder = "Consumable Type"
         })
         
         consumableAlert.addTextField(configurationHandler: {
             textField in
+            textField.keyboardType = .numberPad
             textField.placeholder = "Consumable Count"
         })
         
         consumableAlert.addTextField(configurationHandler: {
             textField in
+            textField.keyboardType = .numberPad
+            textField.autocapitalizationType = .allCharacters
             textField.placeholder = "Item SKU"
         })
         
@@ -66,8 +70,12 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
                     if let sku = consumableAlert.textFields?[2].text{
                         if type != "" && count != "" && sku != ""{
                             if(Int(count) != nil){
-                                self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku)
-                                self.consumableTable.reloadData()
+                                if(self.isDuplication(type: type)){
+                                    self.present(self.methods.displayAlert(givenTitle: "Error adding - Duplication", givenMessage: "That adapter type is already on this list"), animated: true)
+                                }else{
+                                    self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku)
+                                    self.consumableTable.reloadData()
+                                }
                             }else{
                                 self.present(self.methods.displayAlert(givenTitle: "Error adding - NaN", givenMessage: "\(count) is not a number, please enter a number and try again"), animated: true)
                             }
@@ -80,6 +88,16 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         }))
         
         self.present(consumableAlert, animated: true)
+    }
+    
+    //--------------------- CHECK FOR DUPLICATIONS ------------------//
+    public func isDuplication(type:String) -> Bool{
+        for consumable in consumableArray{
+            if(consumable.getType().caseInsensitiveCompare(type) == .orderedSame){ //are equal
+                return true
+            }
+        }
+        return false
     }
     
     //---------------------- DELETE FROM TABLE ----------------------//
@@ -104,33 +122,24 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         
         editConsumable.addTextField(configurationHandler: {
             textField in
-            textField.text = self.consumableArray[indexPath.row].getType()
-        })
-        
-        editConsumable.addTextField(configurationHandler: {
-            textField in
+            textField.keyboardType = .numberPad
             textField.text = self.consumableArray[indexPath.row].getCount()
-        })
-        
-        editConsumable.addTextField(configurationHandler: {
-            textField in
-            textField.text = self.consumableArray[indexPath.row].getSku()
         })
         
         editConsumable.addAction(UIAlertAction(title: "Update", style: .default, handler: {
             action in
-            if let type = editConsumable.textFields?[0].text, let count = editConsumable.textFields?[1].text, let sku = editConsumable.textFields?[2].text {
+            if let count = editConsumable.textFields?[0].text {
                 if Int(count) != nil {
-                    self.fireBaseMethods.editAdapter(type: self.consumableArray[indexPath.row].getType(), newType: type, newCount: count, newSku: sku)
-                    self.consumableArray[indexPath.row].setType(type: type)
+                    self.fireBaseMethods.changeConsumableCount(type: self.consumableArray[indexPath.row].getType(), newCount: count)
                     self.consumableArray[indexPath.row].setCount(count: count)
-                    self.consumableArray[indexPath.row].setSku(sku: sku)
                     
                     self.reloadTable()
                     
                 }else{
                     self.present(self.methods.displayAlert(givenTitle: "Error adding - Count must be a number", givenMessage: "\(count) is not a number"), animated: true)
                 }
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Error adding - Please fill out all fields", givenMessage: ""), animated: true)
             }
         }))
         
