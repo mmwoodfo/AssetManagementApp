@@ -113,6 +113,10 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
             /*If important information is not empty add to core data & check if method added succussfully*/
             saveSigniture()
             
+            if(countField.text == ""){
+                countField.text = "1"
+            }
+            
             fireBaseMethods.addCheckedOutToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", count: countField.text ?? "1", loanedDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)
             
             savedObject = true

@@ -50,7 +50,31 @@ class CheckedOutDetailViewController: UIViewController {
             let image = UIImage(data: data! as Data)
             self.signitureImage.image = image
         }
+    }
+
+    @IBAction func editTicketNumber(_ sender: Any) {
+        let editTicketNumber = UIAlertController(title: "Change Ticket Number", message: nil, preferredStyle: .alert)
+        editTicketNumber.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        //signitureImage.image = UIImage(data: (selectedCheckedOutItem?.getSigniture())!, scale:1.0)!
+        editTicketNumber.addTextField(configurationHandler: {
+            textField in
+            textField.keyboardType = .numberPad
+            textField.text = self.ticketNumber.text
+        })
+        
+        editTicketNumber.addAction(UIAlertAction(title: "Update", style: .default, handler: {
+            action in
+            if let ticket = editTicketNumber.textFields?[0].text {
+                //do something
+                self.fireBaseMethods.updateCheckedOutTicket(asuriteId: self.asurite.text ?? "", expectedReturn: self.returnDate.text ?? "", adapterType: self.adapterType.text ?? "", loanedDate: self.loanedDate.text ?? "", newTicketID: ticket)
+                
+                self.ticketNumber.text = ticket
+                
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Error adding - Please fill out all fields", givenMessage: ""), animated: true)
+            }
+        }))
+        
+        self.present(editTicketNumber, animated: true)
     }
 }

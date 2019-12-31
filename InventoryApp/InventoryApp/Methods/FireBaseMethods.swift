@@ -220,4 +220,15 @@ public class FireBaseMethods{
         self.ref.child("CheckedOutConsumables").removeAllObservers()
         self.ref.child("AssignedConsumables").removeAllObservers()
     }
+    
+    //------------- UPDATE TICKET ID ---------//
+    public func updateCheckedOutTicket(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newTicketID:String){
+        let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("TicketNumber").setValue(newTicketID)
+    }
+    
+    public func updateAssignedTicket(asuriteId:String, adapterType: String, loanedDate: String, newTicketID:String){
+        let hashCode = hashAssigned(asuriteId: asuriteId, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("AssignedConsumables").child(hashCode).child("TicketNumber").setValue(newTicketID)
+    }
 }
