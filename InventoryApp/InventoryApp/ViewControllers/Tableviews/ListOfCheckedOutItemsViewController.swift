@@ -122,7 +122,8 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
                                                      type: checkedOutAdapterArray[indexPath.row].getAdaptorType(),
                                                      expectedReturn: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate(),
                                                      loanedDate: checkedOutAdapterArray[indexPath.row].getLoanedDate(),
-                                                     count: checkedOutAdapterArray[indexPath.row].getCount())
+                                                     count: checkedOutAdapterArray[indexPath.row].getCount(),
+                                                     signitureURL: checkedOutAdapterArray[indexPath.row].getSigniture())
         
         checkedOutAdapterArray.remove(at: indexPath.row)
         

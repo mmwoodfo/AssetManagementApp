@@ -147,10 +147,25 @@ public class FireBaseMethods{
         refToDelete.removeValue()
     }
     
-    public func removeCheckedOutFromFirebase(asuriteId:String, type:String, expectedReturn:String, loanedDate:String, count:String){
+    public func removeCheckedOutFromFirebase(asuriteId:String, type:String, expectedReturn:String, loanedDate:String, count:String, signitureURL:String){
         increaseAdapterCount(adapterType: type, amount: Int(count) ?? 1)
         
-        let refToDelete = ref.child("CheckedOutConsumables").child(hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: type, loanedDate: loanedDate))
+        let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: type, loanedDate: loanedDate)
+        
+        //delete firebase PNG image
+        let storage = Storage.storage()
+        let signitureReference = storage.reference(forURL: signitureURL)
+        
+        signitureReference.delete { error in
+            if let error = error {
+                print(error)
+            } else {
+                print("signiture deleted")
+            }
+        }
+        
+        //delete firebase JSON object
+        let refToDelete = ref.child("CheckedOutConsumables").child(hashCode)
         refToDelete.removeValue()
     }
     
