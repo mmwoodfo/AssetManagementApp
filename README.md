@@ -24,6 +24,9 @@ When hitting the plus button in this section you will be presented a check out p
 ### Assigned Consumables 
 Not to be confused with Loaned consumables this option is exists for people that are given a required item by Herberger IT. This mainly effects people receiving new MacBooks Pros. The features of this page are similar to the Loaned Consumables page. However, we don’t have a signature field as we assign them the consumables. The same search features are avaliable as in the Loaned Consumables section
 
+### In Stock Consumables
+This part of the app lists all of consumables in stock. It will go red when hitting 0 or going negative. The count may go negative if someone fails to update the count when new stock is ordered or the incorrect count was inputted - when the count goes negative on a consumable a recount of that particular stock item should be done. Unlike the assigned and loaned consumabels table. This table does not link to any extra pages, adding and viewing is all done on one page.
+
 ## Authors
 * [Meghan Woodford](https://github.com/mmwoodfo)
 * [ImAnthony](https://github.com/ImAnthony)
