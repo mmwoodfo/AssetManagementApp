@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AnyFormatKit
+
 
 class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
@@ -68,6 +70,15 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         view.addGestureRecognizer(tapGesture)
         
         SuccessLabel.isHidden = true
+    }
+    
+    @IBAction func startedTyping(_ sender: UITextField) {
+        phoneField.text = ""
+    }
+    
+    @IBAction func stoppedTyping(_ sender: UITextField) {
+        let phoneFormatter = DefaultTextFormatter(textPattern: "###-###-####")
+        phoneField.text = phoneFormatter.format(phoneField.text)
     }
     
     //---------------------------- EXIT ASSIGNED PAGE --------------------------------//

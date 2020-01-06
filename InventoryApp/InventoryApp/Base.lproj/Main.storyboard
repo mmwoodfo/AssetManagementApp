@@ -638,6 +638,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" keyboardType="phonePad" smartDashesType="yes" smartInsertDeleteType="yes" textContentType="tel"/>
+                                <connections>
+                                    <action selector="startedTyping:" destination="7eJ-hD-Aud" eventType="editingDidBegin" id="OH1-HV-r2D"/>
+                                    <action selector="stoppedTyping:" destination="7eJ-hD-Aud" eventType="editingDidEnd" id="gbt-VX-2t5"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reason" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TkU-Q3-Ge2" userLabel="reasonField">
                                 <rect key="frame" x="106" y="527" width="571" height="34"/>
@@ -991,6 +995,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes" keyboardType="phonePad" smartDashesType="yes" smartInsertDeleteType="yes" textContentType="tel"/>
+                                <connections>
+                                    <action selector="startedTyping:" destination="LRh-W7-CZX" eventType="editingDidBegin" id="WPo-GU-G7H"/>
+                                    <action selector="stoppedTyping:" destination="LRh-W7-CZX" eventType="editingDidEnd" id="qhn-vt-wqq"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IIx-61-E9R">
                                 <rect key="frame" x="333" y="617" width="116" height="57"/>

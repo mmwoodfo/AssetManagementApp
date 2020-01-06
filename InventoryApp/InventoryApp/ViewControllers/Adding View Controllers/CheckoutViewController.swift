@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AnyFormatKit
 
 class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
@@ -22,6 +23,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private var activeTextField = 0
     private var datePicker: UIDatePicker?
     private var savedObject:Bool = false
+    
     //signiture
     private var startingPoint: CGPoint!
     private var touchPoint: CGPoint!
@@ -43,7 +45,6 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var btnExit: UIButton!
     @IBOutlet weak var ticketNumber: UITextField!
     @IBOutlet weak var signitureField: UIImageView!
-    
     
     //------------------------ VIEW DID LOAD FUNCTION --------------------------//
     override func viewDidLoad(){
@@ -86,6 +87,15 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         view.addGestureRecognizer(tapGesture)
         
         SuccessLabel.isHidden = true
+    }
+    
+    @IBAction func startedTyping(_ sender: UITextField) {
+        phoneField.text = ""
+    }
+    
+    @IBAction func stoppedTyping(_ sender: UITextField) {
+        let phoneFormatter = DefaultTextFormatter(textPattern: "###-###-####")
+        phoneField.text = phoneFormatter.format(phoneField.text)
     }
     
     //----------------------------- EXIT CHECKOUT PAGE --------------------------------//
@@ -271,5 +281,3 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         UIGraphicsEndImageContext()
     }
 }
-
-

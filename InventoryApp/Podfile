@@ -10,5 +10,6 @@ target 'InventoryApp' do
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Email'
+  pod 'AnyFormatKit'
 
 end
