@@ -43,6 +43,7 @@ public class FireBaseMethods{
     
     public func addCheckedOutToFirebase(name:String, asuriteId:String, email:String, phoneNumber:String, adaptorType:String, count:String, loanedDate:String, expectedReturnDate:String, ticketNumber:String, reason:String, signiture:Data){
         
+        decreaseAdapterCount(adapterType: adaptorType, amount: Int(count) ?? 1)
         let child:String = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)
         let storageRef = Storage.storage().reference().child("\(child).png")
         
@@ -88,7 +89,6 @@ public class FireBaseMethods{
         ]
         
         ref.child("CheckedOutConsumables").child(self.hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturnDate, adapterType: adaptorType, loanedDate: loanedDate)).setValue(checkedOut)
-        decreaseAdapterCount(adapterType: adaptorType, amount: Int(count) ?? 1)
     }
     
     //------------------- MAKE HASH NAME -----------------//
@@ -211,8 +211,9 @@ public class FireBaseMethods{
         }
     }
     
-    public func changeConsumableCount(type:String, newCount:String){
-        ref.child("Consumables").child(type).child("Count").setValue(newCount)
+    public func editConsumable(type:String, Sku:String, newCount:String, newType:String){
+        removeConsumableFromFirebase(type: type)
+        addConsumableToFirebase(type: newType, count: newCount, sku: Sku)
     }
     
     public func removeObservers(){
@@ -230,5 +231,38 @@ public class FireBaseMethods{
     public func updateAssignedTicket(asuriteId:String, adapterType: String, loanedDate: String, newTicketID:String){
         let hashCode = hashAssigned(asuriteId: asuriteId, adapterType: adapterType, loanedDate: loanedDate)
         ref.child("AssignedConsumables").child(hashCode).child("TicketNumber").setValue(newTicketID)
+    }
+    
+    //--------- UPDATE NAME ------------//
+    public func updateCheckedOutName(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newName:String){
+        let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("Name").setValue(newName)
+    }
+    
+    public func updateAssignedName(asuriteId:String, adapterType: String, loanedDate: String, newName:String){
+        let hashCode = hashAssigned(asuriteId: asuriteId, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("Name").setValue(newName)
+    }
+    
+    //------- UPDATE EMAIL -----------//
+    public func updateCheckedOutEmail(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newEmail:String){
+        let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("Email").setValue(newEmail)
+    }
+    
+    public func updateAssignedEmail(asuriteId:String, adapterType: String, loanedDate: String, newEmail:String){
+        let hashCode = hashAssigned(asuriteId: asuriteId, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("Email").setValue(newEmail)
+    }
+    
+    //------- UPDATE PHONE ---------//
+    public func updateCheckedOutPhoneNumber(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newPhoneNumber:String){
+        let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("PhoneNumber").setValue(newPhoneNumber)
+    }
+    
+    public func updateAssignedPhoneNumber(asuriteId:String, adapterType: String, loanedDate: String, newPhoneNumber:String){
+        let hashCode = hashAssigned(asuriteId: asuriteId, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("PhoneNumber").setValue(newPhoneNumber)
     }
 }

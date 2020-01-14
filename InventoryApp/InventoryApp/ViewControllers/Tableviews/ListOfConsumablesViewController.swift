@@ -126,12 +126,18 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             textField.text = self.consumableArray[indexPath.row].getCount()
         })
         
+        editConsumable.addTextField(configurationHandler: {
+            textField in
+            textField.text = self.consumableArray[indexPath.row].getType()
+        })
+        
         editConsumable.addAction(UIAlertAction(title: "Update", style: .default, handler: {
             action in
-            if let count = editConsumable.textFields?[0].text {
-                if Int(count) != nil {
-                    self.fireBaseMethods.changeConsumableCount(type: self.consumableArray[indexPath.row].getType(), newCount: count)
-                    self.consumableArray[indexPath.row].setCount(count: count)
+            if let count = editConsumable.textFields?[0].text{
+                if let type = editConsumable.textFields?[1].text{
+                    self.fireBaseMethods.editConsumable(type: self.consumableArray[indexPath.row].getType(), Sku: self.consumableArray[indexPath.row].getSku(), newCount: count, newType: type)
+                    
+                    self.consumableArray.remove(at: indexPath.row)
                     
                     self.reloadTable()
                     

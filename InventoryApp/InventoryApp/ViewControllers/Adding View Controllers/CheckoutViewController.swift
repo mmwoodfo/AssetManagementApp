@@ -266,9 +266,11 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func clearCanvas(){
-        path.removeAllPoints()
-        signitureField.layer.sublayers = nil
-        signitureField.setNeedsDisplay()
+        if(path != nil){
+            path.removeAllPoints()
+            signitureField.layer.sublayers = nil
+            signitureField.setNeedsDisplay()
+        }
     }
     
     func saveSigniture(){
