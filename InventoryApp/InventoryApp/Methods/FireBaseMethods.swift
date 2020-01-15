@@ -16,12 +16,13 @@ public class FireBaseMethods{
     //------------------- ADD TO FIREBASE ------------------//
     
     public func addConsumableToFirebase(type:String, count:String, sku:String){
+        let newType = type.replacingOccurrences(of: "/", with: "\\")
         let consumable = [
-            "Type":  type,
+            "Type":  newType,
             "Count": count,
             "Sku":   sku
         ]
-        ref.child("Consumables").child(type).setValue(consumable)
+        ref.child("Consumables").child(newType).setValue(consumable)
     }
     
     public func addAssignedToFirebase(name:String, asuriteId:String, email:String, phoneNumber:String, adaptorType:String, count:String, loanedDate:String, ticketNumber:String, reason:String){

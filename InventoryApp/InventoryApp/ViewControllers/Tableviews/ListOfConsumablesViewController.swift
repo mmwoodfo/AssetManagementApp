@@ -25,6 +25,8 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         self.consumableTable.dataSource = self
         self.consumableTable.delegate = self
         
+        consumableTable.contentInset.bottom = 100
+        
         fireBaseMethods.populateConsumableTableArray { consumable in
             self.consumableArray.append(consumable)
             DispatchQueue.main.async {
@@ -58,7 +60,6 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         
         consumableAlert.addTextField(configurationHandler: {
             textField in
-            textField.keyboardType = .numberPad
             textField.autocapitalizationType = .allCharacters
             textField.placeholder = "Item SKU"
         })
