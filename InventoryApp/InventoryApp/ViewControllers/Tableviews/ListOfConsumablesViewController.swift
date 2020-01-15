@@ -35,6 +35,41 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
         }
     }
     
+    //--------------- SEARCH FOR A CONSUMABLE ------------------//
+    @IBAction func searchConsumables(_ sender: Any) {
+        let searchAlert = UIAlertController(title: "Search List", message: "Search the list by the consumables name", preferredStyle: .alert)
+        searchAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        searchAlert.addTextField(configurationHandler: {
+            textField in
+            textField.placeholder = "Name of Consumable"
+        })
+        
+        searchAlert.addAction(UIAlertAction(title: "Search", style: .default, handler: {
+            action in
+            if let type = searchAlert.textFields?[0].text{
+                var searchedItems = [Consumable]()
+                for item in self.consumableArray{
+                    if item.getType().lowercased().contains(type.lowercased()){
+                        searchedItems.append(item)
+                    }
+                }
+                
+                if !searchedItems.isEmpty{
+                    self.consumableArray = searchedItems
+                    self.consumableTable.reloadData()
+                }else{
+                    self.present(self.methods.displayAlert(givenTitle: "No results found for \(type)", givenMessage:"Please check the spelling and try again"), animated: true)
+                }
+                
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Name field left blank", givenMessage:"Please specify a name and try again"), animated: true)
+            }
+        }))
+        
+        self.present(searchAlert, animated: true)
+    }
+    
     //----------------------- RELOAD TABLE --------------------//
     func reloadTable(){
         consumableArray.sort{ ($0.getType()) < ($1.getType()) }
