@@ -23,6 +23,8 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
         self.assignedTable.dataSource = self
         self.assignedTable.delegate = self
         
+        assignedTable.contentInset.bottom = 100
+        
         fireBaseMethods.populateAssignedTableArray { [weak self] assigned in
             self?.assignedAdapterArray.append(assigned)
             DispatchQueue.main.async {

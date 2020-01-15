@@ -23,6 +23,8 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         self.checkedOutTable.dataSource = self
         self.checkedOutTable.delegate = self
         
+        checkedOutTable.contentInset.bottom = 100
+        
         fireBaseMethods.populateCheckedOutTableArray { [weak self] checkedOut in
             self?.checkedOutAdapterArray.append(checkedOut)
             DispatchQueue.main.async {
