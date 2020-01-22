@@ -52,7 +52,6 @@ class CheckedOutDetailViewController: UIViewController {
             self.signitureImage.image = image
         }
     }
-
 //=============== Edit Information =================//
     //EDIT TICKET
     @IBAction func editTicketNumber(_ sender: Any) {
@@ -78,6 +77,30 @@ class CheckedOutDetailViewController: UIViewController {
         }))
         
         self.present(editTicketNumber, animated: true)
+    }
+    //EDIT REASON
+    @IBAction func editReason(_ sender: Any) {
+        let editReasonAlert = UIAlertController(title: "Edit Reason Number", message: nil, preferredStyle: .alert)
+        editReasonAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        editReasonAlert.addTextField(configurationHandler: {
+            textField in
+            textField.text = self.reason.text
+        })
+        
+        editReasonAlert.addAction(UIAlertAction(title: "Update", style: .default, handler: {
+            action in
+            if let reason = editReasonAlert.textFields?[0].text {
+                self.fireBaseMethods.updateCheckedOutReason(asuriteId: self.asurite.text ?? "", expectedReturn: self.returnDate.text ?? "", adapterType: self.adapterType.text ?? "", loanedDate: self.loanedDate.text ?? "", newReason: reason)
+                
+                self.reason.text = reason
+                
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Error adding - Please fill out all fields", givenMessage: ""), animated: true)
+            }
+        }))
+        
+        self.present(editReasonAlert, animated: true)
     }
     //EDIT NAME
     @IBAction func editName(_ sender: Any) {

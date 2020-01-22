@@ -38,6 +38,7 @@ class AssignedDetailViewController: UIViewController {
         reason.text = selectedAssignedItem?.getReason()
     }
     
+    //EDIT TICKET ID
     @IBAction func editTicketNumber(_ sender: Any) {
         let editTicketNumber = UIAlertController(title: "Change Ticket Number", message: nil, preferredStyle: .alert)
         editTicketNumber.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -62,5 +63,31 @@ class AssignedDetailViewController: UIViewController {
         }))
         
         self.present(editTicketNumber, animated: true)  
+    }
+    //EDIT REASON
+    @IBAction func editReason(_ sender: Any) {
+        let editReason = UIAlertController(title: "Change Reason", message: nil, preferredStyle: .alert)
+        editReason.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        editReason.addTextField(configurationHandler: {
+            textField in
+            textField.keyboardType = .numberPad
+            textField.text = self.reason.text
+        })
+        
+        editReason.addAction(UIAlertAction(title: "Update", style: .default, handler: {
+            action in
+            if let reason = editReason.textFields?[0].text {
+                //do something
+                self.fireBaseMethods.updateAssignedReason(asuriteId: self.asurite.text ?? "", adapterType: self.adapterType.text ?? "", loanedDate: self.assignedDate.text ?? "", newReason: reason)
+                
+                self.reason.text = reason
+                
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Error adding - Please fill out all fields", givenMessage: ""), animated: true)
+            }
+        }))
+        
+        self.present(editReason, animated: true)
     }
 }

@@ -16,6 +16,7 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     
     var checkedout = [CheckedOut]()
+    var reviewed = false
     
     private var tempAdapterArray = [String]()
     private let adapterPicker = UIPickerView()
@@ -110,7 +111,8 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
             nameField.text == "" ||
                 asuField.text == "" ||
                 reasonField.text == "" ||
-                adapterSelector.text == ""){
+                adapterSelector.text == "" ||
+                ticketNumber.text == ""){
             self.present(methods.displayAlert(givenTitle: "Invalid Information", givenMessage: ""), animated: true)
         }
         else if !methods.checkPhoneNumberWithDashes(phoneNumber: phoneField.text ?? "") || !methods.checkEmail(email: emailField.text ?? ""){
@@ -127,9 +129,24 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 countField.text = "1"
             }
             
-            fireBaseMethods.addCheckedOutToFirebase(name: nameField.text ?? "", asuriteId: asuField.text ?? "", email: emailField.text ?? "", phoneNumber: phoneField.text ?? "", adaptorType: adapterSelector.text ?? "", count: countField.text ?? "1", loanedDate: dateHolder.text ?? "", expectedReturnDate: returnDateField.text ?? "", ticketNumber: ticketNumber.text ?? "", reason: reasonField.text ?? "", signiture: signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)
-            
-            savedObject = true
+            if(reviewed){
+                self.fireBaseMethods.addCheckedOutToFirebase(name: self.nameField.text ?? "", asuriteId: self.asuField.text ?? "", email: self.emailField.text ?? "", phoneNumber: self.phoneField.text ?? "", adaptorType: self.adapterSelector.text ?? "", count: self.countField.text ?? "1", loanedDate: self.dateHolder.text ?? "", expectedReturnDate: self.returnDateField.text ?? "", ticketNumber: self.ticketNumber.text ?? "", reason: self.reasonField.text ?? "", signiture: self.signiture.pngData() ?? UIImage(named: "defaultSigniture.png")!.pngData()!)
+                    
+                self.savedObject = true
+            }else{
+                //REVIEW ALERT
+                let reviewAlert = UIAlertController(title: "Please Review", message: "Name: \(nameField.text ?? "")\nAsuriteID: \(asuField.text ?? "")\nEmail: \(emailField.text ?? "")\nPhone #: \(phoneField.text ?? "")\nReturn Date: \(returnDateField.text ?? "")\nAdapter Type: \(adapterSelector.text ?? "")", preferredStyle: .alert)
+                reviewAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                
+                reviewAlert.addAction(UIAlertAction(title: "Yes, the information is correct", style: .default, handler: {
+                    action in
+                    self.reviewed = true
+                    
+                    self.btnCheckout.setTitle("Check Out", for: .normal)
+                }))
+                
+                self.present(reviewAlert, animated: true)
+            }
         }
     }
     
@@ -153,10 +170,14 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBAction func ClearFields(_ sender: Any){
         methods.clearUI(viewController: self)
         clearCanvas()
+        self.btnCheckout.setTitle("Review Information", for: .normal)
+        reviewed = false
     }
     
     @IBAction func ClearSigniture(_ sender: Any) {
         clearCanvas()
+        self.btnCheckout.setTitle("Review Information", for: .normal)
+        reviewed = false
     }
     
     //------------------- VIEW TAPPED FUNCTION - CLOSE UI ELEMENTS ---------------------//

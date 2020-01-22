@@ -234,6 +234,17 @@ public class FireBaseMethods{
         ref.child("AssignedConsumables").child(hashCode).child("TicketNumber").setValue(newTicketID)
     }
     
+    //------------- UPDATE REASON ---------//
+    public func updateCheckedOutReason(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newReason:String){
+        let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("CheckedOutConsumables").child(hashCode).child("Reason").setValue(newReason)
+    }
+    
+    public func updateAssignedReason(asuriteId:String, adapterType: String, loanedDate: String, newReason:String){
+        let hashCode = hashAssigned(asuriteId: asuriteId, adapterType: adapterType, loanedDate: loanedDate)
+        ref.child("AssignedConsumables").child(hashCode).child("Reason").setValue(newReason)
+    }
+    
     //--------- UPDATE NAME ------------//
     public func updateCheckedOutName(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newName:String){
         let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)

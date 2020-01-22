@@ -33,7 +33,7 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         }
     }
     
-    //--------------------------- SORTS BY ASCENDING ----------------------------------//
+    //--------------------------- SORTS ----------------------------------//
     @IBAction func SortListAscending(_ sender: Any) {
         let sortAlert = UIAlertController(title: "Sort List", message: "Sort the list by:", preferredStyle: .alert)
         sortAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -56,14 +56,14 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
             self.checkedOutTable.reloadData()
         }))
         
-        sortAlert.addAction(UIAlertAction(title: "Date", style: .default, handler: {
+        /*sortAlert.addAction(UIAlertAction(title: "Date", style: .default, handler: {
             action in
             self.checkedOutAdapterArray.sort {
-                $0.getLoanedDate() < $1.getLoanedDate()
+                (self.convertToDate(dateString: $0.getLoanedDate())).compare(self.convertToDate(dateString: $1.getLoanedDate())) == .orderedDescending
             }
             
             self.checkedOutTable.reloadData()
-        }))
+        }))*/
         
         self.present(sortAlert, animated: true)
     }
@@ -117,6 +117,10 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
         return UITableViewCell.EditingStyle.delete
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
+    {
+         return "Return"
+    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {

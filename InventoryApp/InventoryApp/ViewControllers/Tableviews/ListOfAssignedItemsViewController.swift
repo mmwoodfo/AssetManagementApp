@@ -102,6 +102,10 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
         return UITableViewCell.EditingStyle.delete
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String?
+    {
+         return "Return"
+    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         fireBaseMethods.removeAssignedFromFirebase(asuriteId: assignedAdapterArray[indexPath.row].getAsuriteId(),
