@@ -146,9 +146,17 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
-        fireBaseMethods.removeConsumableFromFirebase(type: consumableArray[indexPath.row].getType())
-        consumableArray.remove(at: indexPath.row)
-        self.reloadTable()
+        let deleteAlert = UIAlertController(title: "ARE YOU SURE YOU WANT TO DELETE \(consumableArray[indexPath.row].getType()) CONSUMABLE?", message: nil, preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Yes, Delete", style: .destructive, handler: {
+            action in
+            self.fireBaseMethods.removeConsumableFromFirebase(type: self.consumableArray[indexPath.row].getType())
+            self.consumableArray.remove(at: indexPath.row)
+            self.reloadTable()
+        }))
+        
+        self.present(deleteAlert, animated: true)
     }
     
     //---------------------- EDIT CELLS IN TABLE ----------------------//

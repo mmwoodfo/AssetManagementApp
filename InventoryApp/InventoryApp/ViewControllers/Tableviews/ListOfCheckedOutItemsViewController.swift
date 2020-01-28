@@ -124,16 +124,25 @@ class ListOfCheckedOutItemsViewController: UIViewController, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        fireBaseMethods.removeCheckedOutFromFirebase(asuriteId: checkedOutAdapterArray[indexPath.row].getAsuriteId(),
-                                                     type: checkedOutAdapterArray[indexPath.row].getAdaptorType(),
-                                                     expectedReturn: checkedOutAdapterArray[indexPath.row].getExpectedReturnDate(),
-                                                     loanedDate: checkedOutAdapterArray[indexPath.row].getLoanedDate(),
-                                                     count: checkedOutAdapterArray[indexPath.row].getCount(),
-                                                     signitureURL: checkedOutAdapterArray[indexPath.row].getSigniture())
         
-        checkedOutAdapterArray.remove(at: indexPath.row)
+        let deleteAlert = UIAlertController(title: "ARE YOU SURE YOU WANT TO RETURN \(checkedOutAdapterArray[indexPath.row].getName())'s RECORD?", message: nil, preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        checkedOutTable.reloadData()
+        deleteAlert.addAction(UIAlertAction(title: "Yes, Return", style: .destructive, handler: {
+            action in
+            self.fireBaseMethods.removeCheckedOutFromFirebase(asuriteId: self.checkedOutAdapterArray[indexPath.row].getAsuriteId(),
+                                                         type: self.checkedOutAdapterArray[indexPath.row].getAdaptorType(),
+                                                         expectedReturn: self.checkedOutAdapterArray[indexPath.row].getExpectedReturnDate(),
+                                                         loanedDate: self.checkedOutAdapterArray[indexPath.row].getLoanedDate(),
+                                                         count: self.checkedOutAdapterArray[indexPath.row].getCount(),
+                                                         signitureURL: self.checkedOutAdapterArray[indexPath.row].getSigniture())
+            
+            self.checkedOutAdapterArray.remove(at: indexPath.row)
+            
+            self.checkedOutTable.reloadData()
+        }))
+        
+        self.present(deleteAlert, animated: true)
     }
     
     //-------------- SHOW CELL DETAILS ON DETAILS PAGE ------------------//

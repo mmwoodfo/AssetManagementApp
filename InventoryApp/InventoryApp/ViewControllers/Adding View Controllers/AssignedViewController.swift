@@ -72,13 +72,11 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         SuccessLabel.isHidden = true
     }
     
-    @IBAction func startedTyping(_ sender: UITextField) {
-        phoneField.text = ""
-    }
-    
     @IBAction func stoppedTyping(_ sender: UITextField) {
         let phoneFormatter = DefaultTextFormatter(textPattern: "###-###-####")
-        phoneField.text = phoneFormatter.format(phoneField.text)
+        if(!((phoneField.text ?? "").contains("-"))){
+            phoneField.text = phoneFormatter.format(phoneField.text)
+        }
     }
     
     //---------------------------- EXIT ASSIGNED PAGE --------------------------------//

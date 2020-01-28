@@ -108,14 +108,22 @@ class ListOfAssignedItemsViewController: UIViewController, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
-        fireBaseMethods.removeAssignedFromFirebase(asuriteId: assignedAdapterArray[indexPath.row].getAsuriteId(),
-                                                   type: assignedAdapterArray[indexPath.row].getAdaptorType(),
-                                                   loanedDate: assignedAdapterArray[indexPath.row].getLoanedDate(),
-                                                   count: assignedAdapterArray[indexPath.row].getCount())
+        let deleteAlert = UIAlertController(title: "ARE YOU SURE YOU WANT TO DELETE \(assignedAdapterArray[indexPath.row].getName())'s RECORD?", message: nil, preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        assignedAdapterArray.remove(at: indexPath.row)
+        deleteAlert.addAction(UIAlertAction(title: "Yes, Delete", style: .destructive, handler: {
+            action in
+            self.fireBaseMethods.removeAssignedFromFirebase(asuriteId: self.assignedAdapterArray[indexPath.row].getAsuriteId(),
+                                                       type: self.assignedAdapterArray[indexPath.row].getAdaptorType(),
+                                                       loanedDate: self.assignedAdapterArray[indexPath.row].getLoanedDate(),
+                                                       count: self.assignedAdapterArray[indexPath.row].getCount())
+            
+            self.assignedAdapterArray.remove(at: indexPath.row)
+            
+            self.assignedTable.reloadData()
+        }))
         
-        self.assignedTable.reloadData()
+        self.present(deleteAlert, animated: true)
     }
     
     //------------------------------- UNWIND SEGUE --------------------------------------//
