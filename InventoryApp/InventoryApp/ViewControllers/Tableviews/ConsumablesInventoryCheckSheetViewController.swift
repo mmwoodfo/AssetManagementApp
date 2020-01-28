@@ -38,17 +38,37 @@ class ConsumablesInventoryCheckSheetViewController: UIViewController, UITableVie
     
     //----------- FINISHED REVIEWING CONSUMABLES INVENTORY BUTTON --------------//
     @IBAction func doneReviewingBtn(_ sender: Any) {
-        let sendTo = "jakexod573@mailrunner.net"
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients([sendTo])
-            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+        let signOffAlert = UIAlertController(title: "Update Inventory & Email Changes", message: "Please sign your name below", preferredStyle: .alert)
+        signOffAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        signOffAlert.addTextField(configurationHandler: {
+            textField in
+        })
+        
+        signOffAlert.addAction(UIAlertAction(title: "Update", style: .default, handler: {
+            action in
+            if let eSigniture = signOffAlert.textFields?[0].text{
+                
+                //update firebase inventory
+                
+                let sendTo = "jakexod573@mailrunner.net"
+                if MFMailComposeViewController.canSendMail() {
+                    let mail = MFMailComposeViewController()
+                    mail.mailComposeDelegate = self
+                    mail.setToRecipients([sendTo])
+                    mail.setMessageBody("<p>\(eSigniture) pushed a button!</p>", isHTML: true)
 
-            present(mail, animated: true)
-        } else {
-            self.present(methods.displayAlert(givenTitle: "ERROR", givenMessage: "here was a problem sending your email to \(sendTo)"), animated: true)
-        }
+                    self.present(mail, animated: true)
+                    
+                } else {
+                    self.present(self.methods.displayAlert(givenTitle: "ERROR", givenMessage: "There was a problem sending your email to \(sendTo)"), animated: true)
+                }
+            }else{
+                self.present(self.methods.displayAlert(givenTitle: "Error", givenMessage: "Try again and fill out your name"), animated: true)
+            }
+        }))
+        
+        self.present(signOffAlert, animated: true)
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

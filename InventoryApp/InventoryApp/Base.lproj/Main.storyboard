@@ -258,7 +258,7 @@
                                                     <action selector="searchConsumables:" destination="dOq-CO-1Kq" id="hVN-Fa-PqP"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Item" image="checkmark.seal.fill" catalog="system" id="Phf-so-WDo">
+                                            <barButtonItem title="✓ Inventory" id="Phf-so-WDo">
                                                 <connections>
                                                     <segue destination="n4J-He-L40" kind="showDetail" identifier="ConsumablesToCheckSheet" id="UjW-T5-Bq4"/>
                                                 </connections>
@@ -337,7 +337,7 @@
             <objects>
                 <viewController id="n4J-He-L40" customClass="ConsumablesInventoryCheckSheetViewController" customModule="inventoryapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3uq-Ii-rRg">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jHi-u9-JSP">
@@ -345,7 +345,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Consumable Inventory Check" id="OD9-5v-dy6">
-                                        <barButtonItem key="rightBarButtonItem" title="Done" image="checkmark.shield.fill" catalog="system" id="og1-Mw-VHA">
+                                        <barButtonItem key="rightBarButtonItem" title="✓ Off" id="og1-Mw-VHA">
                                             <connections>
                                                 <action selector="doneReviewingBtn:" destination="n4J-He-L40" id="5B2-vv-drG"/>
                                             </connections>
@@ -1309,8 +1309,6 @@
     </scenes>
     <resources>
         <image name="arrow.up.arrow.down" catalog="system" width="64" height="48"/>
-        <image name="checkmark.seal.fill" catalog="system" width="64" height="60"/>
-        <image name="checkmark.shield.fill" catalog="system" width="64" height="60"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="pencil.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
