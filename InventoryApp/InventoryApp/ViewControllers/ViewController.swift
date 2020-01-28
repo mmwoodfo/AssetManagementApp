@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         btnCheckout.layer.cornerRadius = 10
         btnConsumables.layer.cornerRadius = 10
         btnView.layer.cornerRadius = 10
+        btnReport.layer.cornerRadius = 10
         
         hidaLogo.image = UIImage(named: "HIDA logo")
         
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnCheckout: UIButton!
     @IBOutlet weak var btnConsumables: UIButton!
     @IBOutlet weak var btnView: UIButton!
+    @IBOutlet weak var btnReport: UIButton!
     @IBOutlet weak var hidaLogo: UIImageView!
 }
 

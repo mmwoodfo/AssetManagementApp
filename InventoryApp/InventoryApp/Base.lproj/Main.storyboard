@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ByJ-Tb-RWK">
     <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -193,8 +193,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kux-nY-MVj">
                                 <rect key="frame" x="161" y="54" width="520" height="246"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-cG-qQD">
-                                <rect key="frame" x="34" y="727" width="743" height="123"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sm-cG-qQD">
+                                <rect key="frame" x="34" y="727" width="742" height="123"/>
                                 <color key="backgroundColor" red="0.55118113759999998" green="0.1120348945" blue="0.2517451644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="123" id="E4E-SM-Wrl"/>
@@ -208,9 +208,25 @@
                                     <segue destination="dOq-CO-1Kq" kind="show" identifier="MainToConsumables" id="l8L-sk-GhT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4a8-q8-FGN">
+                                <rect key="frame" x="34" y="886" width="743" height="123"/>
+                                <color key="backgroundColor" red="0.98665565249999998" green="0.72179102900000003" blue="0.15317258240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="YW7-Wd-7YK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Run Inventory Report">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="n4J-He-L40" kind="showDetail" identifier="MenuToInventoryReport" id="8ju-9N-Ecn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="4a8-q8-FGN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="5eg-y4-Col"/>
                             <constraint firstItem="MHj-Af-9uP" firstAttribute="top" secondItem="Kux-nY-MVj" secondAttribute="bottom" constant="82" id="EeX-4Q-mJ3"/>
                             <constraint firstItem="MHj-Af-9uP" firstAttribute="trailing" secondItem="0hc-f5-fyF" secondAttribute="trailing" id="Htc-ie-5Xa"/>
                             <constraint firstItem="MHj-Af-9uP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="Qqe-eZ-vwb"/>
@@ -224,6 +240,8 @@
                             <constraint firstItem="0hc-f5-fyF" firstAttribute="leading" secondItem="1Sm-cG-qQD" secondAttribute="leading" id="oib-Yx-uWw"/>
                             <constraint firstItem="MHj-Af-9uP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="shD-ng-Hqx"/>
                             <constraint firstItem="MHj-Af-9uP" firstAttribute="leading" secondItem="0hc-f5-fyF" secondAttribute="leading" id="tgq-FL-gi2"/>
+                            <constraint firstItem="4a8-q8-FGN" firstAttribute="top" secondItem="1Sm-cG-qQD" secondAttribute="bottom" constant="36" id="uIw-T9-Kzw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4a8-q8-FGN" secondAttribute="trailing" constant="33" id="zQM-13-fnX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -231,6 +249,7 @@
                     <connections>
                         <outlet property="btnCheckout" destination="0hc-f5-fyF" id="9nn-A6-QaW"/>
                         <outlet property="btnConsumables" destination="1Sm-cG-qQD" id="bWa-zY-ghD"/>
+                        <outlet property="btnReport" destination="4a8-q8-FGN" id="o2N-5Q-anU"/>
                         <outlet property="btnView" destination="MHj-Af-9uP" id="SUD-JC-MaJ"/>
                         <outlet property="hidaLogo" destination="Kux-nY-MVj" id="ZyX-4v-Ynj"/>
                     </connections>
@@ -252,18 +271,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Consumable Inventory List" id="ddK-Nz-x5J">
-                                        <leftBarButtonItems>
-                                            <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="KT3-nb-0pP">
-                                                <connections>
-                                                    <action selector="searchConsumables:" destination="dOq-CO-1Kq" id="hVN-Fa-PqP"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="✓ Inventory" id="Phf-so-WDo">
-                                                <connections>
-                                                    <segue destination="n4J-He-L40" kind="showDetail" identifier="ConsumablesToCheckSheet" id="UjW-T5-Bq4"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </leftBarButtonItems>
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="KT3-nb-0pP">
+                                            <connections>
+                                                <action selector="searchConsumables:" destination="dOq-CO-1Kq" id="hVN-Fa-PqP"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="Quo-QE-lNv">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="DEu-b7-Hoy">
                                                 <rect key="frame" x="667" y="16" width="25" height="24"/>
@@ -344,7 +356,7 @@
                                 <rect key="frame" x="0.0" y="1" width="712" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Consumable Inventory Check" id="OD9-5v-dy6">
+                                    <navigationItem title="Run Inventory Report" id="OD9-5v-dy6">
                                         <barButtonItem key="rightBarButtonItem" title="✓ Off" id="og1-Mw-VHA">
                                             <connections>
                                                 <action selector="doneReviewingBtn:" destination="n4J-He-L40" id="5B2-vv-drG"/>

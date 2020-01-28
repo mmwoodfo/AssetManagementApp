@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 
 class ConsumablesInventoryCheckSheetViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate {
-
+    
     private var methods:MethodsForController = MethodsForController()
     private var fireBaseMethods:FireBaseMethods = FireBaseMethods()
     
@@ -38,91 +38,70 @@ class ConsumablesInventoryCheckSheetViewController: UIViewController, UITableVie
     
     //----------- FINISHED REVIEWING CONSUMABLES INVENTORY BUTTON --------------//
     @IBAction func doneReviewingBtn(_ sender: Any) {
-        let signOffAlert = UIAlertController(title: "Update Inventory & Email Changes", message: "Please sign your name below", preferredStyle: .alert)
-        signOffAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        signOffAlert.addTextField(configurationHandler: {
-            textField in
-        })
-        
-        signOffAlert.addAction(UIAlertAction(title: "Update", style: .default, handler: {
-            action in
-            if let eSigniture = signOffAlert.textFields?[0].text{
-                
-                //update firebase inventory
-                
-                let sendTo = "jakexod573@mailrunner.net"
-                if MFMailComposeViewController.canSendMail() {
-                    let mail = MFMailComposeViewController()
-                    mail.mailComposeDelegate = self
-                    mail.setToRecipients([sendTo])
-                    mail.setSubject("Inventory Update by \(eSigniture)")
-                    mail.setMessageBody(self.methods.htmlEmailFormat(eSigniture: eSigniture, consumableArray: self.consumableArray, consumableDictionary: self.consumableDictionary), isHTML: true)
-
-                    self.present(mail, animated: true)
+        if(consumableArray.count != consumableDictionary.count){
+            self.present(methods.displayAlert(givenTitle: "Inventory Incomplete", givenMessage: "Please fill out count for all inventory items"), animated: true)
+        }else{
+            let signOffAlert = UIAlertController(title: "Update Inventory & Email Changes", message: "Please sign your name below", preferredStyle: .alert)
+            signOffAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            signOffAlert.addTextField(configurationHandler: {
+                textField in
+            })
+            
+            signOffAlert.addAction(UIAlertAction(title: "Update", style: .default, handler: {
+                action in
+                if let eSigniture = signOffAlert.textFields?[0].text{
                     
-                } else {
-                    self.present(self.methods.displayAlert(givenTitle: "ERROR", givenMessage: "There was a problem sending your email to \(sendTo)"), animated: true)
+                    //update firebase inventory
+                    self.fireBaseMethods.updateInventoryFromCheck(consumableArray: self.consumableArray, consumableDictionary: self.consumableDictionary)
+                    
+                    let sendTo = "hidacs@asu.edu"
+                    if MFMailComposeViewController.canSendMail() {
+                        let mail = MFMailComposeViewController()
+                        mail.mailComposeDelegate = self
+                        mail.setToRecipients([sendTo])
+                        mail.setSubject("Inventory Update by \(eSigniture)")
+                        mail.setMessageBody(self.methods.htmlEmailFormat(eSigniture: eSigniture, consumableArray: self.consumableArray, consumableDictionary: self.consumableDictionary), isHTML: true)
+                        
+                        self.present(mail, animated: true)
+                        
+                    } else {
+                        self.present(self.methods.displayAlert(givenTitle: "ERROR", givenMessage: "There was a problem sending your email to \(sendTo)"), animated: true)
+                    }
+                }else{
+                    self.present(self.methods.displayAlert(givenTitle: "Error", givenMessage: "Try again and fill out your name"), animated: true)
                 }
-            }else{
-                self.present(self.methods.displayAlert(givenTitle: "Error", givenMessage: "Try again and fill out your name"), animated: true)
-            }
-        }))
-        
-        self.present(signOffAlert, animated: true)
+            }))
+            
+            self.present(signOffAlert, animated: true)
+        }
     }
-
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
     
-    //---------------------- DELETE FROM TABLE ----------------------//
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
-        return true
-    }
-    
-    private func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell.EditingStyle {
-        return UITableViewCell.EditingStyle.delete
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
-        let deleteAlert = UIAlertController(title: "ARE YOU SURE YOU WANT TO DELETE \(consumableArray[indexPath.row].getType()) CONSUMABLE?", message: nil, preferredStyle: .alert)
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        deleteAlert.addAction(UIAlertAction(title: "Yes, Delete", style: .destructive, handler: {
-            action in
-            self.consumableDictionary[self.consumableArray[indexPath.row].getType()] = "DELETE"
-            self.consumableArray.remove(at: indexPath.row)
-            self.consumableTable.reloadData()
-        }))
-        
-        self.present(deleteAlert, animated: true)
-    }
-    
     //---------------------- EDIT CELLS IN TABLE ----------------------//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editConsumable = UIAlertController(title: "Change Count", message: nil, preferredStyle: .alert)
+        let editConsumable = UIAlertController(title: "Change Count of \(consumableArray[indexPath.row].getType())", message: nil, preferredStyle: .alert)
         editConsumable.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         editConsumable.addTextField(configurationHandler: {
             textField in
             textField.keyboardType = .numberPad
-            textField.text = self.consumableArray[indexPath.row].getCount()
-        })
-        
-        editConsumable.addTextField(configurationHandler: {
-            textField in
-            textField.text = self.consumableArray[indexPath.row].getType()
         })
         
         editConsumable.addAction(UIAlertAction(title: "Update", style: .default, handler: {
             action in
             if let count = editConsumable.textFields?[0].text{
-                self.consumableDictionary[self.consumableArray[indexPath.row].getType()] = count
-                self.consumableTable.reloadData()
-                    
+                if((Int(count)) != nil){
+                    self.consumableDictionary[self.consumableArray[indexPath.row].getType()] = count
+                    self.consumableTable.reloadData()
+                }else{
+                    self.present(self.methods.displayAlert(givenTitle: "Error editing", givenMessage: "Please enter a number"), animated: true)
+                }
             }else{
-                self.present(self.methods.displayAlert(givenTitle: "Error adding - Please fill out all fields", givenMessage: ""), animated: true)
+                self.present(self.methods.displayAlert(givenTitle: "Error editing", givenMessage: "Do not leave blank"), animated: true)
             }
         }))
         

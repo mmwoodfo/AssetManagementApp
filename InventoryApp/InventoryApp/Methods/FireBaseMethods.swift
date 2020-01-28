@@ -223,6 +223,15 @@ public class FireBaseMethods{
         self.ref.child("AssignedConsumables").removeAllObservers()
     }
     
+    //------------ UPDATE INVENTORY FROM INVENTORY CHECK ------------//
+    public func updateInventoryFromCheck(consumableArray:[Consumable], consumableDictionary:[String:String]){
+        for consumable in consumableArray{
+            if(consumable.getCount() != consumableDictionary[consumable.getType()]){
+                ref.child("Consumables").child(consumable.getType()).child("Count").setValue(consumableDictionary[consumable.getType()])
+            }
+        }
+    }
+    
     //------------- UPDATE TICKET ID ---------//
     public func updateCheckedOutTicket(asuriteId:String, expectedReturn:String, adapterType: String, loanedDate: String, newTicketID:String){
         let hashCode = hashCheckedOut(asuriteId: asuriteId, expectedReturn: expectedReturn, adapterType: adapterType, loanedDate: loanedDate)

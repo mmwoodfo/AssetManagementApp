@@ -68,6 +68,7 @@ public class MethodsForController{
     func htmlEmailFormat(eSigniture:String, consumableArray:[Consumable], consumableDictionary:[String:String]) -> String{
         var consumablesInventoryStr = ""
         for consumable in consumableArray{
+            
             if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 < 1){
                 consumablesInventoryStr += "<font color='red'><b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font><br>"
             }else{
