@@ -63,4 +63,23 @@ public class MethodsForController{
         
         return dateFormatterGet.date(from: dateStr) == nil
     }
+    
+    //--------- FORMAT EMAIL IN HTML ---------//
+    func htmlEmailFormat(eSigniture:String, consumableArray:[Consumable], consumableDictionary:[String:String]) -> String{
+        var consumablesInventoryStr = ""
+        for consumable in consumableArray{
+            if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 < 1){
+                consumablesInventoryStr += "<font color='red'><b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font><br>"
+            }else{
+                consumablesInventoryStr += "<b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")<br>"
+            }
+        }
+        
+        return """
+        <h2>Consumable Inventory Update</h2>
+        <h4>Completed by \(eSigniture)</h4>
+        <p>\(consumablesInventoryStr)</p>
+        <h4>Notes: <br></h4>
+        """
+    }
 }

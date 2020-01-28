@@ -56,7 +56,8 @@ class ConsumablesInventoryCheckSheetViewController: UIViewController, UITableVie
                     let mail = MFMailComposeViewController()
                     mail.mailComposeDelegate = self
                     mail.setToRecipients([sendTo])
-                    mail.setMessageBody("<p>\(eSigniture) pushed a button!</p>", isHTML: true)
+                    mail.setSubject("Inventory Update by \(eSigniture)")
+                    mail.setMessageBody(self.methods.htmlEmailFormat(eSigniture: eSigniture, consumableArray: self.consumableArray, consumableDictionary: self.consumableDictionary), isHTML: true)
 
                     self.present(mail, animated: true)
                     
