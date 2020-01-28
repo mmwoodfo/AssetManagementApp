@@ -16,6 +16,8 @@
 		0D5FE3922388392500136B9C /* AssignedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */; };
 		0D5FE39423883A7400136B9C /* AssignedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5FE39323883A7400136B9C /* AssignedViewController.swift */; };
 		0D61FDB023A9553100E9D949 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D61FDAF23A9553100E9D949 /* LoginViewController.swift */; };
+		0D6DF3D823E0C3270092E75D /* ConsumablesInventoryCheckSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6DF3D723E0C3270092E75D /* ConsumablesInventoryCheckSheetViewController.swift */; };
+		0D6DF3DA23E0C73F0092E75D /* ConsumableCheckerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6DF3D923E0C73F0092E75D /* ConsumableCheckerCell.swift */; };
 		0D7BF99323A43F1F00392C5F /* CheckedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7BF99223A43F1F00392C5F /* CheckedOut.swift */; };
 		0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D860317237354EA00E5D313 /* MethodsForControllers.swift */; };
 		0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */; };
@@ -43,6 +45,8 @@
 		0D5FE3912388392500136B9C /* AssignedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedDetailViewController.swift; sourceTree = "<group>"; };
 		0D5FE39323883A7400136B9C /* AssignedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedViewController.swift; sourceTree = "<group>"; };
 		0D61FDAF23A9553100E9D949 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0D6DF3D723E0C3270092E75D /* ConsumablesInventoryCheckSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumablesInventoryCheckSheetViewController.swift; sourceTree = "<group>"; };
+		0D6DF3D923E0C73F0092E75D /* ConsumableCheckerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableCheckerCell.swift; sourceTree = "<group>"; };
 		0D7BF99223A43F1F00392C5F /* CheckedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedOut.swift; sourceTree = "<group>"; };
 		0D860317237354EA00E5D313 /* MethodsForControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodsForControllers.swift; sourceTree = "<group>"; };
 		0D87A4A223A2D0DB0089AD3B /* FireBaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseMethods.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 				0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */,
 				0D5AA0DF2385D73B006B0023 /* ListOfAssignedItemsViewController.swift */,
 				0D5AA0E72385E355006B0023 /* ListOfConsumablesViewController.swift */,
+				0D6DF3D723E0C3270092E75D /* ConsumablesInventoryCheckSheetViewController.swift */,
 			);
 			path = Tableviews;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				92DEDC3B237E00570093D911 /* CheckOutCell.swift */,
 				0D5AA0E32385D827006B0023 /* ConsumablesCell.swift */,
 				0D5AA0E52385D855006B0023 /* AssignedCell.swift */,
+				0D6DF3D923E0C73F0092E75D /* ConsumableCheckerCell.swift */,
 			);
 			path = CellClasses;
 			sourceTree = "<group>";
@@ -336,11 +342,13 @@
 				0D87A4A323A2D0DB0089AD3B /* FireBaseMethods.swift in Sources */,
 				92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */,
 				0D5AA0E82385E355006B0023 /* ListOfConsumablesViewController.swift in Sources */,
+				0D6DF3DA23E0C73F0092E75D /* ConsumableCheckerCell.swift in Sources */,
 				0D61FDB023A9553100E9D949 /* LoginViewController.swift in Sources */,
 				0D5AA0E62385D855006B0023 /* AssignedCell.swift in Sources */,
 				0D5AA0E42385D827006B0023 /* ConsumablesCell.swift in Sources */,
 				0D87A4A523A3E6870089AD3B /* Consumable.swift in Sources */,
 				0D860318237354EA00E5D313 /* MethodsForControllers.swift in Sources */,
+				0D6DF3D823E0C3270092E75D /* ConsumablesInventoryCheckSheetViewController.swift in Sources */,
 				0DFB15342360F3C200F64EE0 /* ViewController.swift in Sources */,
 				0DFB15302360F3C200F64EE0 /* AppDelegate.swift in Sources */,
 				0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */,
