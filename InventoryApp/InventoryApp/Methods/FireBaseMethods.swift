@@ -15,12 +15,13 @@ public class FireBaseMethods{
     
     //------------------- ADD TO FIREBASE ------------------//
     
-    public func addConsumableToFirebase(type:String, count:String, sku:String){
+    public func addConsumableToFirebase(type:String, count:String, sku:String, reOrder:String){
         let newType = type.replacingOccurrences(of: "/", with: "\\")
         let consumable = [
             "Type":  newType,
             "Count": count,
-            "Sku":   sku
+            "Sku":   sku,
+            "ReOrder" : reOrder
         ]
         ref.child("Consumables").child(newType).setValue(consumable)
     }
@@ -212,9 +213,9 @@ public class FireBaseMethods{
         }
     }
     
-    public func editConsumable(type:String, Sku:String, newCount:String, newType:String){
+    public func editConsumable(type:String, Sku:String, newCount:String, newType:String, reOrder:String){
         removeConsumableFromFirebase(type: type)
-        addConsumableToFirebase(type: newType, count: newCount, sku: Sku)
+        addConsumableToFirebase(type: newType, count: newCount, sku: Sku, reOrder: reOrder)
     }
     
     public func removeObservers(){

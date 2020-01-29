@@ -69,10 +69,31 @@ public class MethodsForController{
         var consumablesInventoryStr = ""
         for consumable in consumableArray{
             
-            if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 < 1){
-                consumablesInventoryStr += "<font color='red'><b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font><br>"
+            //check if needs to be reordered
+            if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 < Int(consumable.getReOrder()) ?? 0){
+                //highlight type red
+                if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 > Int(consumable.getCount()) ?? 0){
+                    //highlight actual green
+                    consumablesInventoryStr += "<font color='red'><b>Type:</b>\(consumable.getType())</font> | <b>Expected Count:</b> \(consumable.getCount()) | <font color='#319716'><b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font> | <b>Reorder Threshold:</b> \(consumable.getReOrder())<br>"
+                }else if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 < Int(consumable.getCount()) ?? 0){
+                    //hightlight actual red
+                    consumablesInventoryStr += "<font color='red'><b>Type:</b>\(consumable.getType())</font> | <b>Expected Count:</b> \(consumable.getCount()) | <font color='red'><b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font> | <b>Reorder Threshold:</b> \(consumable.getReOrder())<br>"
+                }else{
+                    //do nothing
+                    consumablesInventoryStr += "<font color='red'><b>Type:</b>\(consumable.getType())</font> | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "") | <b>Reorder Threshold:</b> \(consumable.getReOrder())<br>"
+                }
             }else{
-                consumablesInventoryStr += "<b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")<br>"
+                //don't highlight type red
+                if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 > Int(consumable.getCount()) ?? 0){
+                    //highlight actual green
+                    consumablesInventoryStr += "<b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <font color='#319716'><b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font> | <b>Reorder Threshold:</b> \(consumable.getReOrder())<br>"
+                }else if(Int(consumableDictionary[consumable.getType()] ?? "0") ?? 0 < Int(consumable.getCount()) ?? 0){
+                    //hightlight actual red
+                    consumablesInventoryStr += "<b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <font color='red'><b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "")</font> | <b>Reorder Threshold:</b> \(consumable.getReOrder())<br>"
+                }else{
+                    //do nothing
+                    consumablesInventoryStr += "<b>Type:</b>\(consumable.getType()) | <b>Expected Count:</b> \(consumable.getCount()) | <b>Actual Count:</b> \(consumableDictionary[consumable.getType()] ?? "") | <b>Reorder Threshold:</b> \(consumable.getReOrder())<br>"
+                }
             }
         }
         

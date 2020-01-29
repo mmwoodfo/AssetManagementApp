@@ -99,24 +99,32 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             textField.placeholder = "Item SKU"
         })
         
+        consumableAlert.addTextField(configurationHandler: {
+            textField in
+            textField.keyboardType = .numberPad
+            textField.placeholder = "Reorder Threshold"
+        })
+        
         consumableAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: {
             action in
             if let type = consumableAlert.textFields?[0].text{
                 if let count = consumableAlert.textFields?[1].text{
                     if let sku = consumableAlert.textFields?[2].text{
-                        if type != "" && count != "" && sku != ""{
-                            if(Int(count) != nil){
-                                if(self.isDuplication(type: type)){
-                                    self.present(self.methods.displayAlert(givenTitle: "Error adding - Duplication", givenMessage: "That adapter type is already on this list"), animated: true)
+                        if let reOrder = consumableAlert.textFields?[3].text{
+                            if type != "" && count != "" && sku != ""{
+                                if(Int(count) != nil && Int(reOrder) != nil){
+                                    if(self.isDuplication(type: type)){
+                                        self.present(self.methods.displayAlert(givenTitle: "Error adding - Duplication", givenMessage: "That adapter type is already on this list"), animated: true)
+                                    }else{
+                                        self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku,reOrder: reOrder)
+                                        self.consumableTable.reloadData()
+                                    }
                                 }else{
-                                    self.fireBaseMethods.addConsumableToFirebase(type: type, count: count, sku: sku)
-                                    self.consumableTable.reloadData()
+                                    self.present(self.methods.displayAlert(givenTitle: "Error adding - NaN", givenMessage: "\(count) is not a number, please enter a number and try again"), animated: true)
                                 }
                             }else{
-                                self.present(self.methods.displayAlert(givenTitle: "Error adding - NaN", givenMessage: "\(count) is not a number, please enter a number and try again"), animated: true)
+                                self.present(self.methods.displayAlert(givenTitle: "Error adding - Missing Information", givenMessage: "Please try again and fill out all the required information"), animated: true)
                             }
-                        }else{
-                            self.present(self.methods.displayAlert(givenTitle: "Error adding - Missing Information", givenMessage: "Please try again and fill out all the required information"), animated: true)
                         }
                     }
                 }
@@ -179,7 +187,7 @@ class ListOfConsumablesViewController: UIViewController, UITableViewDataSource, 
             action in
             if let count = editConsumable.textFields?[0].text{
                 if let type = editConsumable.textFields?[1].text{
-                    self.fireBaseMethods.editConsumable(type: self.consumableArray[indexPath.row].getType(), Sku: self.consumableArray[indexPath.row].getSku(), newCount: count, newType: type)
+                    self.fireBaseMethods.editConsumable(type: self.consumableArray[indexPath.row].getType(), Sku: self.consumableArray[indexPath.row].getSku(), newCount: count, newType: type, reOrder: self.consumableArray[indexPath.row].getReOrder())
                     
                     self.consumableArray.remove(at: indexPath.row)
                     

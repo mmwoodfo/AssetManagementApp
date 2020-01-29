@@ -12,11 +12,13 @@ public class Consumable{
     private var type:String
     private var count:String
     private var sku:String
+    private var reOrder:String
     
     init (aDict: [String: AnyObject]){
         self.type = aDict["Type"] as! String
         self.count = aDict["Count"] as! String
         self.sku = aDict["Sku"] as! String
+        self.reOrder = aDict["ReOrder"] as! String
     }
     
     //setter methods
@@ -32,6 +34,10 @@ public class Consumable{
         self.sku = sku
     }
     
+    public func setReOrder(reOrder:String){
+        self.reOrder = reOrder
+    }
+    
     //getter methods
     public func getType() -> String{
         return type
@@ -43,5 +49,9 @@ public class Consumable{
     
     public func getSku() -> String{
         return sku
+    }
+    
+    public func getReOrder() -> String{
+        return reOrder
     }
 }
