@@ -111,7 +111,7 @@ class SumTextInputFormatterCaretPositionCalculator {
     for (index, character) in newFormattedText.enumerated() {
       if isDigit(character: character) ||
           character == decimalSeparator.first ||
-          (!(suffix ?? "").isEmpty && (suffix ?? "").contains(character)) {
+          isPartOf(suffix: suffix, character: character, index: index, newFormattedText: newFormattedText) {
         numberSymbolsCount += 1
       }
       if numberSymbolsCount >= numberOfSymbolsBefore {
@@ -147,5 +147,11 @@ class SumTextInputFormatterCaretPositionCalculator {
   private func isDigit(character: Character) -> Bool {
     guard let scalar = String(character).unicodeScalars.first else { return false }
     return CharacterSet.decimalDigits.contains(scalar)
+  }
+  
+  private func isPartOf(suffix: String?, character: Character, index: Int, newFormattedText: String) -> Bool {
+    guard let suffix = suffix, !suffix.isEmpty else { return false }
+    let suffixStartIndex = newFormattedText.count - suffix.count
+    return index >= suffixStartIndex
   }
 }
