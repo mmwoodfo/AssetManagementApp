@@ -1,4 +1,4 @@
-framework module Pods_InventoryApp {
+module Pods_InventoryApp {
   umbrella header "Pods-InventoryApp-umbrella.h"
 
   export *

@@ -56,12 +56,10 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
+        tempAdapterArray.append("")
         fireBaseMethods.getAdapterTypes { [weak self] type in
             self?.tempAdapterArray.append(type)
             DispatchQueue.main.async {
-                if(self?.tempAdapterArray.isEmpty ?? true){
-                    self?.tempAdapterArray.append("")
-                }
                 // Stuff for Adapter selector
                 self?.adapterSelector.delegate = self
                 self?.createPickerView()
@@ -74,14 +72,12 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         format.dateFormat = "MM-dd-yyyy"
         let formattedDate = format.string(from: date)
         dateHolder.text = formattedDate
-        returnDateField.text = formattedDate
         
         //Date Picker setup
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(CheckoutViewController.dateChanged(datePicker:)), for: .valueChanged)
         returnDateField.inputView = datePicker
-        
         
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CheckoutViewController.viewTapped(gestureRecognixer:)))

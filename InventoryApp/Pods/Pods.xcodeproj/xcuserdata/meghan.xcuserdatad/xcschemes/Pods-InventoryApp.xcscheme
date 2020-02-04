@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4838D43A4BD64FDB5AD949CC65135DF6"
-               BuildableName = "Pods-InventoryApp.framework"
+               BuildableName = "libPods-InventoryApp.a"
                BlueprintName = "Pods-InventoryApp"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

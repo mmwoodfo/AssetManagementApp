@@ -1,4 +1,4 @@
-framework module AnyFormatKit {
+module AnyFormatKit {
   umbrella header "AnyFormatKit-umbrella.h"
 
   export *

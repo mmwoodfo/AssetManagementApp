@@ -31,7 +31,7 @@
 		0DFB153F2360F3C300F64EE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB153D2360F3C300F64EE0 /* LaunchScreen.storyboard */; };
 		0DFB15492360FECB00F64EE0 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */; };
 		0DFB154D2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */; };
-		25D252363156EF5C9FE91780 /* Pods_InventoryApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0EAFA746307FFCB23D5E84 /* Pods_InventoryApp.framework */; };
+		795067C74AA2E8071F035A72 /* libPods-InventoryApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCBF191B4D0260C2A09584A /* libPods-InventoryApp.a */; };
 		92DEDC3C237E00570093D911 /* CheckOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DEDC3B237E00570093D911 /* CheckOutCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,10 +62,10 @@
 		0DFB15402360F3C300F64EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DFB15482360FECB00F64EE0 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		0DFB154C2361011700F64EE0 /* ListOfCheckedOutItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfCheckedOutItemsViewController.swift; sourceTree = "<group>"; };
-		765AB383B22F157158C1B5D9 /* Pods-InventoryApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InventoryApp.debug.xcconfig"; path = "Target Support Files/Pods-InventoryApp/Pods-InventoryApp.debug.xcconfig"; sourceTree = "<group>"; };
-		7D0EAFA746307FFCB23D5E84 /* Pods_InventoryApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InventoryApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DCBF191B4D0260C2A09584A /* libPods-InventoryApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InventoryApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DEDC3B237E00570093D911 /* CheckOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCell.swift; sourceTree = "<group>"; };
-		FA01D5051D31A4B63BD65A51 /* Pods-InventoryApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InventoryApp.release.xcconfig"; path = "Target Support Files/Pods-InventoryApp/Pods-InventoryApp.release.xcconfig"; sourceTree = "<group>"; };
+		CCDDD72175C7DBB21CFD2502 /* Pods-InventoryApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InventoryApp.debug.xcconfig"; path = "Target Support Files/Pods-InventoryApp/Pods-InventoryApp.debug.xcconfig"; sourceTree = "<group>"; };
+		FCAD7EBFB88AC9564B650D4C /* Pods-InventoryApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InventoryApp.release.xcconfig"; path = "Target Support Files/Pods-InventoryApp/Pods-InventoryApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25D252363156EF5C9FE91780 /* Pods_InventoryApp.framework in Frameworks */,
+				795067C74AA2E8071F035A72 /* libPods-InventoryApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +134,7 @@
 				0DFB152E2360F3C200F64EE0 /* InventoryApp */,
 				0DFB152D2360F3C200F64EE0 /* Products */,
 				A07BE28F8E0C3FCD55BF5000 /* Pods */,
-				F07A0872ED1C6B32DCF63CDF /* Frameworks */,
+				B3722002F28B91FFC4345389 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,16 +190,16 @@
 		A07BE28F8E0C3FCD55BF5000 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				765AB383B22F157158C1B5D9 /* Pods-InventoryApp.debug.xcconfig */,
-				FA01D5051D31A4B63BD65A51 /* Pods-InventoryApp.release.xcconfig */,
+				CCDDD72175C7DBB21CFD2502 /* Pods-InventoryApp.debug.xcconfig */,
+				FCAD7EBFB88AC9564B650D4C /* Pods-InventoryApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F07A0872ED1C6B32DCF63CDF /* Frameworks */ = {
+		B3722002F28B91FFC4345389 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7D0EAFA746307FFCB23D5E84 /* Pods_InventoryApp.framework */,
+				4DCBF191B4D0260C2A09584A /* libPods-InventoryApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -211,12 +211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DFB15432360F3C300F64EE0 /* Build configuration list for PBXNativeTarget "InventoryApp" */;
 			buildPhases = (
-				9524FA21124E3FFD4083071D /* [CP] Check Pods Manifest.lock */,
+				28121CA7E96CBD2B0DE47FAB /* [CP] Check Pods Manifest.lock */,
 				0DFB15282360F3C200F64EE0 /* Sources */,
 				0DFB15292360F3C200F64EE0 /* Frameworks */,
 				0DFB152A2360F3C200F64EE0 /* Resources */,
-				1E260DEAE2AE9E1AC007E673 /* [CP] Embed Pods Frameworks */,
-				6C5060C4D7DE31D068C195A2 /* [CP] Copy Pods Resources */,
+				79A61CC257F97FA864E1AEA6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,41 +274,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E260DEAE2AE9E1AC007E673 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C5060C4D7DE31D068C195A2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9524FA21124E3FFD4083071D /* [CP] Check Pods Manifest.lock */ = {
+		28121CA7E96CBD2B0DE47FAB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,6 +294,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79A61CC257F97FA864E1AEA6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InventoryApp/Pods-InventoryApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -500,7 +482,7 @@
 		};
 		0DFB15442360F3C300F64EE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 765AB383B22F157158C1B5D9 /* Pods-InventoryApp.debug.xcconfig */;
+			baseConfigurationReference = CCDDD72175C7DBB21CFD2502 /* Pods-InventoryApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -519,7 +501,7 @@
 		};
 		0DFB15452360F3C300F64EE0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA01D5051D31A4B63BD65A51 /* Pods-InventoryApp.release.xcconfig */;
+			baseConfigurationReference = FCAD7EBFB88AC9564B650D4C /* Pods-InventoryApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
