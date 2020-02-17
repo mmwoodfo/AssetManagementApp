@@ -86,6 +86,18 @@ class CheckoutViewController: UIViewController, UIPickerViewDataSource, UIPicker
         SuccessLabel.isHidden = true
     }
     
+    @IBAction func setDate(_ sender: Any) {
+        if(returnDateField.text == ""){
+            returnDateField.text = dateHolder.text
+        }
+    }
+    
+    @IBAction func populateEmail(_ sender: Any) {
+        if(asuField.text != "" && asuField != nil){
+            emailField.text = "\(asuField.text!)@asu.edu"
+        }
+    }
+    
     @IBAction func stoppedTyping(_ sender: UITextField) {
         let phoneFormatter = DefaultTextFormatter(textPattern: "###-###-####")
         if(!((phoneField.text ?? "").contains("-"))){

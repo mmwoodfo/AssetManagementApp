@@ -775,6 +775,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <connections>
+                                    <action selector="populateEmail:" destination="7eJ-hD-Aud" eventType="editingDidEnd" id="KRH-K7-3z7"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address ( email@asu.edu )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DZj-S6-N5c" userLabel="emailField">
                                 <rect key="frame" x="106" y="342" width="571" height="34"/>
@@ -837,6 +840,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="setDate:" destination="7eJ-hD-Aud" eventType="editingDidBegin" id="DkJ-09-HKa"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Adapter Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SNc-BJ-SHi">
                                 <rect key="frame" x="106" y="481" width="459" height="34"/>
@@ -1174,6 +1180,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <connections>
+                                    <action selector="populateEmail:" destination="LRh-W7-CZX" eventType="editingDidEnd" id="ur9-io-UpV"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address ( email@asu.edu )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ueX-Xy-TKe" userLabel="emailField">
                                 <rect key="frame" x="106" y="342" width="571" height="34"/>

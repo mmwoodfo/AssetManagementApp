@@ -47,12 +47,10 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         btnExit.layer.cornerRadius = 10
         
         //Set adaptors
+        tempAdapterArray.append("")
         fireBaseMethods.getAdapterTypes { [weak self] type in
             self?.tempAdapterArray.append(type)
             DispatchQueue.main.async {
-                if(self?.tempAdapterArray.isEmpty ?? true){
-                    self?.tempAdapterArray.append("")
-                }
                 // Stuff for Adapter selector
                 self?.adapterSelector.delegate = self
                 self?.createPickerView()
@@ -70,6 +68,12 @@ class AssignedViewController: UIViewController, UIPickerViewDataSource, UIPicker
         view.addGestureRecognizer(tapGesture)
         
         SuccessLabel.isHidden = true
+    }
+    
+    @IBAction func populateEmail(_ sender: Any) {
+        if(asuField.text != "" && asuField != nil){
+            emailField.text = "\(asuField.text!)@asu.edu"
+        }
     }
     
     @IBAction func stoppedTyping(_ sender: UITextField) {
